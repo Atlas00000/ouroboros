@@ -32,10 +32,9 @@ class HealthResponse(BaseModel):
 
 def _check_postgres(database_url: str) -> DependencyStatus:
     try:
-        with psycopg.connect(database_url, connect_timeout=3) as conn:
-            with conn.cursor() as cur:
-                cur.execute("SELECT 1")
-                cur.fetchone()
+        with psycopg.connect(database_url, connect_timeout=3) as conn, conn.cursor() as cur:
+            cur.execute("SELECT 1")
+            cur.fetchone()
         return DependencyStatus(name="postgres", ok=True)
     except Exception as exc:  # noqa: BLE001 — surface any connectivity failure
         logger.warning("postgres_health_failed: %s", exc)

@@ -1,0 +1,17 @@
+# Railway — API service (root directory = server/)
+# Create a second service from the same image with startCommand:
+#   python -m app.scheduler
+# (worker lands in Phase 2)
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+# Run migrations before traffic (Railway release phase)
+releaseCommand = "python -m alembic upgrade head"
+healthcheckPath = "/v1/health/live"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

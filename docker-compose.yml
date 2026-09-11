@@ -1,5 +1,7 @@
-# Local infrastructure only — Postgres/Timescale + Redis.
-# App services use profiles: --profile server | worker | client (added in later Phase 0 days).
+# Local infrastructure — Postgres/Timescale + Redis always.
+# Optional app profiles:
+#   docker-compose --profile server up -d
+#   docker-compose --profile client up -d
 #
 # Usage:
 #   docker-compose up -d
@@ -15,7 +17,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ouroboros}
       POSTGRES_DB: ${POSTGRES_DB:-ouroboros}
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - ouroboros_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -29,7 +31,7 @@ services:
     container_name: ouroboros-redis
     restart: unless-stopped
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - "${REDIS_PORT:-6380}:6379"
     volumes:
       - ouroboros_redisdata:/data
     command: ["redis-server", "--appendonly", "yes"]
@@ -38,6 +40,34 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+
+  server:
+    profiles: ["server"]
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: ouroboros-server
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-8000}:8000"
+    environment:
+      APP_ENV: local
+      DATABASE_URL: postgresql://ouroboros:${POSTGRES_PASSWORD:-ouroboros}@postgres:5432/ouroboros
+      REDIS_URL: redis://redis:6379/0
+      CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  client:
+    profiles: ["client"]
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: ouroboros-client
+    restart: unless-stopped
 
 volumes:
   ouroboros_pgdata:

@@ -13,6 +13,11 @@ Independent asset-intelligence platform: market data → profiles, regimes, sent
 - [concept.md](./concept.md) — product concept
 - [roadmap.md](./roadmap.md) — full roadmap (v1.3)
 - [docs/adr/](./docs/adr/) — architecture decisions
+- [ops/railway/STAGING.md](./ops/railway/STAGING.md) — walking-skeleton Railway staging setup
+
+## Status
+
+Phase 0 foundations tagged **`v0.1-foundations`** (contracts, server health API, migrations, CI). Railway staging requires linking your Railway project (see ops doc) — CLI not required for local work.
 
 ## Local services (Phase 0)
 
