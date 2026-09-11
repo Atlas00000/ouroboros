@@ -20,6 +20,9 @@ Independent asset-intelligence platform: market data → profiles, regimes, sent
 # Start Postgres (Timescale) + Redis only
 docker-compose up -d
 
+# Defaults publish host ports 5433 (Postgres) and 6380 (Redis)
+# to avoid clashes with other local services on 5432/6379.
+
 # Copy env templates (never commit real secrets)
 copy server\.env.example server\.env
 copy client\.env.example client\.env.local
