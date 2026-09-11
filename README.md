@@ -55,6 +55,11 @@ Client and server apps are scaffolded in later Phase 0 days; they run natively (
 
 See [ADR-015](./docs/adr/015-dual-auth-clerk-and-api-keys.md).
 
+## Tooling
+
+- Python server: `server/`
+- Optional Cloudflare Wrangler (root): `pnpm install` then `pnpm wrangler login` — see [ops/cloudflare/README.md](./ops/cloudflare/README.md)
+
 ## License
 
 Private — internal use.

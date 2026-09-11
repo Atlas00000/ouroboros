@@ -1,0 +1,14 @@
+{
+  "name": "ouroboros",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "test:phase0": "python scripts/test_phase0.py --quick",
+    "wrangler": "wrangler",
+    "wrangler:whoami": "wrangler whoami",
+    "cf:types": "wrangler types"
+  },
+  "devDependencies": {
+    "wrangler": "^4.34.0"
+  }
+}

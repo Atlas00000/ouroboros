@@ -1,0 +1,17 @@
+# Cloudflare Wrangler — optional Workers/tooling for the monorepo.
+# Primary hosting remains Vercel (client) + Railway (server). Use Wrangler only
+# when you add Cloudflare Workers, Queues, or R2 later.
+#
+# Setup:
+#   pnpm install
+#   pnpm wrangler login
+#   pnpm wrangler:whoami
+#
+# name = "ouroboros" is a placeholder; rename when you create a real Worker.
+
+name = "ouroboros"
+main = "ops/cloudflare/src/index.ts"
+compatibility_date = "2026-09-11"
+
+# [vars]
+# APP_ENV = "local"
