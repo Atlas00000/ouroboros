@@ -1,0 +1,44 @@
+# Local infrastructure only — Postgres/Timescale + Redis.
+# App services use profiles: --profile server | worker | client (added in later Phase 0 days).
+#
+# Usage:
+#   docker-compose up -d
+#   docker-compose down
+
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: ouroboros-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ouroboros}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ouroboros}
+      POSTGRES_DB: ${POSTGRES_DB:-ouroboros}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ouroboros_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ouroboros} -d ${POSTGRES_DB:-ouroboros}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: ouroboros-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - ouroboros_redisdata:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  ouroboros_pgdata:
+  ouroboros_redisdata:

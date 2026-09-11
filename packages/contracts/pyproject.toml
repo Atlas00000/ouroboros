@@ -1,0 +1,15 @@
+[project]
+name = "ouroboros-contracts"
+version = "0.1.0"
+description = "Versioned Ouroboros data contracts (profile.v1, state.v1, ...)"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["contracts"]
