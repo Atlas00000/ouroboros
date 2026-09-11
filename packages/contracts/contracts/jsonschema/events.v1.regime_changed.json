@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "Provenance": {
+      "description": "Trust metadata required on every Ouroboros output (roadmap F14 / N6).",
+      "properties": {
+        "confidence": {
+          "description": "Producer confidence in [0, 1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "generated_at": {
+          "description": "UTC timestamp when this output was produced.",
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_version": {
+          "description": "Deterministic or generative model/version string, e.g. 'regimes.rule_v1'.",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Upstream data sources or feed IDs that contributed to this output.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "stale": {
+          "default": false,
+          "description": "True when one or more contributing feeds exceeded cadence expectations.",
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generated_at",
+        "model_version",
+        "confidence"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "RegimeChangedPayload": {
+      "properties": {
+        "as_of": {
+          "format": "date-time",
+          "title": "As Of",
+          "type": "string"
+        },
+        "new_regime": {
+          "description": "One of: trending_up | trending_down | ranging | high_volatility",
+          "pattern": "^(trending_up|trending_down|ranging|high_volatility)$",
+          "title": "New Regime",
+          "type": "string"
+        },
+        "previous_regime": {
+          "anyOf": [
+            {
+              "description": "One of: trending_up | trending_down | ranging | high_volatility",
+              "pattern": "^(trending_up|trending_down|ranging|high_volatility)$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous Regime"
+        },
+        "symbol": {
+          "title": "Symbol",
+          "type": "string"
+        },
+        "timeframe": {
+          "description": "Bar timeframe code.",
+          "pattern": "^(M1|M5|M15|M30|H1|H4|D1|W1)$",
+          "title": "Timeframe",
+          "type": "string"
+        }
+      },
+      "required": [
+        "symbol",
+        "timeframe",
+        "new_regime",
+        "as_of"
+      ],
+      "title": "RegimeChangedPayload",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "event": {
+      "const": "regime.changed",
+      "default": "regime.changed",
+      "title": "Event",
+      "type": "string"
+    },
+    "event_id": {
+      "description": "Unique event id (UUID recommended).",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "description": "UTC time the domain change occurred.",
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/$defs/RegimeChangedPayload"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "schema_id": {
+      "default": "events.v1",
+      "pattern": "^events\\.v1$",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "symbol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Symbol"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "provenance",
+    "payload"
+  ],
+  "title": "RegimeChangedEvent",
+  "type": "object"
+}

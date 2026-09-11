@@ -1,0 +1,180 @@
+{
+  "$defs": {
+    "Disclaimer": {
+      "description": "Advisory disclaimer \u2014 research only, not investment advice / not execution.",
+      "properties": {
+        "text": {
+          "default": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+          "title": "Text",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "title": "Disclaimer",
+      "type": "object"
+    },
+    "Provenance": {
+      "description": "Trust metadata required on every Ouroboros output (roadmap F14 / N6).",
+      "properties": {
+        "confidence": {
+          "description": "Producer confidence in [0, 1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "generated_at": {
+          "description": "UTC timestamp when this output was produced.",
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_version": {
+          "description": "Deterministic or generative model/version string, e.g. 'regimes.rule_v1'.",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Upstream data sources or feed IDs that contributed to this output.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "stale": {
+          "default": false,
+          "description": "True when one or more contributing feeds exceeded cadence expectations.",
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generated_at",
+        "model_version",
+        "confidence"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "RegimeProbability": {
+      "properties": {
+        "probability": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Probability",
+          "type": "number"
+        },
+        "regime": {
+          "description": "One of: trending_up | trending_down | ranging | high_volatility",
+          "pattern": "^(trending_up|trending_down|ranging|high_volatility)$",
+          "title": "Regime",
+          "type": "string"
+        }
+      },
+      "required": [
+        "regime",
+        "probability"
+      ],
+      "title": "RegimeProbability",
+      "type": "object"
+    }
+  },
+  "description": "Current market state / regime classification (schema_id: state.v1).",
+  "properties": {
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "disclaimer": {
+      "$ref": "#/$defs/Disclaimer"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "regime": {
+      "description": "One of: trending_up | trending_down | ranging | high_volatility",
+      "pattern": "^(trending_up|trending_down|ranging|high_volatility)$",
+      "title": "Regime",
+      "type": "string"
+    },
+    "regime_probabilities": {
+      "items": {
+        "$ref": "#/$defs/RegimeProbability"
+      },
+      "minItems": 1,
+      "title": "Regime Probabilities",
+      "type": "array"
+    },
+    "schema_id": {
+      "default": "state.v1",
+      "pattern": "^state\\.v1$",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "symbol": {
+      "title": "Symbol",
+      "type": "string"
+    },
+    "timeframe": {
+      "description": "Bar timeframe code.",
+      "pattern": "^(M1|M5|M15|M30|H1|H4|D1|W1)$",
+      "title": "Timeframe",
+      "type": "string"
+    },
+    "trend_strength": {
+      "anyOf": [
+        {
+          "maximum": 1.0,
+          "minimum": -1.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Signed trend strength in [-1, 1]; positive = up.",
+      "title": "Trend Strength"
+    },
+    "volatility_percentile": {
+      "anyOf": [
+        {
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volatility Percentile"
+    }
+  },
+  "required": [
+    "symbol",
+    "timeframe",
+    "regime",
+    "regime_probabilities",
+    "as_of",
+    "provenance"
+  ],
+  "title": "MarketState",
+  "type": "object"
+}

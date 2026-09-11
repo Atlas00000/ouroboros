@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "NewsHighImpactPayload": {
+      "properties": {
+        "event_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g. NFP, CPI, FOMC.",
+          "title": "Event Type"
+        },
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
+        "impact": {
+          "const": "high",
+          "default": "high",
+          "title": "Impact",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "scheduled_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scheduled At"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "symbol": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Symbol"
+        }
+      },
+      "required": [
+        "headline"
+      ],
+      "title": "NewsHighImpactPayload",
+      "type": "object"
+    },
+    "Provenance": {
+      "description": "Trust metadata required on every Ouroboros output (roadmap F14 / N6).",
+      "properties": {
+        "confidence": {
+          "description": "Producer confidence in [0, 1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "generated_at": {
+          "description": "UTC timestamp when this output was produced.",
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_version": {
+          "description": "Deterministic or generative model/version string, e.g. 'regimes.rule_v1'.",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Upstream data sources or feed IDs that contributed to this output.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "stale": {
+          "default": false,
+          "description": "True when one or more contributing feeds exceeded cadence expectations.",
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generated_at",
+        "model_version",
+        "confidence"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "event": {
+      "const": "news.high_impact",
+      "default": "news.high_impact",
+      "title": "Event",
+      "type": "string"
+    },
+    "event_id": {
+      "description": "Unique event id (UUID recommended).",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "description": "UTC time the domain change occurred.",
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/$defs/NewsHighImpactPayload"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "schema_id": {
+      "default": "events.v1",
+      "pattern": "^events\\.v1$",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "symbol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Symbol"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "provenance",
+    "payload"
+  ],
+  "title": "NewsHighImpactEvent",
+  "type": "object"
+}

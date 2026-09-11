@@ -1,0 +1,449 @@
+{
+  "$defs": {
+    "AssetIdentity": {
+      "properties": {
+        "asset_class": {
+          "pattern": "^(fx|metal|index|equity|crypto|rate|other)$",
+          "title": "Asset Class",
+          "type": "string"
+        },
+        "base_currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Base Currency"
+        },
+        "display_name": {
+          "title": "Display Name",
+          "type": "string"
+        },
+        "mt5_ticker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Broker-specific MT5 symbol.",
+          "title": "Mt5 Ticker"
+        },
+        "quote_currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote Currency"
+        },
+        "symbol": {
+          "description": "Canonical internal symbol ID, e.g. 'EURUSD'.",
+          "title": "Symbol",
+          "type": "string"
+        },
+        "venues": {
+          "description": "Trading venues / brokers.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Venues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "symbol",
+        "display_name",
+        "asset_class"
+      ],
+      "title": "AssetIdentity",
+      "type": "object"
+    },
+    "CorrelationEntry": {
+      "properties": {
+        "coefficient": {
+          "maximum": 1.0,
+          "minimum": -1.0,
+          "title": "Coefficient",
+          "type": "number"
+        },
+        "symbol": {
+          "title": "Symbol",
+          "type": "string"
+        },
+        "window_days": {
+          "default": 30,
+          "minimum": 1,
+          "title": "Window Days",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "symbol",
+        "coefficient"
+      ],
+      "title": "CorrelationEntry",
+      "type": "object"
+    },
+    "Disclaimer": {
+      "description": "Advisory disclaimer \u2014 research only, not investment advice / not execution.",
+      "properties": {
+        "text": {
+          "default": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+          "title": "Text",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "title": "Disclaimer",
+      "type": "object"
+    },
+    "EventSensitivity": {
+      "properties": {
+        "event_type": {
+          "description": "e.g. 'NFP', 'CPI', 'FOMC', 'central_bank'.",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "typical_move_atr_multiple": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Typical Move Atr Multiple"
+        }
+      },
+      "required": [
+        "event_type"
+      ],
+      "title": "EventSensitivity",
+      "type": "object"
+    },
+    "LiquidityCharacter": {
+      "properties": {
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "spread_percentile_30d": {
+          "anyOf": [
+            {
+              "maximum": 100.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Spread Percentile 30D"
+        },
+        "typical_spread": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Typical Spread"
+        }
+      },
+      "title": "LiquidityCharacter",
+      "type": "object"
+    },
+    "Provenance": {
+      "description": "Trust metadata required on every Ouroboros output (roadmap F14 / N6).",
+      "properties": {
+        "confidence": {
+          "description": "Producer confidence in [0, 1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "generated_at": {
+          "description": "UTC timestamp when this output was produced.",
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_version": {
+          "description": "Deterministic or generative model/version string, e.g. 'regimes.rule_v1'.",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Upstream data sources or feed IDs that contributed to this output.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "stale": {
+          "default": false,
+          "description": "True when one or more contributing feeds exceeded cadence expectations.",
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generated_at",
+        "model_version",
+        "confidence"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "RegimeDistribution": {
+      "properties": {
+        "regime": {
+          "description": "One of: trending_up | trending_down | ranging | high_volatility",
+          "pattern": "^(trending_up|trending_down|ranging|high_volatility)$",
+          "title": "Regime",
+          "type": "string"
+        },
+        "share": {
+          "description": "Fraction of sample history spent in this regime.",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Share",
+          "type": "number"
+        }
+      },
+      "required": [
+        "regime",
+        "share"
+      ],
+      "title": "RegimeDistribution",
+      "type": "object"
+    },
+    "TradingHours": {
+      "properties": {
+        "close_utc": {
+          "anyOf": [
+            {
+              "format": "time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Close Utc"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "open_utc": {
+          "anyOf": [
+            {
+              "format": "time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Open Utc"
+        },
+        "sessions": {
+          "description": "Named sessions, e.g. ['sydney', 'tokyo', 'london', 'new_york'].",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sessions",
+          "type": "array"
+        },
+        "timezone": {
+          "default": "UTC",
+          "description": "IANA timezone used for session bounds.",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "title": "TradingHours",
+      "type": "object"
+    },
+    "VolatilityCharacter": {
+      "properties": {
+        "atr_percentile_30d": {
+          "anyOf": [
+            {
+              "maximum": 100.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Atr Percentile 30D"
+        },
+        "realized_vol_percentile_30d": {
+          "anyOf": [
+            {
+              "maximum": 100.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Realized Vol Percentile 30D"
+        },
+        "typical_daily_range": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Typical daily high-low range in price units.",
+          "title": "Typical Daily Range"
+        }
+      },
+      "title": "VolatilityCharacter",
+      "type": "object"
+    }
+  },
+  "description": "Living, versioned dossier for one instrument (schema_id: profile.v1).",
+  "properties": {
+    "as_of": {
+      "description": "UTC as-of for the profile snapshot.",
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "correlations": {
+      "items": {
+        "$ref": "#/$defs/CorrelationEntry"
+      },
+      "title": "Correlations",
+      "type": "array"
+    },
+    "disclaimer": {
+      "$ref": "#/$defs/Disclaimer"
+    },
+    "event_sensitivities": {
+      "items": {
+        "$ref": "#/$defs/EventSensitivity"
+      },
+      "title": "Event Sensitivities",
+      "type": "array"
+    },
+    "identity": {
+      "$ref": "#/$defs/AssetIdentity"
+    },
+    "liquidity": {
+      "$ref": "#/$defs/LiquidityCharacter"
+    },
+    "profile_version": {
+      "description": "Monotonic profile generation version.",
+      "minimum": 1,
+      "title": "Profile Version",
+      "type": "integer"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "regime_distribution": {
+      "items": {
+        "$ref": "#/$defs/RegimeDistribution"
+      },
+      "title": "Regime Distribution",
+      "type": "array"
+    },
+    "schema_id": {
+      "default": "profile.v1",
+      "pattern": "^profile\\.v1$",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "trading_hours": {
+      "$ref": "#/$defs/TradingHours"
+    },
+    "volatility": {
+      "$ref": "#/$defs/VolatilityCharacter"
+    }
+  },
+  "required": [
+    "profile_version",
+    "identity",
+    "as_of",
+    "provenance"
+  ],
+  "title": "AssetProfile",
+  "type": "object"
+}

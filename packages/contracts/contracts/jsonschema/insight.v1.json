@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "Disclaimer": {
+      "description": "Advisory disclaimer \u2014 research only, not investment advice / not execution.",
+      "properties": {
+        "text": {
+          "default": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+          "title": "Text",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "title": "Disclaimer",
+      "type": "object"
+    },
+    "Provenance": {
+      "description": "Trust metadata required on every Ouroboros output (roadmap F14 / N6).",
+      "properties": {
+        "confidence": {
+          "description": "Producer confidence in [0, 1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "generated_at": {
+          "description": "UTC timestamp when this output was produced.",
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_version": {
+          "description": "Deterministic or generative model/version string, e.g. 'regimes.rule_v1'.",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Upstream data sources or feed IDs that contributed to this output.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "stale": {
+          "default": false,
+          "description": "True when one or more contributing feeds exceeded cadence expectations.",
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generated_at",
+        "model_version",
+        "confidence"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    }
+  },
+  "description": "LLM-generated narrative built on deterministic outputs (schema_id: insight.v1).\n\nGenerative tier only \u2014 never feeds numeric fields consumed by analytics.",
+  "properties": {
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "body": {
+      "description": "Readable insight text produced by the generative tier.",
+      "title": "Body",
+      "type": "string"
+    },
+    "disclaimer": {
+      "$ref": "#/$defs/Disclaimer"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "related_refs": {
+      "description": "IDs/refs of deterministic inputs used (profile/state/sentiment versions).",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Refs",
+      "type": "array"
+    },
+    "schema_id": {
+      "default": "insight.v1",
+      "pattern": "^insight\\.v1$",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "symbol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Asset symbol when insight is asset-scoped; null for market-wide.",
+      "title": "Symbol"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "type": {
+      "const": "narrative",
+      "default": "narrative",
+      "description": "Always 'narrative' \u2014 distinguishes generative from deterministic payloads.",
+      "title": "Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "body",
+    "as_of",
+    "provenance"
+  ],
+  "title": "Insight",
+  "type": "object"
+}

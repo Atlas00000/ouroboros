@@ -1,0 +1,204 @@
+{
+  "$defs": {
+    "Disclaimer": {
+      "description": "Advisory disclaimer \u2014 research only, not investment advice / not execution.",
+      "properties": {
+        "text": {
+          "default": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+          "title": "Text",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "title": "Disclaimer",
+      "type": "object"
+    },
+    "Provenance": {
+      "description": "Trust metadata required on every Ouroboros output (roadmap F14 / N6).",
+      "properties": {
+        "confidence": {
+          "description": "Producer confidence in [0, 1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "generated_at": {
+          "description": "UTC timestamp when this output was produced.",
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_version": {
+          "description": "Deterministic or generative model/version string, e.g. 'regimes.rule_v1'.",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "sources": {
+          "description": "Upstream data sources or feed IDs that contributed to this output.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "stale": {
+          "default": false,
+          "description": "True when one or more contributing feeds exceeded cadence expectations.",
+          "title": "Stale",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generated_at",
+        "model_version",
+        "confidence"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "SentimentDriver": {
+      "description": "A headline / article contributing to the score.",
+      "properties": {
+        "contribution": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": -1.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Signed contribution of this item toward the aggregate score.",
+          "title": "Contribution"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "SentimentDriver",
+      "type": "object"
+    }
+  },
+  "description": "Decay-weighted 24h sentiment for one asset (schema_id: sentiment.v1).",
+  "properties": {
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "disclaimer": {
+      "$ref": "#/$defs/Disclaimer"
+    },
+    "item_count": {
+      "description": "Number of underlying news/calendar items.",
+      "minimum": 0,
+      "title": "Item Count",
+      "type": "integer"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "schema_id": {
+      "default": "sentiment.v1",
+      "pattern": "^sentiment\\.v1$",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "score": {
+      "description": "Aggregate sentiment in [-1, +1].",
+      "maximum": 1.0,
+      "minimum": -1.0,
+      "title": "Score",
+      "type": "number"
+    },
+    "symbol": {
+      "title": "Symbol",
+      "type": "string"
+    },
+    "top_drivers": {
+      "items": {
+        "$ref": "#/$defs/SentimentDriver"
+      },
+      "title": "Top Drivers",
+      "type": "array"
+    },
+    "window_hours": {
+      "default": 24,
+      "description": "Decay window in hours (default 24).",
+      "minimum": 1,
+      "title": "Window Hours",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "symbol",
+    "score",
+    "item_count",
+    "as_of",
+    "provenance"
+  ],
+  "title": "SentimentSnapshot",
+  "type": "object"
+}
