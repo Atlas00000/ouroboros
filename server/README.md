@@ -8,6 +8,7 @@ docker-compose up -d
 
 cd server
 python -m pip install -e ".[dev]"
+python -m alembic upgrade head
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
