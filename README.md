@@ -33,6 +33,19 @@ copy server\.env.example server\.env
 copy client\.env.example client\.env.local
 ```
 
+### Phase 0 verification suite
+
+```bash
+# Full suite (compose, migrate, ruff, alembic check, pytest, docker builds)
+python scripts/test_phase0.py
+
+# Faster (skip image builds)
+python scripts/test_phase0.py --quick
+
+# PowerShell
+.\scripts\test_phase0.ps1 -Quick
+```
+
 Client and server apps are scaffolded in later Phase 0 days; they run natively (`pnpm` / `uv`) or via their own Dockerfiles under `client/` and `server/`.
 
 ## Dual auth (preview)

@@ -90,9 +90,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -e .
+      - run: pip install -e ".[dev]"
       - run: python -c "from contracts import AssetProfile, MarketState; print('ok')"
       - run: python -m contracts.export_jsonschema
+      - run: python -m pytest -q
 
   client-placeholder:
     name: client Dockerfile placeholder
