@@ -3,6 +3,7 @@
 from app.models.asset import Asset
 from app.models.forecast_log import ForecastLog
 from app.models.insight import InsightRow
+from app.models.macro import MacroObservation
 from app.models.news import NewsItem
 from app.models.outbox import OutboxMessage
 from app.models.price import PriceBar
@@ -15,6 +16,7 @@ __all__ = [
     "Asset",
     "ForecastLog",
     "InsightRow",
+    "MacroObservation",
     "MarketStateRow",
     "NewsItem",
     "OutboxMessage",

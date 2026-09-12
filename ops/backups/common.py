@@ -25,6 +25,7 @@ IRREPLACEABLE_TABLES = (
     "states",
     "source_registry",
     "assets",
+    "macro_observations",
 )
 
 
