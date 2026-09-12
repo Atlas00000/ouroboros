@@ -46,7 +46,7 @@ def connect(settings: Settings | None = None) -> Mt5ConnectionInfo:
             error="MT5_PATH is not set",
         )
 
-    initialized = mt5.initialize(path=cfg.mt5_path)
+    initialized = mt5.initialize(path=cfg.mt5_path, timeout=120_000)
     if not initialized:
         code, message = mt5.last_error()
         return Mt5ConnectionInfo(
