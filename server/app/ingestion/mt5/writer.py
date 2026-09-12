@@ -6,7 +6,7 @@ import logging
 from datetime import UTC, datetime
 from decimal import Decimal
 
-from sqlalchemy import func, select, text
+from sqlalchemy import func, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
@@ -77,11 +77,7 @@ def count_bars(session: Session, symbol: str) -> int:
 
 
 def heartbeat_source(session: Session, source_id: str = "mt5.prices") -> None:
-    session.execute(
-        text(
-            "UPDATE source_registry SET last_seen_at = now(), status = 'ok', updated_at = now() "
-            "WHERE source_id = :sid"
-        ),
-        {"sid": source_id},
-    )
-    session.commit()
+    """Record a successful MT5 write cycle on the source registry."""
+    from app.ingestion.registry import record_heartbeat
+
+    record_heartbeat(session, source_id)
