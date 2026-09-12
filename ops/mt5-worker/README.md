@@ -35,3 +35,18 @@ py -3.12 ..\ops\mt5-worker\backfill.py --years 2
 ```
 
 Re-running is safe: continues from each symbol's latest `prices.ts`.
+
+## Live poller (W2·D3)
+
+```powershell
+# Single cycle (gap detect + upsert closed M1 bars)
+py -3.12 ..\ops\mt5-worker\poll.py --once --symbols EURUSD
+
+# Continuous loop (default 60s); Ctrl+C to stop
+py -3.12 ..\ops\mt5-worker\poll.py --interval 60
+
+# Smoke: two cycles then exit
+py -3.12 ..\ops\mt5-worker\poll.py --symbols EURUSD --interval 5 --max-cycles 2
+```
+
+Do not run backfill and the live poller at the same time — MT5 IPC is single-connection.
