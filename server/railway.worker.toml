@@ -1,0 +1,17 @@
+# Railway — worker service (W5·D4)
+#
+# Create a second service in the same project from the same Dockerfile.
+# Prefer configuring startCommand in the Railway dashboard; this file documents
+# the intended worker deploy settings if linked as a separate config.
+#
+# Root Directory = repository root
+# Dockerfile = server/Dockerfile
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "server/Dockerfile"
+
+[deploy]
+startCommand = "python -m app.scheduler"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

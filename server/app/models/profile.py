@@ -5,7 +5,17 @@ from __future__ import annotations
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import DateTime, ForeignKey, Integer, Numeric, String, Text, UniqueConstraint, func
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    Numeric,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -13,7 +23,10 @@ from app.db.base import Base
 
 class ProfileRow(Base):
     __tablename__ = "profiles"
-    __table_args__ = (UniqueConstraint("symbol", "profile_version", name="uq_profiles_symbol_ver"),)
+    __table_args__ = (
+        UniqueConstraint("symbol", "profile_version", name="uq_profiles_symbol_ver"),
+        Index("ix_profiles_symbol_created", "symbol", "created_at"),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     symbol: Mapped[str] = mapped_column(String(32), ForeignKey("assets.symbol"), nullable=False)

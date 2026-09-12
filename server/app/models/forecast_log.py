@@ -13,7 +13,18 @@ from app.db.base import Base
 
 class ForecastLog(Base):
     __tablename__ = "forecast_log"
-    __table_args__ = (Index("ix_forecast_log_symbol_made_at", "symbol", "made_at"),)
+    __table_args__ = (
+        Index("ix_forecast_log_symbol_made_at", "symbol", "made_at"),
+        Index(
+            "uq_forecast_log_call_identity",
+            "symbol",
+            "timeframe",
+            "call_type",
+            "made_at",
+            "model_version",
+            unique=True,
+        ),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     symbol: Mapped[str] = mapped_column(String(32), nullable=False)

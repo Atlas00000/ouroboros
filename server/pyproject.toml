@@ -16,6 +16,9 @@ dependencies = [
   "alembic>=1.14",
   "httpx>=0.27",
   "MetaTrader5>=5.0.45; platform_system=='Windows'",
+  "pandas>=2.2",
+  "numpy>=2.0",
+  "apscheduler>=3.10",
 ]
 
 # Install shared contracts separately when needed:
@@ -27,6 +30,10 @@ dev = [
   "pytest>=8.0",
   "pytest-asyncio>=0.24",
   "ruff>=0.8",
+]
+hmm = [
+  "hmmlearn>=0.3.2",
+  "scikit-learn>=1.4",
 ]
 
 [build-system]

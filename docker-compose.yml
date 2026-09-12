@@ -1,6 +1,7 @@
 # Local infrastructure — Postgres/Timescale + Redis always.
 # Optional app profiles:
 #   docker-compose --profile server up -d
+#   docker-compose --profile worker up -d
 #   docker-compose --profile client up -d
 #
 # Usage:
@@ -44,8 +45,8 @@ services:
   server:
     profiles: ["server"]
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: server/Dockerfile
     container_name: ouroboros-server
     restart: unless-stopped
     ports:
@@ -55,6 +56,25 @@ services:
       DATABASE_URL: postgresql://ouroboros:${POSTGRES_PASSWORD:-ouroboros}@postgres:5432/ouroboros
       REDIS_URL: redis://redis:6379/0
       CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    profiles: ["worker"]
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: ouroboros-worker
+    restart: unless-stopped
+    command: ["python", "-m", "app.scheduler"]
+    environment:
+      APP_ENV: local
+      DATABASE_URL: postgresql://ouroboros:${POSTGRES_PASSWORD:-ouroboros}@postgres:5432/ouroboros
+      REDIS_URL: redis://redis:6379/0
+      LOG_LEVEL: INFO
     depends_on:
       postgres:
         condition: service_healthy

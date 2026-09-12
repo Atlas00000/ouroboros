@@ -1,0 +1,82 @@
+{
+  "model_version": "regimes.rule_v1",
+  "params": {
+    "vol_high": 75.0,
+    "er_abs": 0.25,
+    "persistence_n": 3
+  },
+  "grid_cases": [
+    {
+      "id": "hv_dominates",
+      "vol_percentile": 90.0,
+      "efficiency_ratio": 0.5,
+      "expected_raw": "high_volatility"
+    },
+    {
+      "id": "trend_up",
+      "vol_percentile": 40.0,
+      "efficiency_ratio": 0.4,
+      "expected_raw": "trending_up"
+    },
+    {
+      "id": "trend_down",
+      "vol_percentile": 40.0,
+      "efficiency_ratio": -0.4,
+      "expected_raw": "trending_down"
+    },
+    {
+      "id": "ranging",
+      "vol_percentile": 40.0,
+      "efficiency_ratio": 0.1,
+      "expected_raw": "ranging"
+    },
+    {
+      "id": "boundary_vol_inclusive",
+      "vol_percentile": 75.0,
+      "efficiency_ratio": 0.0,
+      "expected_raw": "high_volatility"
+    },
+    {
+      "id": "boundary_er_up_inclusive",
+      "vol_percentile": 50.0,
+      "efficiency_ratio": 0.25,
+      "expected_raw": "trending_up"
+    },
+    {
+      "id": "boundary_er_down_inclusive",
+      "vol_percentile": 50.0,
+      "efficiency_ratio": -0.25,
+      "expected_raw": "trending_down"
+    }
+  ],
+  "persistence_cases": [
+    {
+      "id": "confirm_after_n",
+      "prior": "ranging",
+      "raw": ["trending_up", "trending_up", "trending_up", "trending_down"],
+      "expected_confirmed": ["ranging", "ranging", "trending_up", "trending_up"]
+    },
+    {
+      "id": "hold_on_none",
+      "prior": "trending_down",
+      "raw": [null, null, "ranging"],
+      "expected_confirmed": ["trending_down", "trending_down", "trending_down"]
+    }
+  ],
+  "probability_cases": [
+    {
+      "id": "hv_top_mass",
+      "vol_percentile": 90.0,
+      "efficiency_ratio": 0.0,
+      "expected_top": "high_volatility",
+      "min_top_probability": 0.35
+    },
+    {
+      "id": "trend_up_top_mass",
+      "vol_percentile": 30.0,
+      "efficiency_ratio": 0.6,
+      "expected_top": "trending_up",
+      "min_top_probability": 0.35
+    }
+  ]
+}

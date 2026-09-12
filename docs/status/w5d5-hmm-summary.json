@@ -1,0 +1,11 @@
+{
+  "timeframe": "H1",
+  "n_symbols": 14,
+  "avg_rule_flips_per_day": 0.9893822402425727,
+  "avg_hmm_flips_per_day": 0.8493923116071217,
+  "avg_agreement": 0.4897509412811481,
+  "rule_within_budget": 14,
+  "hmm_within_budget": 14,
+  "promote_hmm": false,
+  "decision": "keep_rule_v1"
+}
