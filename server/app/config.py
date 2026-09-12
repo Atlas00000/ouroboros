@@ -62,6 +62,22 @@ class Settings(BaseSettings):
     alert_telegram_chat_id: str | None = Field(default=None, alias="ALERT_TELEGRAM_CHAT_ID")
     alert_webhook_url: str | None = Field(default=None, alias="ALERT_WEBHOOK_URL")
 
+    # Auth — Clerk (humans)
+    clerk_secret_key: str | None = Field(default=None, alias="CLERK_SECRET_KEY")
+    clerk_jwks_url: str | None = Field(default=None, alias="CLERK_JWKS_URL")
+    clerk_authorized_parties: str = Field(
+        default="http://localhost:3000",
+        alias="CLERK_AUTHORIZED_PARTIES",
+    )
+    clerk_allowed_org_id: str | None = Field(default=None, alias="CLERK_ALLOWED_ORG_ID")
+    # Local/smoke only: HS256 secret when JWKS URL is empty
+    clerk_test_jwt_secret: str | None = Field(default=None, alias="CLERK_TEST_JWT_SECRET")
+
+    # Machine API keys (plaintext bootstrap → hashed into api_keys table)
+    ouroboros_api_key_client: str | None = Field(default=None, alias="OUROBOROS_API_KEY_CLIENT")
+    ouroboros_api_key_epg: str | None = Field(default=None, alias="OUROBOROS_API_KEY_EPG")
+    ouroboros_api_key_quant: str | None = Field(default=None, alias="OUROBOROS_API_KEY_QUANT")
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
@@ -69,6 +85,23 @@ class Settings(BaseSettings):
     @property
     def fred_series_list(self) -> list[str]:
         return [s.strip().upper() for s in self.fred_series.split(",") if s.strip()]
+
+    @property
+    def clerk_authorized_parties_list(self) -> list[str]:
+        return [p.strip() for p in self.clerk_authorized_parties.split(",") if p.strip()]
+
+    def bootstrap_api_keys(self) -> list[tuple[str, str, str]]:
+        """Return (name, service_name, raw_key) triples for non-empty env keys."""
+        out: list[tuple[str, str, str]] = []
+        mapping = (
+            ("client", "client", self.ouroboros_api_key_client),
+            ("epg", "epg", self.ouroboros_api_key_epg),
+            ("quant", "quant", self.ouroboros_api_key_quant),
+        )
+        for name, service, raw in mapping:
+            if raw and raw.strip():
+                out.append((name, service, raw.strip()))
+        return out
 
 
 @lru_cache

@@ -35,13 +35,8 @@
 
 ## Tag
 
-After committing Phase 2 analytics work:
-
-```powershell
-git tag -a v0.3-analytics -m "Phase 2 deterministic analytics (metrics/regimes/profiles/worker)"
-git push origin v0.3-analytics
-```
+Tagged and pushed: **`v0.3-analytics`** on `d33f4d5`.
 
 ## Next
 
-**Phase 3 / W6·D1** — dual-auth middleware + problem+json + profiles/assets routers.
+**Phase 3 / W6·D1** — started; see `docs/status/w6d1-status.md`.

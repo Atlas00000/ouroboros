@@ -1,5 +1,6 @@
 """ORM models — import all so Alembic metadata is complete."""
 
+from app.models.api_key import ApiKeyRow
 from app.models.asset import Asset
 from app.models.forecast_log import ForecastLog
 from app.models.insight import InsightRow
@@ -13,6 +14,7 @@ from app.models.source_registry import SourceRegistry
 from app.models.state import MarketStateRow
 
 __all__ = [
+    "ApiKeyRow",
     "Asset",
     "ForecastLog",
     "InsightRow",

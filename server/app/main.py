@@ -2,16 +2,45 @@
 
 from __future__ import annotations
 
+import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
 
 from app import __version__
+from app.api.errors import register_exception_handlers
+from app.api.v1 import assets as assets_router
 from app.api.v1 import health as health_router
+from app.api.v1 import profiles as profiles_router
+from app.auth.api_keys import BootstrapKey, upsert_bootstrap_keys
 from app.config import get_settings
+from app.db.session import get_session_factory
 from app.observability.logging import configure_logging
 from app.observability.sentry import init_sentry
+
+logger = logging.getLogger(__name__)
+
+
+def _bootstrap_keys() -> None:
+    settings = get_settings()
+    triples = settings.bootstrap_api_keys()
+    if not triples:
+        return
+    session = get_session_factory()()
+    try:
+        keys = [
+            BootstrapKey(name=n, service_name=s, raw_key=k, role="viewer")
+            for n, s, k in triples
+        ]
+        n = upsert_bootstrap_keys(session, keys)
+        logger.info("api_key_bootstrap upserted=%s", n)
+    except Exception:
+        logger.exception("api_key_bootstrap_failed")
+        session.rollback()
+    finally:
+        session.close()
 
 
 @asynccontextmanager
@@ -23,6 +52,7 @@ async def lifespan(_app: FastAPI):
         environment=settings.app_env,
         release=f"ouroboros-server@{__version__}",
     )
+    _bootstrap_keys()
     yield
 
 
@@ -41,7 +71,40 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    register_exception_handlers(application)
     application.include_router(health_router.router, prefix="/v1")
+    application.include_router(assets_router.router, prefix="/v1")
+    application.include_router(profiles_router.router, prefix="/v1")
+
+    def custom_openapi() -> dict:
+        if application.openapi_schema:
+            return application.openapi_schema
+        schema = get_openapi(
+            title=application.title,
+            version=application.version,
+            description=application.description,
+            routes=application.routes,
+        )
+        schema.setdefault("components", {}).setdefault("securitySchemes", {}).update(
+            {
+                "bearerAuth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT",
+                    "description": "Clerk session JWT",
+                },
+                "apiKeyAuth": {
+                    "type": "apiKey",
+                    "in": "header",
+                    "name": "X-API-Key",
+                    "description": "Hashed machine API key",
+                },
+            }
+        )
+        application.openapi_schema = schema
+        return application.openapi_schema
+
+    application.openapi = custom_openapi  # type: ignore[method-assign]
     return application
 
 
