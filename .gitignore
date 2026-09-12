@@ -48,6 +48,7 @@ data/
 *.log
 ops/mt5-worker/smoke_out.txt
 ops/mt5-worker/smoke_out.txt.err
+data/soak/
 
 # Generated / local
 *.pem
