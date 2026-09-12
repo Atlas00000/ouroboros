@@ -14,6 +14,7 @@ dependencies = [
   "psycopg[binary]>=3.2",
   "sqlalchemy>=2.0",
   "alembic>=1.14",
+  "httpx>=0.27",
   "MetaTrader5>=5.0.45; platform_system=='Windows'",
 ]
 
