@@ -121,9 +121,13 @@ def run_check(
     *,
     now: datetime | None = None,
     propagate: bool = True,
+    notify: bool = False,
+    notifier: object | None = None,
 ) -> WatchdogReport:
     """
     Cadence checker → persist registry status → propagate stale flags → log alerts.
+
+    When `notify=True`, also dispatch a digest via the configured alert channel.
     """
     moment = now or datetime.now(UTC)
     snaps = refresh_statuses(session, now=moment)
@@ -150,4 +154,8 @@ def run_check(
         len(alerts),
         marked,
     )
+    if notify and alerts:
+        from app.watchdog.notify import notify_watchdog_report
+
+        notify_watchdog_report(report, notifier=notifier)  # type: ignore[arg-type]
     return report

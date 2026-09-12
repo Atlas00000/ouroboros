@@ -70,6 +70,7 @@ def request_with_retry(
     timeout: float = 30.0,
     headers: Mapping[str, str] | None = None,
     params: Mapping[str, Any] | None = None,
+    json: Any | None = None,
     retries: int = 3,
     backoff_base: float = 0.4,
     retry_statuses: frozenset[int] = DEFAULT_RETRY_STATUSES,
@@ -91,7 +92,9 @@ def request_with_retry(
             if rate_limiter is not None:
                 rate_limiter.wait()
             try:
-                response = http.request(method, url, headers=headers, params=params)
+                response = http.request(
+                    method, url, headers=headers, params=params, json=json
+                )
             except DEFAULT_RETRY_EXCEPTIONS as exc:
                 if attempt >= retries:
                     raise

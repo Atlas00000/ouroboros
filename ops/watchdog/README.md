@@ -15,3 +15,9 @@ py -3.12 ..\ops\watchdog\run.py gap-report --symbols EURUSD,GBPUSD
 ```
 
 Exit code `1` from `check` means at least one alert fired (or use in CI with care on weekends for price feeds — weekend price silence is suppressed).
+
+```powershell
+# Also email/Telegram/webhook digest via ALERT_CHANNEL
+py -3.12 ..\ops\watchdog\run.py check --notify
+py -3.12 ..\ops\watchdog\run.py kill-feed-drill --notify
+```

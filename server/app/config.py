@@ -58,6 +58,9 @@ class Settings(BaseSettings):
     resend_api_key: str | None = Field(default=None, alias="RESEND_API_KEY")
     email_from: str | None = Field(default=None, alias="EMAIL_FROM")
     email_alert_to: str | None = Field(default=None, alias="EMAIL_ALERT_TO")
+    alert_telegram_bot_token: str | None = Field(default=None, alias="ALERT_TELEGRAM_BOT_TOKEN")
+    alert_telegram_chat_id: str | None = Field(default=None, alias="ALERT_TELEGRAM_CHAT_ID")
+    alert_webhook_url: str | None = Field(default=None, alias="ALERT_WEBHOOK_URL")
 
     @property
     def cors_origin_list(self) -> list[str]:

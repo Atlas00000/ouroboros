@@ -23,10 +23,20 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Ouroboros watchdog / integrity tools")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
-    sub.add_parser("check", help="Cadence check + stale propagation + log alerts")
+    check = sub.add_parser("check", help="Cadence check + stale propagation + log alerts")
+    check.add_argument(
+        "--notify",
+        action="store_true",
+        help="Also send alert digest via ALERT_CHANNEL (Resend/Telegram/webhook)",
+    )
 
     drill = sub.add_parser("kill-feed-drill", help="Simulate a silenced feed (no MT5 stop)")
     drill.add_argument("--source", default="finnhub.news")
+    drill.add_argument(
+        "--notify",
+        action="store_true",
+        help="Send notification digest if drill produces alerts",
+    )
 
     gaps = sub.add_parser("gap-report", help="M1 backfill integrity gap scan")
     gaps.add_argument("--symbols", default="", help="Comma-separated subset (default: all active)")
@@ -40,7 +50,7 @@ def main() -> int:
     session = get_session_factory()()
     try:
         if args.cmd == "check":
-            report = run_check(session)
+            report = run_check(session, notify=args.notify)
             print(
                 f"watchdog check sources={len(report.sources)} "
                 f"stale={report.stale_count} alerts={len(report.alerts)} "
@@ -58,6 +68,11 @@ def main() -> int:
         if args.cmd == "kill-feed-drill":
             result = run_kill_feed_drill(session, source_id=args.source)
             print(f"kill-feed drill passed={result.passed} {result.detail}")
+            if args.notify and result.report.alerts:
+                from app.watchdog.notify import notify_watchdog_report
+
+                nr = notify_watchdog_report(result.report)
+                print(f"notify ok={nr.ok if nr else None} detail={nr.detail if nr else None}")
             return 0 if result.passed else 1
 
         if args.cmd == "gap-report":
