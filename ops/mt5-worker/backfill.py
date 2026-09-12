@@ -27,6 +27,11 @@ def main() -> int:
         help="Comma-separated canonical symbols (default: full active universe)",
     )
     parser.add_argument("--chunk-days", type=int, default=14, help="MT5 fetch window size")
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="Ignore latest bar; re-fetch full --years window (idempotent upserts)",
+    )
     args = parser.parse_args()
 
     get_settings.cache_clear()
@@ -39,15 +44,18 @@ def main() -> int:
         symbols=symbols,
         chunk_days=args.chunk_days,
         settings=settings,
+        no_resume=args.no_resume,
     )
     total = sum(r.bars_written for r in results)
     print(f"backfill complete symbols={len(results)} bars_written={total}")
     for r in results:
+        err = f" ERROR={r.error}" if r.error else ""
         print(
             f"  {r.symbol} ticker={r.mt5_ticker} written={r.bars_written} "
-            f"resumed={r.resumed} from={r.from_ts} to={r.to_ts}"
+            f"resumed={r.resumed} from={r.from_ts} to={r.to_ts}{err}"
         )
-    return 0
+    failed = [r for r in results if r.error]
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

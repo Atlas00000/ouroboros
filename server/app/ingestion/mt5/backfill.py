@@ -26,6 +26,7 @@ class BackfillResult:
     from_ts: datetime | None
     to_ts: datetime | None
     resumed: bool
+    error: str | None = None
 
 
 def backfill_symbol(
@@ -37,11 +38,13 @@ def backfill_symbol(
     end_utc: datetime | None = None,
     chunk_days: int = 14,
     settings: Settings | None = None,
+    no_resume: bool = False,
 ) -> BackfillResult:
     """
     Backfill one symbol.
 
     Resume: if bars already exist, continue from last ts + 1 minute.
+    Use no_resume=True to re-fetch the full years window (upserts are idempotent).
     """
     cfg = settings or get_settings()
     end = end_utc or datetime.now(UTC)
@@ -49,7 +52,7 @@ def backfill_symbol(
 
     last = latest_bar_ts(session, symbol)
     resumed = False
-    if last is not None and last > start:
+    if not no_resume and last is not None and last > start:
         start = last + timedelta(minutes=1)
         resumed = True
 
@@ -90,6 +93,7 @@ def backfill_universe(
     symbols: list[str] | None = None,
     chunk_days: int = 14,
     settings: Settings | None = None,
+    no_resume: bool = False,
 ) -> list[BackfillResult]:
     """Connect to MT5 and backfill active universe (or a symbol subset)."""
     cfg = settings or get_settings()
@@ -102,14 +106,30 @@ def backfill_universe(
         for symbol in targets:
             ticker = mapper.to_mt5(symbol)
             logger.info("backfill start symbol=%s ticker=%s years=%s", symbol, ticker, years)
-            result = backfill_symbol(
-                session,
-                symbol=symbol,
-                mt5_ticker=ticker,
-                years=years,
-                chunk_days=chunk_days,
-                settings=cfg,
-            )
+            try:
+                result = backfill_symbol(
+                    session,
+                    symbol=symbol,
+                    mt5_ticker=ticker,
+                    years=years,
+                    chunk_days=chunk_days,
+                    settings=cfg,
+                    no_resume=no_resume,
+                )
+            except Exception as exc:  # noqa: BLE001 — continue universe on per-symbol MT5 failures
+                logger.exception("backfill failed symbol=%s ticker=%s", symbol, ticker)
+                results.append(
+                    BackfillResult(
+                        symbol=symbol,
+                        mt5_ticker=ticker,
+                        bars_written=0,
+                        from_ts=None,
+                        to_ts=None,
+                        resumed=False,
+                        error=str(exc),
+                    )
+                )
+                continue
             total = count_bars(session, symbol)
             logger.info(
                 "backfill done symbol=%s written=%s total_in_db=%s resumed=%s",

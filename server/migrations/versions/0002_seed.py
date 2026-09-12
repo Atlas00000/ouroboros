@@ -31,9 +31,10 @@ ASSETS = [
     ("GBPJPY", "British Pound / Japanese Yen", "fx", "GBPJPY", "GBP", "JPY"),
     ("XAUUSD", "Gold / US Dollar", "metal", "XAUUSD", "XAU", "USD"),
     ("XAGUSD", "Silver / US Dollar", "metal", "XAGUSD", "XAG", "USD"),
-    ("US500", "S&P 500", "index", "US500", None, "USD"),
+    # mt5_ticker = YWO-Trade Market Watch names (canonical symbols stay US500/NAS100)
+    ("US500", "S&P 500", "index", "SPX500", None, "USD"),
     ("US30", "Dow Jones Industrial Average", "index", "US30", None, "USD"),
-    ("NAS100", "Nasdaq 100", "index", "NAS100", None, "USD"),
+    ("NAS100", "Nasdaq 100", "index", "US100", None, "USD"),
 ]
 
 SOURCES = [
