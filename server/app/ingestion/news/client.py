@@ -10,9 +10,9 @@ from typing import Any
 import httpx
 
 from app.config import Settings, get_settings
+from app.ingestion.httputil import FINNHUB_LIMITER, get_json
 
 logger = logging.getLogger(__name__)
-logging.getLogger("httpx").setLevel(logging.WARNING)
 
 FINNHUB_NEWS_URL = "https://finnhub.io/api/v1/news"
 DEFAULT_CATEGORIES = ("forex", "general")
@@ -37,9 +37,16 @@ class RawNewsArticle:
 class FinnhubNewsClient:
     """Thin client for Finnhub market news (`/news`)."""
 
-    def __init__(self, settings: Settings | None = None, *, timeout: float = 30.0) -> None:
+    def __init__(
+        self,
+        settings: Settings | None = None,
+        *,
+        timeout: float = 30.0,
+        transport: httpx.BaseTransport | None = None,
+    ) -> None:
         self._settings = settings or get_settings()
         self._timeout = timeout
+        self._transport = transport
 
     @property
     def api_key(self) -> str:
@@ -51,10 +58,14 @@ class FinnhubNewsClient:
     def fetch_category(self, category: str) -> list[RawNewsArticle]:
         params = {"category": category}
         headers = {"X-Finnhub-Token": self.api_key}
-        with httpx.Client(timeout=self._timeout) as client:
-            resp = client.get(FINNHUB_NEWS_URL, params=params, headers=headers)
-            resp.raise_for_status()
-            payload = resp.json()
+        payload = get_json(
+            FINNHUB_NEWS_URL,
+            timeout=self._timeout,
+            headers=headers,
+            params=params,
+            rate_limiter=FINNHUB_LIMITER,
+            transport=self._transport,
+        )
 
         if not isinstance(payload, list):
             raise RuntimeError(f"unexpected Finnhub news payload type: {type(payload)}")

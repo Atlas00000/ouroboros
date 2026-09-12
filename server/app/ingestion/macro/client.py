@@ -11,9 +11,9 @@ from typing import Any
 import httpx
 
 from app.config import Settings, get_settings
+from app.ingestion.httputil import FRED_LIMITER, get_json
 
 logger = logging.getLogger(__name__)
-logging.getLogger("httpx").setLevel(logging.WARNING)
 
 FRED_OBS_URL = "https://api.stlouisfed.org/fred/series/observations"
 
@@ -26,9 +26,16 @@ class RawMacroPoint:
 
 
 class FredClient:
-    def __init__(self, settings: Settings | None = None, *, timeout: float = 30.0) -> None:
+    def __init__(
+        self,
+        settings: Settings | None = None,
+        *,
+        timeout: float = 30.0,
+        transport: httpx.BaseTransport | None = None,
+    ) -> None:
         self._settings = settings or get_settings()
         self._timeout = timeout
+        self._transport = transport
 
     @property
     def api_key(self) -> str:
@@ -55,10 +62,13 @@ class FredClient:
         if limit is not None:
             params["limit"] = limit
 
-        with httpx.Client(timeout=self._timeout) as client:
-            resp = client.get(FRED_OBS_URL, params=params)
-            resp.raise_for_status()
-            payload = resp.json()
+        payload = get_json(
+            FRED_OBS_URL,
+            timeout=self._timeout,
+            params=params,
+            rate_limiter=FRED_LIMITER,
+            transport=self._transport,
+        )
 
         observations = payload.get("observations") if isinstance(payload, dict) else None
         if not isinstance(observations, list):

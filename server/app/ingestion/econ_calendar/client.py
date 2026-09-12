@@ -11,9 +11,9 @@ from typing import Any
 import httpx
 
 from app.config import Settings, get_settings
+from app.ingestion.httputil import FINNHUB_LIMITER, get_json
 
 logger = logging.getLogger(__name__)
-logging.getLogger("httpx").setLevel(logging.WARNING)
 
 FINNHUB_CALENDAR_URL = "https://finnhub.io/api/v1/calendar/economic"
 
@@ -34,9 +34,16 @@ class RawCalendarEvent:
 
 
 class FinnhubCalendarClient:
-    def __init__(self, settings: Settings | None = None, *, timeout: float = 30.0) -> None:
+    def __init__(
+        self,
+        settings: Settings | None = None,
+        *,
+        timeout: float = 30.0,
+        transport: httpx.BaseTransport | None = None,
+    ) -> None:
         self._settings = settings or get_settings()
         self._timeout = timeout
+        self._transport = transport
 
     @property
     def api_key(self) -> str:
@@ -51,10 +58,14 @@ class FinnhubCalendarClient:
             "to": end.isoformat(),
         }
         headers = {"X-Finnhub-Token": self.api_key}
-        with httpx.Client(timeout=self._timeout) as client:
-            resp = client.get(FINNHUB_CALENDAR_URL, params=params, headers=headers)
-            resp.raise_for_status()
-            payload = resp.json()
+        payload = get_json(
+            FINNHUB_CALENDAR_URL,
+            timeout=self._timeout,
+            headers=headers,
+            params=params,
+            rate_limiter=FINNHUB_LIMITER,
+            transport=self._transport,
+        )
 
         items = payload.get("economicCalendar", payload) if isinstance(payload, dict) else payload
         if not isinstance(items, list):
@@ -90,7 +101,6 @@ class FinnhubCalendarClient:
         scheduled: datetime | None = None
         time_raw = item.get("time")
         if isinstance(time_raw, str) and time_raw:
-            # Finnhub uses "YYYY-MM-DD HH:MM:SS" (often UTC or local-naive).
             for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d"):
                 try:
                     scheduled = datetime.strptime(time_raw, fmt).replace(tzinfo=UTC)

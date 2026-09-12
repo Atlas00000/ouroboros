@@ -1,0 +1,24 @@
+[
+  {
+    "category": "forex",
+    "datetime": 1726070400,
+    "headline": "ECB holds rates as euro firms versus dollar",
+    "id": 9001001,
+    "image": "",
+    "related": "OANDA:EUR_USD",
+    "source": "fixture-wire",
+    "summary": "European Central Bank keeps policy unchanged.",
+    "url": "https://example.com/ecb-holds"
+  },
+  {
+    "category": "forex",
+    "datetime": 1726156800,
+    "headline": "Gold climbs on safe-haven demand",
+    "id": 9001002,
+    "image": "",
+    "related": "",
+    "source": "fixture-wire",
+    "summary": "XAUUSD gains as yields ease.",
+    "url": "https://example.com/gold"
+  }
+]

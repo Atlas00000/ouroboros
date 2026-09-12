@@ -10,9 +10,9 @@ from typing import Any
 import httpx
 
 from app.ingestion.econ_calendar.client import RawCalendarEvent
+from app.ingestion.httputil import FF_LIMITER, get_json
 
 logger = logging.getLogger(__name__)
-logging.getLogger("httpx").setLevel(logging.WARNING)
 
 # Unofficial but widely used public FF calendar JSON (this-week window).
 FF_CALENDAR_URL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
@@ -34,14 +34,22 @@ _CURRENCY_TO_COUNTRY = {
 class ForexFactoryCalendarClient:
     """Best-effort free calendar when Finnhub economic calendar is plan-locked."""
 
-    def __init__(self, *, timeout: float = 30.0) -> None:
+    def __init__(
+        self,
+        *,
+        timeout: float = 30.0,
+        transport: httpx.BaseTransport | None = None,
+    ) -> None:
         self._timeout = timeout
+        self._transport = transport
 
     def fetch_this_week(self) -> list[RawCalendarEvent]:
-        with httpx.Client(timeout=self._timeout) as client:
-            resp = client.get(FF_CALENDAR_URL)
-            resp.raise_for_status()
-            payload = resp.json()
+        payload = get_json(
+            FF_CALENDAR_URL,
+            timeout=self._timeout,
+            rate_limiter=FF_LIMITER,
+            transport=self._transport,
+        )
 
         if not isinstance(payload, list):
             raise RuntimeError(f"unexpected FF calendar payload: {type(payload)}")
