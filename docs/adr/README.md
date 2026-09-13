@@ -10,3 +10,4 @@
 | 015 | Dual auth: Clerk (humans) + API keys (machines) | Accepted |
 | 016 | Resend for human-facing email alerts | Accepted |
 | 017 | Keep rule-based regimes; do not promote HMM spike | Accepted |
+| 018 | System `/metrics` vs asset `/v1/metrics` | Accepted |

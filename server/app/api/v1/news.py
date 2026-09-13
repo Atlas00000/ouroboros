@@ -11,6 +11,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.pagination import ProvenanceEnvelope, decode_cursor, encode_cursor
+from app.api.staleness import endpoint_stale
 from app.auth.dependencies import RequirePrincipal
 from app.db.session import get_db
 from app.models.news import NewsItem
@@ -97,6 +98,6 @@ def list_news(
             generated_at=now,
             model_version="news.list.v1",
             confidence=1.0,
-            stale=False,
+            stale=endpoint_stale(db, "news"),
         ),
     )

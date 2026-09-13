@@ -30,8 +30,8 @@ def get_engine() -> Engine:
         _engine = create_engine(
             _normalize_url(settings.database_url),
             pool_pre_ping=True,
-            pool_size=5,
-            max_overflow=10,
+            pool_size=max(1, int(settings.db_pool_size)),
+            max_overflow=max(0, int(settings.db_max_overflow)),
         )
 
         @event.listens_for(_engine, "connect")

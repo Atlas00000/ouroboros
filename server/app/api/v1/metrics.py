@@ -14,6 +14,7 @@ from app.analytics.bars import load_ohlcv
 from app.analytics.metrics import MODEL_VERSION, compute_metric_snapshot
 from app.api.errors import AppError
 from app.api.pagination import ProvenanceEnvelope
+from app.api.staleness import endpoint_stale
 from app.auth.dependencies import RequirePrincipal
 from app.db.session import get_db
 from app.models.asset import Asset
@@ -98,6 +99,6 @@ def get_metrics(
             generated_at=now,
             model_version=snap.model_version,
             confidence=0.9 if snap.atr_14 is not None else 0.4,
-            stale=False,
+            stale=endpoint_stale(db, "metrics"),
         ),
     )

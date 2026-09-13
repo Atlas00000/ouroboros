@@ -1,10 +1,11 @@
 # Ouroboros — Project Report & Implementation Roadmap
 
-> **Version:** 1.5 · **Date:** 2026-09-13 · **Status:** Planning
+> **Version:** 1.6 · **Date:** 2026-09-13 · **Status:** Planning
 > **One-liner:** An independent asset-intelligence platform that ingests real-time and historical market data, builds living asset profiles, detects market states/regimes, digests news into sentiment and insight, and serves all of it to sibling platforms (EPG, quant platforms) via versioned APIs and durable events. **It does not execute trades.**
 > **Hosting model:** `client/` deploys to **Vercel** · `server/` (API + worker) + database deploy to **Railway** · local services (Postgres, Redis) run in **Docker** · staging is live from **Week 1** (walking skeleton, continuously deployed).
 > **Human auth & email:** **Clerk** (social + email login for dashboard users) · **Resend** (alerts, digests, invite/lifecycle mail). Machine consumers keep **hashed API keys**.
 > **Phase 3 compute:** **Local Docker first** — full server + client operational locally until explicit sign-off to Railway (unless a blocking need arises).
+> **LLM:** Multi-model cloud only (no local/Ollama — hardware). Prod: OpenAI → Anthropic → Gemini. Dev/free: Gemini/Groq free tiers. Sentiment interval configurable (15–30 min free/dev; ≤5 min paid/prod).
 
 ---
 
@@ -63,26 +64,26 @@ Ouroboros is the shared "contextual awareness" layer for our platform family. In
 ### 2.1 Functional requirements
 
 
-| ID  | Requirement                                                                                                                                                                                                                  |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| F1  | Ingest 1-minute OHLCV price data from MT5 for the configured asset universe (live + 2–5 years history backfill)                                                                                                              |
-| F2  | Ingest news/economic-calendar items from ≥ 1 API (e.g., Finnhub/Marketaux) within ~1 minute of publication                                                                                                                   |
-| F3  | Ingest macro series from FRED (daily cadence)                                                                                                                                                                                |
-| F4  | Compute deterministic metrics per asset per timeframe: realized vol, ATR percentiles, trend strength, rolling correlations, spread stats                                                                                     |
-| F5  | Classify market state/regime per asset per timeframe (trending-up, trending-down, ranging, high-vol) with probabilities                                                                                                      |
-| F6  | Score sentiment per asset in [-1, +1], decay-weighted 24h, with top-driver article references; per-article scores cached (never pay to score the same headline twice)                                                        |
-| F7  | Generate daily asset profiles (regenerated daily + event-triggered refresh)                                                                                                                                                  |
-| F8  | Generate LLM insight narratives, labeled `type: narrative`, never feeding numeric fields; daily LLM budget cap with alerting                                                                                                 |
-| F9  | Serve REST API: `GET /assets`, `/assets/{symbol}/profile`, `/state`, `/metrics`, `/sentiment`, `/insights`, `/news`                                                                                                          |
-| F10 | Publish durable events via **transactional outbox → Redis Streams** (`regime.changed`, `sentiment.spike`, `news.high_impact`, `profile.updated`) with consumer groups, acks, and replay of missed events                     |
-| F11 | Log every regime call and forecast to an immutable table; weekly scoring job compares to realized outcomes                                                                                                                   |
-| F12 | Staleness watchdog: per-source cadence expectations, `stale: true` propagation, alerting                                                                                                                                     |
-| F13 | Web dashboard (client): asset list, asset detail (profile, state, chart, sentiment, insights), system health page                                                                                                            |
-| F14 | All outputs carry provenance (`sources[]`, `generated_at`, `model_version`, `confidence`) and a disclaimer field                                                                                                             |
-| F15 | Trading-calendar module: all storage in UTC; sessions/holidays/MT5 server-time offset handled explicitly                                                                                                                     |
-| F16 | **Human auth (Clerk):** invite-only org; social login (e.g. Google/GitHub) + email login; client pages protected; roles at minimum `viewer` / `analyst` / `admin` / `ops` (ops → `/system`; admin → API-key management)      |
-| F17 | **Dual-auth API:** every protected endpoint accepts Clerk JWT *or* hashed API key; identity + auth method recorded in request context / audit logs                                                                           |
-| F18 | **Email (Resend):** send staleness/watchdog alerts, optional high-impact/regime digests, weekly scoring summary; `EMAIL_FROM` / allowlisted recipients; alert channel selectable (`telegram` | `webhook` | `resend` | multi) |
+| ID  | Requirement                                                                                                                                                                                                             |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| F1  | Ingest 1-minute OHLCV price data from MT5 for the configured asset universe (live + 2–5 years history backfill)                                                                                                         |
+| F2  | Ingest news/economic-calendar items from ≥ 1 API (e.g., Finnhub/Marketaux) within ~1 minute of publication                                                                                                              |
+| F3  | Ingest macro series from FRED (daily cadence)                                                                                                                                                                           |
+| F4  | Compute deterministic metrics per asset per timeframe: realized vol, ATR percentiles, trend strength, rolling correlations, spread stats                                                                                |
+| F5  | Classify market state/regime per asset per timeframe (trending-up, trending-down, ranging, high-vol) with probabilities                                                                                                 |
+| F6  | Score sentiment per asset in [-1, +1], decay-weighted 24h, with top-driver article references; per-article scores cached (never pay to score the same headline twice)                                                   |
+| F7  | Generate daily asset profiles (regenerated daily + event-triggered refresh)                                                                                                                                             |
+| F8  | Generate LLM insight narratives, labeled `type: narrative`, never feeding numeric fields; daily LLM budget cap with alerting                                                                                            |
+| F9  | Serve REST API: `GET /assets`, `/assets/{symbol}/profile`, `/state`, `/metrics`, `/sentiment`, `/insights`, `/news`                                                                                                     |
+| F10 | Publish durable events via **transactional outbox → Redis Streams** (`regime.changed`, `sentiment.spike`, `news.high_impact`, `profile.updated`) with consumer groups, acks, and replay of missed events                |
+| F11 | Log every regime call and forecast to an immutable table; weekly scoring job compares to realized outcomes                                                                                                              |
+| F12 | Staleness watchdog: per-source cadence expectations, `stale: true` propagation, alerting                                                                                                                                |
+| F13 | Web dashboard (client): asset list, asset detail (profile, state, chart, sentiment, insights), system health page                                                                                                       |
+| F14 | All outputs carry provenance (`sources[]`, `generated_at`, `model_version`, `confidence`) and a disclaimer field                                                                                                        |
+| F15 | Trading-calendar module: all storage in UTC; sessions/holidays/MT5 server-time offset handled explicitly                                                                                                                |
+| F16 | **Human auth (Clerk):** invite-only org; social login (e.g. Google/GitHub) + email login; client pages protected; roles at minimum `viewer` / `analyst` / `admin` / `ops` (ops → `/system`; admin → API-key management) |
+| F17 | **Dual-auth API:** every protected endpoint accepts Clerk JWT *or* hashed API key; identity + auth method recorded in request context / audit logs                                                                      |
+| F18 | **Email (Resend):** send staleness/watchdog alerts, optional high-impact/regime digests, weekly scoring summary; `EMAIL_FROM` / allowlisted recipients; alert channel selectable (`telegram`                            |
 
 
 ### 2.2 Non-functional requirements
@@ -90,7 +91,7 @@ Ouroboros is the shared "contextual awareness" layer for our platform family. In
 
 | ID  | Requirement                                                                                                                                                                                                                                                                 |
 | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| N1  | Price freshness: 99% < 2 min during market hours; sentiment refresh ≤ 5 min; profiles daily                                                                                                                                                                                 |
+| N1  | Price freshness: 99% < 2 min during market hours; sentiment refresh **≤ 5 min on paid/prod** (`SENTIMENT_INTERVAL_MINUTES`; **15–30 min acceptable on free-tier local/dev**); profiles daily |
 | N2  | API p95 latency < 300 ms for profile/state reads                                                                                                                                                                                                                            |
 | N3  | All schema changes via migrations; CI blocks merge if models and migrations diverge; expand–contract pattern + `lock_timeout` for live changes                                                                                                                              |
 | N4  | Every deterministic computation unit-tested; regression fixtures for regime classifier; `schemathesis` contract tests against the OpenAPI spec in CI                                                                                                                        |
@@ -126,7 +127,7 @@ Ouroboros is the shared "contextual awareness" layer for our platform family. In
 | MT5 connectivity            | **MetaTrader5 Python package**                                                                                                                   | Runs on a Windows worker (MT5 requirement) — outside Railway, pushes into Railway DB/API over TLS                                                                                              |
 | News/macro                  | Finnhub or Marketaux; **FRED** (free)                                                                                                            | Source registry table records license, rate limits, cost                                                                                                                                       |
 | Deterministic analytics     | **pandas / numpy / statsmodels**; HMM via `hmmlearn` or rule-based classifier                                                                    | Numbers tier — no LLM involvement                                                                                                                                                              |
-| LLM (generative tier)       | **Multi-model** provider-agnostic client (OpenAI + Anthropic, ordered fallback by key availability / health) | Narratives + sentiment only; outputs labeled; per-article cache + daily budget cap across providers                                                                                |
+| LLM (generative tier)       | **Multi-model cloud** client — prod: **OpenAI → Anthropic → Gemini**; local/dev: **Gemini/Groq free tiers**. No Ollama/local GPU. Ordered by `LLM_PROVIDERS` + key presence | Narratives + sentiment only; per-article cache; 429 backoff → next provider; daily budget across cloud providers; interval via `SENTIMENT_INTERVAL_MINUTES` |
 | Observability               | **Sentry** (server + client, from Phase 0); Prometheus-style `/metrics` (from Phase 3); structured JSON logs                                     | Watchdog monitors the *data*; this monitors the *system*                                                                                                                                       |
 | Human auth                  | **Clerk** (social + email login, invite-only org, roles)                                                                                         | Client sessions on Vercel; Railway verifies Clerk JWT via JWKS. Does **not** replace machine API keys                                                                                          |
 | Email                       | **Resend**                                                                                                                                       | Watchdog alerts, digests, weekly scoring; optional Clerk invite mail via Resend                                                                                                                |
@@ -175,12 +176,14 @@ Quant platforms / workers (machine)  — Phase 3 label; EPG can be added later
 
 **Roles (least privilege):**
 
-| Role | Access |
-| ---- | ------ |
-| `viewer` | Read assets, profiles, state, metrics, news, sentiment, insights |
-| `analyst` | Same as viewer (+ future research/export reads) |
-| `admin` | Mint/revoke machine API keys; org/admin surfaces |
-| `ops` | `/system`, feed registry, watchdog, scoring internals |
+
+| Role      | Access                                                           |
+| --------- | ---------------------------------------------------------------- |
+| `viewer`  | Read assets, profiles, state, metrics, news, sentiment, insights |
+| `analyst` | Same as viewer (+ future research/export reads)                  |
+| `admin`   | Mint/revoke machine API keys; org/admin surfaces                 |
+| `ops`     | `/system`, feed registry, watchdog, scoring internals            |
+
 
 **Public vs protected:**
 
@@ -237,14 +240,20 @@ RESEND_API_KEY=
 EMAIL_FROM=alerts@yourdomain.com
 EMAIL_ALERT_TO=ops@yourdomain.com
 
-# === LLM (multi-provider; first configured key wins / fallback chain) ===
-LLM_PROVIDERS=openai,anthropic
-LLM_PROVIDER=openai
+# === LLM (multi-provider; order = fallback chain; skip if key missing) ===
+# Prod/paid:   openai,anthropic,gemini
+# Local/dev:   gemini,groq  (free tiers — avoid burning paid credits during build)
+LLM_PROVIDERS=gemini,groq
+LLM_PROVIDER=gemini
 OPENAI_API_KEY=
 ANTHROPIC_API_KEY=
+GEMINI_API_KEY=
+GROQ_API_KEY=
 LLM_MODEL=
 LLM_FALLBACK_MODEL=
 LLM_DAILY_BUDGET_USD=10
+# Product SLA ≤5 min when paid; use 15–30 during free-tier local/dev
+SENTIMENT_INTERVAL_MINUTES=15
 
 # === MACHINE API KEYS (issued by us; hashes stored in DB) ===
 # Phase 3 primary consumer label: quant platforms (streamline / add EPG later)
@@ -506,7 +515,7 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | W1·D1 | Init monorepo with `client/` + `server/` + `packages/contracts/` skeletons. Root `docker-compose.yml` for services (Postgres+Timescale, Redis) with named volumes. Per-side `.env.example` (incl. `CLERK_*`, `RESEND_*` placeholders) + gitignore for real secrets. `.github/dependabot.yml`. First ADRs for §1.3 decisions (incl. dual auth + Resend). Verify `docker compose up`.          |
 | W1·D2 | Contracts, one schema file at a time: `profile_v1.py` → `state_v1.py` → `sentiment_v1.py` → `insight_v1.py` → `events_v1.py` → JSON Schema export script.                                                                                                                                                                                                                                    |
 | W1·D3 | Contract review pass (walk EPG/quant needs through schemas); finalize v1. Server scaffold: `pyproject.toml` (uv), `app/main.py`, `config.py`, `observability/` (Sentry init + structured logging), `api/v1/health.py`. Runs natively via uvicorn against Dockerized services.                                                                                                                |
-| W1·D4 | SQLAlchemy models, one file per model (assets, prices, news, sentiment, states, profiles, insights, source_registry, forecast_log, **outbox**). Alembic init (+ global `lock_timeout`) + initial migration: hypertable, **compression policy, retention policy**, H1/D1 continuous aggregates, outbox table. `server/Dockerfile`.                                                            |
+| W1·D4 | SQLAlchemy models, one file per model (assets, prices, news, sentiment, states, profiles, insights, source_registry, forecast_log, **outbox**). Alembic init (+ global `lock_timeout`) + initial migration: hertable,yp **compression policy, retention policy**, H1/D1 continuous aggregates, outbox table. `server/Dockerfile`.                                                            |
 | W1·D5 | Seed data migrations (asset universe, source registry). CI: Ruff, pytest, **drift check**, `pip-audit`/`pnpm audit`, image scan, image builds. **Walking-skeleton staging deploy on Railway:** TimescaleDB (Docker image) + Redis + server (release = `alembic upgrade head`), private networking, secrets; continuous deploy on main enabled. Health endpoint live. Tag `v0.1-foundations`. |
 
 
@@ -531,57 +540,66 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 
 **Locked baseline (2026-09-12):** model tags `metrics.v1` / `regimes.rule_v1`.
 
-| Decision | Choice |
-| -------- | ------ |
-| Timeframes | **M1, M15, H1, H4, D1** — add Timescale continuous aggregates for M15/H4 in W4·D1 (H1/D1 already exist) |
-| Realized vol | Rolling std of log returns, **20** + **60** periods, annualized; percentile rank **30d** (profile) / **90d** (context) |
-| ATR | Wilder **ATR(14)**; percentiles **30d** / **90d** |
-| Rolling returns | **1 / 5 / 20** periods per timeframe |
-| Correlations | Pearson on log returns, **30d** window on **H1**; all active symbols pairwise |
-| Session policy | Use all bars; calendar module **excludes weekend/holiday gaps from return series** (no Friday→Sunday synthetic returns). No per-session metric variants in v1 |
-| USDCHF | Stay `is_active` for ingest; **exclude from correlations + regimes** until ≥90 days M1 depth (analytics config, not DB demotion) |
-| Spread / liquidity | **Defer** true bid/ask; use range proxies (typical daily range, high−low percentiles); leave `typical_spread` null with a note |
-| Trend strength | **Kaufman Efficiency Ratio (20)**; signed by net-change direction; tagged `metrics.v1` |
-| Regime grid v0 | **Tuned W4·D4:** vol percentile ≥**75** → `high_volatility`; else \|ER\| ≥**0.25** → trend by sign; else `ranging`. Soft probs + N=3 persistence. H1 avg ~0.86 flips/day (budget ≤2); D1 within ≤1/week |
-| Flip-rate budget | Hysteresis + **N=3** bar persistence; target **≤2 flips/symbol/day on H1**, **≤1 flip/symbol/week on D1** |
-| Profile refresh | Daily **00:15 UTC**; event-triggered on `regime.changed` (H4/D1) + high-impact calendar (mapped assets); debounce **≤1 refresh/hour/symbol** |
-| Profile retention | Keep every version **180 days**, then prune to last-of-day |
-| HMM (W5·D5) | Spike complete — **not promoted** (flip-rate slightly better, agreement ~0.49 < 0.55). Production stays `regimes.rule_v1`. See ADR-017. |
-| Compute target | **Local Docker Timescale** for W4–W5; Railway worker image ready at W5·D4 — **deploy to Railway only after Phase 3 local sign-off** (see Phase 3 locked baseline) |
+
+| Decision           | Choice                                                                                                                                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timeframes         | **M1, M15, H1, H4, D1** — add Timescale continuous aggregates for M15/H4 in W4·D1 (H1/D1 already exist)                                                                                               |
+| Realized vol       | Rolling std of log returns, **20** + **60** periods, annualized; percentile rank **30d** (profile) / **90d** (context)                                                                                |
+| ATR                | Wilder **ATR(14)**; percentiles **30d** / **90d**                                                                                                                                                     |
+| Rolling returns    | **1 / 5 / 20** periods per timeframe                                                                                                                                                                  |
+| Correlations       | Pearson on log returns, **30d** window on **H1**; all active symbols pairwise                                                                                                                         |
+| Session policy     | Use all bars; calendar module **excludes weekend/holiday gaps from return series** (no Friday→Sunday synthetic returns). No per-session metric variants in v1                                         |
+| USDCHF             | Stay `is_active` for ingest; **exclude from correlations + regimes** until ≥90 days M1 depth (analytics config, not DB demotion)                                                                      |
+| Spread / liquidity | **Defer** true bid/ask; use range proxies (typical daily range, high−low percentiles); leave `typical_spread` null with a note                                                                        |
+| Trend strength     | **Kaufman Efficiency Ratio (20)**; signed by net-change direction; tagged `metrics.v1`                                                                                                                |
+| Regime grid v0     | **Tuned W4·D4:** vol percentile ≥**75** → `high_volatility`; else |ER| ≥**0.25** → trend by sign; else `ranging`. Soft probs + N=3 persistence. H1 avg ~0.86 flips/day (budget ≤2); D1 within ≤1/week |
+| Flip-rate budget   | Hysteresis + **N=3** bar persistence; target **≤2 flips/symbol/day on H1**, **≤1 flip/symbol/week on D1**                                                                                             |
+| Profile refresh    | Daily **00:15 UTC**; event-triggered on `regime.changed` (H4/D1) + high-impact calendar (mapped assets); debounce **≤1 refresh/hour/symbol**                                                          |
+| Profile retention  | Keep every version **180 days**, then prune to last-of-day                                                                                                                                            |
+| HMM (W5·D5)        | Spike complete — **not promoted** (flip-rate slightly better, agreement ~0.49 < 0.55). Production stays `regimes.rule_v1`. See ADR-017.                                                               |
+| Compute target     | **Local Docker Timescale** for W4–W5; Railway worker image ready at W5·D4 — **deploy to Railway only after Phase 3 local sign-off** (see Phase 3 locked baseline)                                     |
+
 
 **Confirm before / on W4·D1 (two defaults):**
 
 1. **DB target = local Docker** — `server/.env` `DATABASE_URL` points at Compose Postgres (`localhost:5433` / project default). Sanity: `docker compose ps` shows healthy postgres; `SELECT count(*), min(ts), max(ts) FROM prices GROUP BY symbol` returns the ~10M-bar universe. If you want analytics to write to Railway staging instead, say so and we switch `DATABASE_URL` + run migrations there.
 2. **MT5 server offset = EET-style UTC+2/+3** — calendar uses `infer_mt5_offset_hours()` (Europe/Bucharest DST) unless `MT5_SERVER_UTC_OFFSET_HOURS` overrides. Confirm on W4·D1: compare a known YWO bar’s MT5 terminal timestamp vs stored UTC in `prices`; if mismatch by 1h, set the env override and re-check. Session-aware gap filtering depends on this being right.
 
-| Day   | Work                                                                                                                                                                                                                                                  |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| W4·D1 | Migration: Timescale caggs for **M15 + H4**. Sanity-check MT5 offset vs YWO bars. `analytics/metrics.py` part 1 (`metrics.v1`): realized vol (20/60), ATR(14)+percentiles, rolling returns on **M1/M15/H1/H4/D1**; gap-aware returns via calendar.   |
-| W4·D2 | Metrics part 2 (split file if >300 lines): Kaufman ER(20) trend strength; H1 30d correlation matrix (**exclude USDCHF** until depth gate); range-based liquidity proxies (true spread deferred).                                                      |
-| W4·D3 | `analytics/regimes.py` (`regimes.rule_v1`): vol percentile × ER grid → 4 regimes + soft probabilities; hysteresis + N=3 persistence; USDCHF excluded until depth gate.                                                                               |
-| W4·D4 | Backtest classifier over history; tune thresholds against flip-rate budget (≤2/day H1, ≤1/week D1); measure noise.                                                                                                                                  |
-| W4·D5 | Regression fixtures pinning classifier behavior; unit tests for all metrics. Status note.                                                                                                                                                             |
-| W5·D1 | `analytics/profiles.py`: daily profile builder assembling `AssetProfile` per contract (30d percentiles, correlations, regime distribution).                                                                                                          |
-| W5·D2 | Event-triggered profile refresh (regime.changed H4/D1 + high-impact calendar, ≤1/hour/symbol); versioning + **180d retention then last-of-day** (migration).                                                                                        |
-| W5·D3 | Forecast/regime-call immutable log writer; every classification recorded with model version.                                                                                                                                                          |
+
+| Day   | Work                                                                                                                                                                                                                                                     |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| W4·D1 | Migration: Timescale caggs for **M15 + H4**. Sanity-check MT5 offset vs YWO bars. `analytics/metrics.py` part 1 (`metrics.v1`): realized vol (20/60), ATR(14)+percentiles, rolling returns on **M1/M15/H1/H4/D1**; gap-aware returns via calendar.       |
+| W4·D2 | Metrics part 2 (split file if >300 lines): Kaufman ER(20) trend strength; H1 30d correlation matrix (**exclude USDCHF** until depth gate); range-based liquidity proxies (true spread deferred).                                                         |
+| W4·D3 | `analytics/regimes.py` (`regimes.rule_v1`): vol percentile × ER grid → 4 regimes + soft probabilities; hysteresis + N=3 persistence; USDCHF excluded until depth gate.                                                                                   |
+| W4·D4 | Backtest classifier over history; tune thresholds against flip-rate budget (≤2/day H1, ≤1/week D1); measure noise.                                                                                                                                       |
+| W4·D5 | Regression fixtures pinning classifier behavior; unit tests for all metrics. Status note.                                                                                                                                                                |
+| W5·D1 | `analytics/profiles.py`: daily profile builder assembling `AssetProfile` per contract (30d percentiles, correlations, regime distribution).                                                                                                              |
+| W5·D2 | Event-triggered profile refresh (regime.changed H4/D1 + high-impact calendar, ≤1/hour/symbol); versioning + **180d retention then last-of-day** (migration).                                                                                             |
+| W5·D3 | Forecast/regime-call immutable log writer; every classification recorded with model version.                                                                                                                                                             |
 | W5·D4 | `scheduler.py` as **worker entrypoint**: APScheduler (metrics cadence, daily 00:15 UTC profiles, log writes). Compose `--profile worker`. **Deploy worker as second Railway service (same image, worker entrypoint).** Full pipeline dry-run on staging. |
-| W5·D5 | HMM classifier spike (`hmmlearn`, 4-state Gaussian) as v2 candidate — compare vs rule-based on flip-rate + agreement; decide & write ADR. Tag `v0.3-analytics`.                                                                                      |
+| W5·D5 | HMM classifier spike (`hmmlearn`, 4-state Gaussian) as v2 candidate — compare vs rule-based on flip-rate + agreement; decide & write ADR. Tag `v0.3-analytics`.                                                                                          |
 
 
 ### Phase 3 — API, events & intelligence (Weeks 6–8)
 
 **Locked baseline (2026-09-13):**
 
-| Decision | Choice |
-| -------- | ------ |
-| Compute target | **Local Docker** (Postgres/Redis + native or compose API/worker/client) until explicit sign-off to Railway — unless a blocking need arises. Goal: **full server + client operational locally first** |
-| Machine consumers | Label **quant platforms** for now (API keys / stream consumers); streamline naming and add EPG later |
-| LLM | **Multi-model** — provider-agnostic client with ordered fallback (e.g. OpenAI → Anthropic) based on configured keys and availability; shared daily budget cap |
-| Sentiment cadence | **≤ 5 min** worker schedule (industry-aligned); spike events on threshold between polls; per-article score cache |
-| Clerk roles | `viewer` \| `analyst` \| `admin` \| `ops` — least privilege as in §3.2 (ops → `/system`; admin → API-key mint/revoke); invite-only org |
-| Public vs protected | **Public:** `/v1/health`, `/v1/health/live` (+ OpenAPI in local/staging). **Protected:** all data routes (Clerk JWT or `X-API-Key`). Browser never holds machine keys |
-| W6·D1 | Done — dual-auth, problem+json, cursor pagination, `GET /v1/assets` + `GET /v1/assets/{symbol}/profile` |
-| W6·D2–D5 | Done locally — state/metrics/news + outbox→Streams + quant consumer smoke (see `docs/status/w6-status.md`) |
+
+| Decision            | Choice                                                                                                                                                                                               |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Compute target      | **Local Docker** (Postgres/Redis + native or compose API/worker/client) until explicit sign-off to Railway — unless a blocking need arises. Goal: **full server + client operational locally first** |
+| Machine consumers   | Label **quant platforms** for now (API keys / stream consumers); streamline naming and add EPG later                                                                                                 |
+| LLM providers       | **Cloud only** (no Ollama / local models — hardware). **Paid/prod chain:** OpenAI (primary) → Anthropic (fallback) → Gemini (third). **Local/dev free chain:** Gemini free tier → Groq free tier. Same client; switch via `LLM_PROVIDERS` + keys |
+| LLM rate / cost     | **Per-article score cache** (never re-score same headline). Batch/coalesce unseen articles per tick; concurrency cap 1–2. On **429:** exponential backoff then next provider. Shared **daily budget** across cloud providers. Optional majors-first throttle if free quotas are tight |
+| Sentiment cadence   | **Configurable** `SENTIMENT_INTERVAL_MINUTES`. **Product SLA ≤ 5 min** on paid. **Local/dev default 15–30 min** on free tiers so ticks rarely hit provider QPS. Spike events still fire on threshold between polls |
+| Clerk roles         | `viewer` \| `analyst` \| `admin` \| `ops` — least privilege as in §3.2 (ops → `/system`; admin → API-key mint/revoke); invite-only org                                                                  |
+| Public vs protected | **Public:** `/v1/health`, `/v1/health/live` (+ OpenAPI in local/staging). **Protected:** all data routes (Clerk JWT or `X-API-Key`). Browser never holds machine keys                                |
+| W6·D1               | Done — dual-auth, problem+json, cursor pagination, `GET /v1/assets` + `GET /v1/assets/{symbol}/profile`                                                                                              |
+| W6·D2–D5            | Done locally — state/metrics/news + outbox→Streams + quant consumer smoke (see `docs/status/w6-status.md`)                                                                                           |
+| W7·D1–D5            | Done locally — multi-model LLM, sentiment cache + `/v1/sentiment`, narratives + `/v1/insights`, guardrails (see `docs/status/w7-status.md`)                                                         |
+| W8·D1–D5            | Done locally — scoring + Resend digest, stale→API, load poll script, `/metrics` + ADR-018; freeze checklist in `docs/status/w8-status.md` (tag `v0.4-api` on sign-off)                              |
+
+
 
 | Day   | Work                                                                                                                                                                                                                                                                                                                                                                                     |
 | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -589,15 +607,15 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | W6·D2 | `states.py` → `metrics.py` → `news.py` routers; p95 latency check; role checks stubbed for ops-only routes.                                                                                                                                                                                                                                                                              |
 | W6·D3 | `events/`: **outbox writer → relay → Redis Streams publisher**; `regime.changed` + `profile.updated` wired into analytics jobs in the same transaction as state changes. Consumer-group + replay smoke test.                                                                                                                                                                             |
 | W6·D4 | OpenAPI spec polish (security schemes: `bearerAuth` Clerk + `apiKey`); CORS for known origins (incl. Clerk authorized parties); `schemathesis` contract tests wired into CI; API integration tests for both auth paths.                                                                                                                                                                  |
-| W6·D5 | Consumer smoke test: minimal Python client simulating a **quant platform** (API key pull + consumer-group subscribe + replay after disconnect). Status note.                                                                                                                                                                                                                              |
-| W7·D1 | `intelligence/llm_client.py`: **multi-model** provider-agnostic interface (fallback by key/availability), retries, cost logging, **daily budget cap with alerting** (shared across providers).                                                                                                                                                                                           |
-| W7·D2 | `intelligence/sentiment.py`: news → per-asset score [-1,+1], decay-weighted 24h, top drivers → `SentimentSnapshot`; **per-article score cache** (dedupe = never score the same headline twice).                                                                                                                                                                                          |
-| W7·D3 | Sentiment schedule (**≤ 5 min**, worker service); `sentiment.spike` + `news.high_impact` events via outbox; `sentiment.py` router.                                                                                                                                                                                                                                                      |
+| W6·D5 | Consumer smoke test: minimal Python client simulating a **quant platform** (API key pull + consumer-group subscribe + replay after disconnect). Status note.                                                                                                                                                                                                                             |
+| W7·D1 | `intelligence/llm_client.py`: **multi-model** client — providers from `LLM_PROVIDERS` (prod: openai→anthropic→gemini; local: gemini→groq); skip missing keys; retries; **429 backoff → next provider**; cost logging; **daily budget cap** (shared). No local/Ollama backend. |
+| W7·D2 | `intelligence/sentiment.py`: news → per-asset score [-1,+1], decay-weighted 24h, top drivers → `SentimentSnapshot`; **per-article score cache** (dedupe = never score the same headline twice); batch unseen articles per tick. |
+| W7·D3 | Sentiment schedule via **`SENTIMENT_INTERVAL_MINUTES`** (default **15** local/free; **5** paid/prod SLA); `sentiment.spike` + `news.high_impact` events via outbox; `sentiment.py` router. |
 | W7·D4 | `intelligence/narratives.py`: deterministic outputs → labeled narratives; `insights.py` router with disclaimer field.                                                                                                                                                                                                                                                                    |
 | W7·D5 | Guardrail tests: narratives never alter numeric fields; label + provenance enforcement; budget-cap behavior. Status note.                                                                                                                                                                                                                                                                |
 | W8·D1 | `scoring/` weekly job (worker service): regime calls vs realized outcomes; accuracy tables; **Resend weekly scoring email** to `EMAIL_ALERT_TO`.                                                                                                                                                                                                                                         |
 | W8·D2 | Staleness → API integration: `stale: true` propagates to every affected endpoint response; Resend alert on prolonged staleness.                                                                                                                                                                                                                                                          |
-| W8·D3 | Load test API (**local first**; staging when signed off) — universe-wide polling pattern; index tuning; verify pooling under load.                                                                                                                                                                                                                                                        |
+| W8·D3 | Load test API (**local first**; staging when signed off) — universe-wide polling pattern; index tuning; verify pooling under load.                                                                                                                                                                                                                                                       |
 | W8·D4 | **Observability hardening:** `/metrics` endpoint (ingestion lag, event publish/ack counts, LLM spend/day, API latency, auth method counts); alert rules; Sentry release tagging; ADR catch-up (dual auth + Resend).                                                                                                                                                                      |
 | W8·D5 | **Backend freeze for v1** after local E2E soak (Railway soak when signed off). Tag `v0.4-api`. Stable API target for the client.                                                                                                                                                                                                                                                         |
 
@@ -660,9 +678,10 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | Self-managed Timescale data loss                             | Defined RPO/RTO (N9); nightly full + hourly targeted dumps; restore drill in Week 2 and again before prod cutover                                                               |
 | Timezone/DST corruption of bars and sessions                 | UTC everywhere + trading-calendar module built first (W2·D1), before any bar is stored                                                                                          |
 | News API licensing limits redistribution                     | Source registry records license terms; derived sentiment/insights served internally only; confirm derived-data clauses before adding paid feeds                                 |
-| Regime classifier noise (excessive flips)                    | Flip-rate budget: ≤2 flips/symbol/day on H1, ≤1/week on D1; hysteresis + N=3 persistence (W4·D3/D4); HMM candidate evaluated before promotion (W5·D5)                          |
+| Regime classifier noise (excessive flips)                    | Flip-rate budget: ≤2 flips/symbol/day on H1, ≤1/week on D1; hysteresis + N=3 persistence (W4·D3/D4); HMM candidate evaluated before promotion (W5·D5)                           |
 | LLM hallucination reaching consumers                         | Two-tier split enforced by tests (W7·D5); narratives labeled; numeric fields untouchable by LLM code paths                                                                      |
-| LLM cost blowout                                             | Daily budget cap with alerting; per-article sentiment cache; spend tracked in `/metrics`                                                                                        |
+| LLM cost blowout                                             | Daily budget cap with alerting; per-article sentiment cache; free-tier slower cadence in local/dev; 429 → next provider; spend tracked in `/metrics`                            |
+| LLM free-tier rate limits                                    | Configurable `SENTIMENT_INTERVAL_MINUTES` (15–30 local); cache + batch + low concurrency; backoff then Gemini↔Groq fallback — no Ollama (hardware)                              |
 | Schedule pressure eroding quality                            | Explicit buffer (Weeks 13–14); D5 test/status discipline; solo build re-baselines to 16–18 weeks instead of compressing                                                         |
 | Scope creep                                                  | Everything outside §2.1 goes to the v1.1 backlog; phase exit criteria are the gate                                                                                              |
 | Silent staleness                                             | Watchdog + `stale` propagation built in Phase 1, *before* any consumer exists; Resend email path proven at W3·D4                                                                |

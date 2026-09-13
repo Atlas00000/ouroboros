@@ -22,6 +22,9 @@ class Settings(BaseSettings):
         alias="DATABASE_URL",
     )
     redis_url: str = Field(default="redis://localhost:6380/0", alias="REDIS_URL")
+    db_pool_size: int = Field(default=5, alias="DB_POOL_SIZE")
+    db_max_overflow: int = Field(default=10, alias="DB_MAX_OVERFLOW")
+    watchdog_interval_minutes: int = Field(default=5, alias="WATCHDOG_INTERVAL_MINUTES")
 
     sentry_dsn_server: str | None = Field(default=None, alias="SENTRY_DSN_SERVER")
 
@@ -77,6 +80,27 @@ class Settings(BaseSettings):
     ouroboros_api_key_client: str | None = Field(default=None, alias="OUROBOROS_API_KEY_CLIENT")
     ouroboros_api_key_epg: str | None = Field(default=None, alias="OUROBOROS_API_KEY_EPG")
     ouroboros_api_key_quant: str | None = Field(default=None, alias="OUROBOROS_API_KEY_QUANT")
+
+    # LLM — Phase 3 generative tier (no Ollama)
+    llm_providers: str = Field(
+        default="mock",
+        alias="LLM_PROVIDERS",
+        description="Comma-separated provider order; missing keys skipped.",
+    )
+    llm_provider: str = Field(default="mock", alias="LLM_PROVIDER")
+    openai_api_key: str | None = Field(default=None, alias="OPENAI_API_KEY")
+    anthropic_api_key: str | None = Field(default=None, alias="ANTHROPIC_API_KEY")
+    gemini_api_key: str | None = Field(default=None, alias="GEMINI_API_KEY")
+    groq_api_key: str | None = Field(default=None, alias="GROQ_API_KEY")
+    llm_model: str | None = Field(default=None, alias="LLM_MODEL")
+    llm_fallback_model: str | None = Field(default=None, alias="LLM_FALLBACK_MODEL")
+    llm_daily_budget_usd: float = Field(default=10.0, alias="LLM_DAILY_BUDGET_USD")
+    sentiment_interval_minutes: int = Field(
+        default=15,
+        alias="SENTIMENT_INTERVAL_MINUTES",
+        description="≤5 paid/prod SLA; 15–30 free-tier local/dev.",
+    )
+    sentiment_spike_threshold: float = Field(default=0.25, alias="SENTIMENT_SPIKE_THRESHOLD")
 
     @property
     def cors_origin_list(self) -> list[str]:

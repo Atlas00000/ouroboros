@@ -188,6 +188,109 @@ def job_prune_profiles() -> None:
         session.close()
 
 
+def job_sentiment_refresh() -> None:
+    """Score unseen news + refresh sentiment.v1 aggregates (W7·D3)."""
+    from app.intelligence.sentiment import run_sentiment_tick
+
+    session = get_session_factory()()
+    try:
+        report = run_sentiment_tick(session, commit=True)
+        logger.info(
+            "sentiment_refresh scored=%s cached=%s symbols=%s spikes=%s high_impact=%s",
+            report.articles_scored,
+            report.articles_cached,
+            report.symbols_updated,
+            report.spikes,
+            report.high_impact,
+        )
+    except Exception:
+        logger.exception("sentiment_refresh failed")
+        raise
+    finally:
+        session.close()
+
+
+def job_narratives_refresh() -> None:
+    """Generate labeled narratives from latest state/sentiment (W7·D4)."""
+    from app.intelligence.narratives import run_narrative_tick
+
+    session = get_session_factory()()
+    try:
+        symbols = _active_symbols(session)
+        report = run_narrative_tick(session, symbols, commit=True)
+        logger.info(
+            "narratives_refresh generated=%s skipped=%s",
+            report.generated,
+            report.skipped,
+        )
+    except Exception:
+        logger.exception("narratives_refresh failed")
+        raise
+    finally:
+        session.close()
+
+
+def job_score_regime_calls() -> None:
+    """Fill realized outcomes on due forecast_log regime rows (W8·D1)."""
+    from app.scoring.regime_accuracy import score_due_regime_calls
+
+    session = get_session_factory()()
+    try:
+        report = score_due_regime_calls(session, commit=True)
+        logger.info(
+            "score_regime_calls scored=%s correct=%s skipped=%s errors=%s",
+            report.scored,
+            report.correct,
+            report.skipped,
+            len(report.errors),
+        )
+    except Exception:
+        logger.exception("score_regime_calls failed")
+        raise
+    finally:
+        session.close()
+
+
+def job_weekly_scoring() -> None:
+    """Weekly accuracy tables + Resend digest (W8·D1)."""
+    from app.scoring.weekly import run_weekly_scoring
+
+    session = get_session_factory()()
+    try:
+        result = run_weekly_scoring(session, send_email=True, commit=True)
+        logger.info(
+            "weekly_scoring report_id=%s accuracy=%s email_ok=%s",
+            result.report_row_id,
+            result.report.accuracy,
+            result.email_ok,
+        )
+    except Exception:
+        logger.exception("weekly_scoring failed")
+        raise
+    finally:
+        session.close()
+
+
+def job_watchdog_check() -> None:
+    """Cadence check → stale propagation → Resend on prolonged staleness (W8·D2)."""
+    from app.watchdog.checker import run_check
+
+    session = get_session_factory()()
+    try:
+        report = run_check(session, propagate=True, notify=True)
+        logger.info(
+            "watchdog_check stale=%s alerts=%s marked=%s",
+            report.stale_count,
+            len(report.alerts),
+            report.rows_marked_stale,
+        )
+    except Exception:
+        logger.exception("watchdog_check failed")
+        raise
+    finally:
+        session.close()
+
+
 JOB_FUNCS = {
     "metrics_cadence": job_metrics_cadence,
     "regime_log": job_regime_log,
@@ -195,11 +298,21 @@ JOB_FUNCS = {
     "outbox_relay": job_outbox_relay,
     "daily_profiles": job_daily_profiles,
     "prune_profiles": job_prune_profiles,
+    "sentiment_refresh": job_sentiment_refresh,
+    "narratives_refresh": job_narratives_refresh,
+    "score_regime_calls": job_score_regime_calls,
+    "weekly_scoring": job_weekly_scoring,
+    "watchdog_check": job_watchdog_check,
 }
 
 
 def build_scheduler() -> BlockingScheduler:
-    """Register analytics + outbox relay jobs (UTC)."""
+    """Register analytics + intelligence + scoring + watchdog jobs (UTC)."""
+    settings = get_settings()
+    sentiment_minutes = max(1, int(settings.sentiment_interval_minutes))
+    narrative_minutes = max(15, sentiment_minutes * 2)
+    watchdog_minutes = max(1, int(settings.watchdog_interval_minutes))
+
     sched = BlockingScheduler(timezone="UTC")
     sched.add_job(
         job_metrics_cadence,
@@ -234,6 +347,46 @@ def build_scheduler() -> BlockingScheduler:
         replace_existing=True,
     )
     sched.add_job(
+        job_sentiment_refresh,
+        IntervalTrigger(minutes=sentiment_minutes),
+        id="sentiment_refresh",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
+        job_narratives_refresh,
+        IntervalTrigger(minutes=narrative_minutes),
+        id="narratives_refresh",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
+        job_score_regime_calls,
+        IntervalTrigger(hours=1),
+        id="score_regime_calls",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
+        job_watchdog_check,
+        IntervalTrigger(minutes=watchdog_minutes),
+        id="watchdog_check",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
+        job_weekly_scoring,
+        CronTrigger(day_of_week="mon", hour=8, minute=0, timezone="UTC"),
+        id="weekly_scoring",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
         job_daily_profiles,
         CronTrigger(
             hour=DAILY_PROFILES_CRON_HOUR,
@@ -259,9 +412,13 @@ def build_scheduler() -> BlockingScheduler:
 def run_once(job_names: list[str] | None = None) -> int:
     """Pipeline dry-run: execute selected jobs once and exit."""
     names = job_names or list(JOB_FUNCS.keys())
-    # Skip expensive daily_profiles in default once unless explicitly named
+    # Skip expensive / weekly jobs in default once unless explicitly named
     if job_names is None:
-        names = [n for n in names if n != "daily_profiles"]
+        names = [
+            n
+            for n in names
+            if n not in ("daily_profiles", "weekly_scoring")
+        ]
     logger.info("scheduler --once jobs=%s at=%s", names, datetime.now(UTC).isoformat())
     failures = 0
     for name in names:

@@ -18,6 +18,7 @@ from app.analytics.state_store import (
     persist_regime_state,
 )
 from app.api.errors import AppError
+from app.api.staleness import with_feed_stale
 from app.auth.dependencies import RequirePrincipal
 from app.db.session import get_db
 from app.models.asset import Asset
@@ -47,7 +48,7 @@ def get_state(
 
     row = latest_state_row(db, sym, timeframe)
     if row is not None and not refresh:
-        return market_state_from_row(row)
+        return with_feed_stale(market_state_from_row(row), db, "state")
 
     df = load_ohlcv(db, sym, timeframe, lookback_days=120)
     if df.empty:
@@ -72,4 +73,4 @@ def get_state(
         )
     persist_regime_state(db, snap, enqueue_outbox=True)
     db.commit()
-    return market_state_from_snapshot(snap)
+    return with_feed_stale(market_state_from_snapshot(snap), db, "state")

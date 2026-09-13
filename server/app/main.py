@@ -13,15 +13,18 @@ from app import __version__
 from app.api.errors import register_exception_handlers
 from app.api.v1 import assets as assets_router
 from app.api.v1 import health as health_router
+from app.api.v1 import insights as insights_router
 from app.api.v1 import metrics as metrics_router
 from app.api.v1 import news as news_router
 from app.api.v1 import ops as ops_router
 from app.api.v1 import profiles as profiles_router
+from app.api.v1 import sentiment as sentiment_router
 from app.api.v1 import states as states_router
 from app.auth.api_keys import BootstrapKey, upsert_bootstrap_keys
 from app.config import get_settings
 from app.db.session import get_session_factory
 from app.observability.logging import configure_logging
+from app.observability.metrics_http import mount_metrics
 from app.observability.sentry import init_sentry
 
 logger = logging.getLogger(__name__)
@@ -76,11 +79,14 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     register_exception_handlers(application)
+    mount_metrics(application)
     application.include_router(health_router.router, prefix="/v1")
     application.include_router(assets_router.router, prefix="/v1")
     application.include_router(profiles_router.router, prefix="/v1")
     application.include_router(states_router.router, prefix="/v1")
     application.include_router(metrics_router.router, prefix="/v1")
+    application.include_router(sentiment_router.router, prefix="/v1")
+    application.include_router(insights_router.router, prefix="/v1")
     application.include_router(news_router.router, prefix="/v1")
     application.include_router(ops_router.router, prefix="/v1")
 
