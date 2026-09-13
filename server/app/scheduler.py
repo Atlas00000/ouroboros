@@ -34,6 +34,7 @@ logger = logging.getLogger("ouroboros.scheduler")
 METRICS_INTERVAL_MINUTES = 15
 REGIME_LOG_INTERVAL_MINUTES = 15
 PROFILE_EVENTS_INTERVAL_MINUTES = 15
+OUTBOX_RELAY_INTERVAL_SECONDS = 30
 DAILY_PROFILES_CRON_HOUR = 0
 DAILY_PROFILES_CRON_MINUTE = 15
 PRUNE_CRON_HOUR = 0
@@ -77,7 +78,7 @@ def job_metrics_cadence() -> None:
 
 
 def job_regime_log() -> None:
-    """Classify latest H1/H4/D1 regimes and append immutable forecast_log rows."""
+    """Classify latest regimes → forecast_log + states (+ regime.changed outbox)."""
     session = get_session_factory()()
     try:
         report = classify_and_log_regimes(session, commit=True)
@@ -89,6 +90,27 @@ def job_regime_log() -> None:
         )
     except Exception:
         logger.exception("regime_log failed")
+        raise
+    finally:
+        session.close()
+
+
+def job_outbox_relay() -> None:
+    """Publish unpublished outbox rows to Redis Streams."""
+    from app.events.relay import relay_unpublished
+
+    session = get_session_factory()()
+    try:
+        result = relay_unpublished(session)
+        session.commit()
+        logger.info(
+            "outbox_relay published=%s failed=%s",
+            result.published,
+            result.failed,
+        )
+    except Exception:
+        logger.exception("outbox_relay failed")
+        session.rollback()
         raise
     finally:
         session.close()
@@ -170,13 +192,14 @@ JOB_FUNCS = {
     "metrics_cadence": job_metrics_cadence,
     "regime_log": job_regime_log,
     "profile_events": job_profile_events,
+    "outbox_relay": job_outbox_relay,
     "daily_profiles": job_daily_profiles,
     "prune_profiles": job_prune_profiles,
 }
 
 
 def build_scheduler() -> BlockingScheduler:
-    """Register all W5·D4 jobs (UTC)."""
+    """Register analytics + outbox relay jobs (UTC)."""
     sched = BlockingScheduler(timezone="UTC")
     sched.add_job(
         job_metrics_cadence,
@@ -198,6 +221,14 @@ def build_scheduler() -> BlockingScheduler:
         job_profile_events,
         IntervalTrigger(minutes=PROFILE_EVENTS_INTERVAL_MINUTES),
         id="profile_events",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
+        job_outbox_relay,
+        IntervalTrigger(seconds=OUTBOX_RELAY_INTERVAL_SECONDS),
+        id="outbox_relay",
         max_instances=1,
         coalesce=True,
         replace_existing=True,

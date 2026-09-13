@@ -13,7 +13,11 @@ from app import __version__
 from app.api.errors import register_exception_handlers
 from app.api.v1 import assets as assets_router
 from app.api.v1 import health as health_router
+from app.api.v1 import metrics as metrics_router
+from app.api.v1 import news as news_router
+from app.api.v1 import ops as ops_router
 from app.api.v1 import profiles as profiles_router
+from app.api.v1 import states as states_router
 from app.auth.api_keys import BootstrapKey, upsert_bootstrap_keys
 from app.config import get_settings
 from app.db.session import get_session_factory
@@ -75,6 +79,10 @@ def create_app() -> FastAPI:
     application.include_router(health_router.router, prefix="/v1")
     application.include_router(assets_router.router, prefix="/v1")
     application.include_router(profiles_router.router, prefix="/v1")
+    application.include_router(states_router.router, prefix="/v1")
+    application.include_router(metrics_router.router, prefix="/v1")
+    application.include_router(news_router.router, prefix="/v1")
+    application.include_router(ops_router.router, prefix="/v1")
 
     def custom_openapi() -> dict:
         if application.openapi_schema:

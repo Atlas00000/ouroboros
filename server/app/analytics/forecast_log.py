@@ -20,6 +20,7 @@ from app.analytics.bars import load_ohlcv, m1_depth_days
 from app.analytics.metrics import Timeframe
 from app.analytics.regimes import MODEL_VERSION as REGIME_MODEL_VERSION
 from app.analytics.regimes import RegimeSnapshot, classify_regime
+from app.analytics.state_store import persist_regime_state
 from app.calendar.timebase import ensure_utc
 from app.models.asset import Asset
 from app.models.forecast_log import ForecastLog
@@ -301,6 +302,7 @@ def classify_and_log_regimes(
                 )
                 result = log_regime_call(session, snap, skip_duplicates=skip_duplicates)
                 report.results.append(result)
+                persist_regime_state(session, snap, enqueue_outbox=True)
             except Exception as exc:  # noqa: BLE001 — per-symbol continue
                 report.errors.append((sym, tf, str(exc)[:200]))
     if commit:

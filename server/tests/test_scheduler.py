@@ -11,6 +11,7 @@ def test_build_scheduler_registers_expected_jobs() -> None:
     assert ids == [
         "daily_profiles",
         "metrics_cadence",
+        "outbox_relay",
         "profile_events",
         "prune_profiles",
         "regime_log",
@@ -22,6 +23,7 @@ def test_job_funcs_cover_registered_ids() -> None:
         "metrics_cadence",
         "regime_log",
         "profile_events",
+        "outbox_relay",
         "daily_profiles",
         "prune_profiles",
     }

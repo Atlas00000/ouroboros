@@ -1,9 +1,10 @@
 # Ouroboros — Project Report & Implementation Roadmap
 
-> **Version:** 1.4 · **Date:** 2026-09-12 · **Status:** Planning
+> **Version:** 1.5 · **Date:** 2026-09-13 · **Status:** Planning
 > **One-liner:** An independent asset-intelligence platform that ingests real-time and historical market data, builds living asset profiles, detects market states/regimes, digests news into sentiment and insight, and serves all of it to sibling platforms (EPG, quant platforms) via versioned APIs and durable events. **It does not execute trades.**
 > **Hosting model:** `client/` deploys to **Vercel** · `server/` (API + worker) + database deploy to **Railway** · local services (Postgres, Redis) run in **Docker** · staging is live from **Week 1** (walking skeleton, continuously deployed).
 > **Human auth & email:** **Clerk** (social + email login for dashboard users) · **Resend** (alerts, digests, invite/lifecycle mail). Machine consumers keep **hashed API keys**.
+> **Phase 3 compute:** **Local Docker first** — full server + client operational locally until explicit sign-off to Railway (unless a blocking need arises).
 
 ---
 
@@ -125,7 +126,7 @@ Ouroboros is the shared "contextual awareness" layer for our platform family. In
 | MT5 connectivity            | **MetaTrader5 Python package**                                                                                                                   | Runs on a Windows worker (MT5 requirement) — outside Railway, pushes into Railway DB/API over TLS                                                                                              |
 | News/macro                  | Finnhub or Marketaux; **FRED** (free)                                                                                                            | Source registry table records license, rate limits, cost                                                                                                                                       |
 | Deterministic analytics     | **pandas / numpy / statsmodels**; HMM via `hmmlearn` or rule-based classifier                                                                    | Numbers tier — no LLM involvement                                                                                                                                                              |
-| LLM (generative tier)       | Provider-agnostic client (OpenAI/Anthropic) behind an internal interface                                                                         | Narratives + sentiment only; outputs labeled; per-article cache + daily budget cap with alerting                                                                                               |
+| LLM (generative tier)       | **Multi-model** provider-agnostic client (OpenAI + Anthropic, ordered fallback by key availability / health) | Narratives + sentiment only; outputs labeled; per-article cache + daily budget cap across providers                                                                                |
 | Observability               | **Sentry** (server + client, from Phase 0); Prometheus-style `/metrics` (from Phase 3); structured JSON logs                                     | Watchdog monitors the *data*; this monitors the *system*                                                                                                                                       |
 | Human auth                  | **Clerk** (social + email login, invite-only org, roles)                                                                                         | Client sessions on Vercel; Railway verifies Clerk JWT via JWKS. Does **not** replace machine API keys                                                                                          |
 | Email                       | **Resend**                                                                                                                                       | Watchdog alerts, digests, weekly scoring; optional Clerk invite mail via Resend                                                                                                                |
@@ -162,20 +163,32 @@ Both client and server read all configuration from env vars (`NEXT_PUBLIC_API_UR
 ```
 Browser (human)
   → Clerk session (social / email)
-  → client (Vercel) attaches Authorization: Bearer <Clerk JWT>
-  → Railway API verifies JWT against Clerk JWKS
+  → client (Vercel / local) attaches Authorization: Bearer <Clerk JWT>
+  → API verifies JWT against Clerk JWKS
   → roles from Clerk public metadata / org roles (viewer | analyst | admin | ops)
 
-EPG / Quant / workers (machine)
+Quant platforms / workers (machine)  — Phase 3 label; EPG can be added later
   → X-API-Key: <plaintext key once issued>
-  → Railway API looks up hash, attaches service principal
+  → API looks up hash, attaches service principal
   → no Clerk involvement
 ```
 
-- Health and OpenAPI docs may stay public or IP-restricted; all data routes require one of the two schemes.
-- Client never stores machine API keys; it only uses the user's Clerk session.
-- Admin UI (Phase 4/5) can mint/revoke machine keys; plaintext shown once; only hashes persist.
-- Audit log fields: `auth_method` (`clerk` | `api_key`), `subject_id`, `role` / `service_name`.
+**Roles (least privilege):**
+
+| Role | Access |
+| ---- | ------ |
+| `viewer` | Read assets, profiles, state, metrics, news, sentiment, insights |
+| `analyst` | Same as viewer (+ future research/export reads) |
+| `admin` | Mint/revoke machine API keys; org/admin surfaces |
+| `ops` | `/system`, feed registry, watchdog, scoring internals |
+
+**Public vs protected:**
+
+- **Public:** `GET /v1/health`, `GET /v1/health/live` (OpenAPI docs may stay public in local/staging).
+- **Protected:** all data routes require Clerk JWT *or* `X-API-Key`.
+- Client never stores machine API keys; browser uses Clerk only.
+- Admin UI (Phase 4/5) mints/revokes machine keys; plaintext shown once; only hashes persist.
+- Audit: `auth_method` (`clerk` | `api_key`), `subject_id`, `role` / `service_name`.
 
 ---
 
@@ -224,17 +237,21 @@ RESEND_API_KEY=
 EMAIL_FROM=alerts@yourdomain.com
 EMAIL_ALERT_TO=ops@yourdomain.com
 
-# === LLM ===
+# === LLM (multi-provider; first configured key wins / fallback chain) ===
+LLM_PROVIDERS=openai,anthropic
 LLM_PROVIDER=openai
 OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
 LLM_MODEL=
+LLM_FALLBACK_MODEL=
 LLM_DAILY_BUDGET_USD=10
 
 # === MACHINE API KEYS (issued by us; hashes stored in DB) ===
+# Phase 3 primary consumer label: quant platforms (streamline / add EPG later)
 # Plaintext only for local bootstrap / handoff — not required in prod once minted via admin
 OUROBOROS_API_KEY_CLIENT=
-OUROBOROS_API_KEY_EPG=
 OUROBOROS_API_KEY_QUANT=
+OUROBOROS_API_KEY_EPG=
 
 # === CLIENT / HOSTING ===
 NEXT_PUBLIC_API_URL=http://localhost:8000
@@ -428,8 +445,8 @@ Env-driven config on both sides, secrets in Vercel/Railway stores + local uncomm
 
 ### 6.5.1 Dual auth & human email ★
 
-- **Humans → Clerk** (social + email): sessions on Vercel; Railway validates JWT via JWKS; roles `viewer` | `analyst` | `admin` | `ops`.
-- **Machines → API keys**: hashed at rest; `X-API-Key` header; issued to EPG/quant/workers.
+- **Humans → Clerk** (social + email): sessions on Vercel/local; API validates JWT via JWKS; roles `viewer` | `analyst` | `admin` | `ops` (§3.2 least privilege).
+- **Machines → API keys**: hashed at rest; `X-API-Key` header; Phase 3 primary consumers labeled **quant platforms** (EPG later); workers as needed.
 - Same FastAPI dependency resolves either scheme into a typed principal (`HumanPrincipal` | `ServicePrincipal`) for authorization and audit.
 - **Resend** delivers watchdog/staleness alerts, optional digests, and weekly scoring mail; SPF/DKIM/DMARC on `EMAIL_FROM` domain. Telegram/webhook remain optional parallel channels (`ALERT_CHANNEL=multi`).
 
@@ -530,7 +547,7 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | Profile refresh | Daily **00:15 UTC**; event-triggered on `regime.changed` (H4/D1) + high-impact calendar (mapped assets); debounce **≤1 refresh/hour/symbol** |
 | Profile retention | Keep every version **180 days**, then prune to last-of-day |
 | HMM (W5·D5) | Spike complete — **not promoted** (flip-rate slightly better, agreement ~0.49 < 0.55). Production stays `regimes.rule_v1`. See ADR-017. |
-| Compute target | **Local Docker Timescale** for W4–W5 development; Railway second worker service at **W5·D4** (confirm below) |
+| Compute target | **Local Docker Timescale** for W4–W5; Railway worker image ready at W5·D4 — **deploy to Railway only after Phase 3 local sign-off** (see Phase 3 locked baseline) |
 
 **Confirm before / on W4·D1 (two defaults):**
 
@@ -553,6 +570,18 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 
 ### Phase 3 — API, events & intelligence (Weeks 6–8)
 
+**Locked baseline (2026-09-13):**
+
+| Decision | Choice |
+| -------- | ------ |
+| Compute target | **Local Docker** (Postgres/Redis + native or compose API/worker/client) until explicit sign-off to Railway — unless a blocking need arises. Goal: **full server + client operational locally first** |
+| Machine consumers | Label **quant platforms** for now (API keys / stream consumers); streamline naming and add EPG later |
+| LLM | **Multi-model** — provider-agnostic client with ordered fallback (e.g. OpenAI → Anthropic) based on configured keys and availability; shared daily budget cap |
+| Sentiment cadence | **≤ 5 min** worker schedule (industry-aligned); spike events on threshold between polls; per-article score cache |
+| Clerk roles | `viewer` \| `analyst` \| `admin` \| `ops` — least privilege as in §3.2 (ops → `/system`; admin → API-key mint/revoke); invite-only org |
+| Public vs protected | **Public:** `/v1/health`, `/v1/health/live` (+ OpenAPI in local/staging). **Protected:** all data routes (Clerk JWT or `X-API-Key`). Browser never holds machine keys |
+| W6·D1 | Done — dual-auth, problem+json, cursor pagination, `GET /v1/assets` + `GET /v1/assets/{symbol}/profile` |
+| W6·D2–D5 | Done locally — state/metrics/news + outbox→Streams + quant consumer smoke (see `docs/status/w6-status.md`) |
 
 | Day   | Work                                                                                                                                                                                                                                                                                                                                                                                     |
 | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -560,17 +589,17 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | W6·D2 | `states.py` → `metrics.py` → `news.py` routers; p95 latency check; role checks stubbed for ops-only routes.                                                                                                                                                                                                                                                                              |
 | W6·D3 | `events/`: **outbox writer → relay → Redis Streams publisher**; `regime.changed` + `profile.updated` wired into analytics jobs in the same transaction as state changes. Consumer-group + replay smoke test.                                                                                                                                                                             |
 | W6·D4 | OpenAPI spec polish (security schemes: `bearerAuth` Clerk + `apiKey`); CORS for known origins (incl. Clerk authorized parties); `schemathesis` contract tests wired into CI; API integration tests for both auth paths.                                                                                                                                                                  |
-| W6·D5 | Consumer smoke test: minimal Python client simulating EPG (API key pull + consumer-group subscribe + replay after disconnect). Status note.                                                                                                                                                                                                                                              |
-| W7·D1 | `intelligence/llm_client.py`: provider-agnostic interface, retries, cost logging, **daily budget cap with alerting**.                                                                                                                                                                                                                                                                    |
+| W6·D5 | Consumer smoke test: minimal Python client simulating a **quant platform** (API key pull + consumer-group subscribe + replay after disconnect). Status note.                                                                                                                                                                                                                              |
+| W7·D1 | `intelligence/llm_client.py`: **multi-model** provider-agnostic interface (fallback by key/availability), retries, cost logging, **daily budget cap with alerting** (shared across providers).                                                                                                                                                                                           |
 | W7·D2 | `intelligence/sentiment.py`: news → per-asset score [-1,+1], decay-weighted 24h, top drivers → `SentimentSnapshot`; **per-article score cache** (dedupe = never score the same headline twice).                                                                                                                                                                                          |
-| W7·D3 | Sentiment schedule (≤ 5 min, worker service); `sentiment.spike` + `news.high_impact` events via outbox; `sentiment.py` router.                                                                                                                                                                                                                                                           |
+| W7·D3 | Sentiment schedule (**≤ 5 min**, worker service); `sentiment.spike` + `news.high_impact` events via outbox; `sentiment.py` router.                                                                                                                                                                                                                                                      |
 | W7·D4 | `intelligence/narratives.py`: deterministic outputs → labeled narratives; `insights.py` router with disclaimer field.                                                                                                                                                                                                                                                                    |
 | W7·D5 | Guardrail tests: narratives never alter numeric fields; label + provenance enforcement; budget-cap behavior. Status note.                                                                                                                                                                                                                                                                |
 | W8·D1 | `scoring/` weekly job (worker service): regime calls vs realized outcomes; accuracy tables; **Resend weekly scoring email** to `EMAIL_ALERT_TO`.                                                                                                                                                                                                                                         |
 | W8·D2 | Staleness → API integration: `stale: true` propagates to every affected endpoint response; Resend alert on prolonged staleness.                                                                                                                                                                                                                                                          |
-| W8·D3 | Load test API on staging (universe-wide polling pattern); index tuning; verify PgBouncer under load.                                                                                                                                                                                                                                                                                     |
+| W8·D3 | Load test API (**local first**; staging when signed off) — universe-wide polling pattern; index tuning; verify pooling under load.                                                                                                                                                                                                                                                        |
 | W8·D4 | **Observability hardening:** `/metrics` endpoint (ingestion lag, event publish/ack counts, LLM spend/day, API latency, auth method counts); alert rules; Sentry release tagging; ADR catch-up (dual auth + Resend).                                                                                                                                                                      |
-| W8·D5 | **Backend freeze for v1.** End-to-end soak on staging (already weeks-deployed — no big-bang risk). Tag `v0.4-api`. Staging API is now the client's stable target.                                                                                                                                                                                                                        |
+| W8·D5 | **Backend freeze for v1** after local E2E soak (Railway soak when signed off). Tag `v0.4-api`. Stable API target for the client.                                                                                                                                                                                                                                                         |
 
 
 ### Phase 4 — Client, hugging the deployed backend (Weeks 9–11)
@@ -638,7 +667,7 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | Scope creep                                                  | Everything outside §2.1 goes to the v1.1 backlog; phase exit criteria are the gate                                                                                              |
 | Silent staleness                                             | Watchdog + `stale` propagation built in Phase 1, *before* any consumer exists; Resend email path proven at W3·D4                                                                |
 | Multi-file edit sprawl during AI-assisted implementation     | §6.7 single-file workflow; daily plans enumerate discrete files in sequence                                                                                                     |
-| Mixing human and machine auth                                | Dual-auth design (§3.2): Clerk JWT for browsers only; API keys for EPG/quant; browser never holds machine keys                                                                  |
+| Mixing human and machine auth                                | Dual-auth design (§3.2): Clerk JWT for browsers only; API keys for quant platforms (EPG later); browser never holds machine keys                                                |
 | Clerk or Resend outage                                       | API keys still allow machine consumers; alerts fall back to Telegram/webhook if `ALERT_CHANNEL=multi`; dashboard degrades to sign-in unavailable (acceptable for internal tool) |
 
 

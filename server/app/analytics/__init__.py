@@ -23,6 +23,10 @@ from app.analytics.forecast_log import (
     log_forecast_call,
     log_regime_call,
 )
+from app.analytics.state_store import (
+    latest_state_row,
+    persist_regime_state,
+)
 from app.analytics.profile_refresh import (
     collect_refresh_triggers,
     run_event_triggered_refresh,
@@ -90,11 +94,13 @@ __all__ = [
     "filter_corr_eligible",
     "gap_aware_log_returns",
     "kaufman_efficiency_ratio",
+    "latest_state_row",
     "log_forecast_call",
     "log_regime_call",
     "m1_span_days",
     "passes_depth_gate",
     "persist_asset_profile",
+    "persist_regime_state",
     "prune_profiles",
     "realized_vol",
     "run_event_triggered_refresh",

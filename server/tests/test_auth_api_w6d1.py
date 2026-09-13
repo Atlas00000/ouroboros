@@ -66,7 +66,8 @@ def test_assets_with_api_key(client: TestClient) -> None:
 
 
 def test_assets_with_clerk_test_jwt(client: TestClient) -> None:
-    token = mint_test_jwt(secret="w6d1-test-secret-32bytes-minimum!", role="analyst")
+    secret = get_settings().clerk_test_jwt_secret or "w6d1-test-secret-32bytes-minimum!"
+    token = mint_test_jwt(secret=secret, role="analyst")
     res = client.get("/v1/assets", headers={"Authorization": f"Bearer {token}"})
     assert res.status_code == 200
     assert res.json()["provenance"]["sources"] == ["db.assets"]
