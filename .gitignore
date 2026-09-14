@@ -53,3 +53,4 @@ data/soak/
 # Generated / local
 *.pem
 .clerk/
+client-scaffold/

@@ -11,16 +11,20 @@ from fastapi.openapi.utils import get_openapi
 
 from app import __version__
 from app.api.errors import register_exception_handlers
+from app.api.v1 import admin_keys as admin_keys_router
 from app.api.v1 import assets as assets_router
+from app.api.v1 import bars as bars_router
 from app.api.v1 import health as health_router
 from app.api.v1 import insights as insights_router
 from app.api.v1 import metrics as metrics_router
 from app.api.v1 import news as news_router
 from app.api.v1 import ops as ops_router
 from app.api.v1 import profiles as profiles_router
+from app.api.v1 import scoring as scoring_router
 from app.api.v1 import sentiment as sentiment_router
 from app.api.v1 import states as states_router
 from app.auth.api_keys import BootstrapKey, upsert_bootstrap_keys
+from app.auth.roles import Role
 from app.config import get_settings
 from app.db.session import get_session_factory
 from app.observability.logging import configure_logging
@@ -28,6 +32,13 @@ from app.observability.metrics_http import mount_metrics
 from app.observability.sentry import init_sentry
 
 logger = logging.getLogger(__name__)
+
+# Local SSR / admin UI uses the client bootstrap key at admin+.
+_BOOTSTRAP_ROLES: dict[str, Role] = {
+    "client": "admin",
+    "epg": "viewer",
+    "quant": "viewer",
+}
 
 
 def _bootstrap_keys() -> None:
@@ -38,7 +49,12 @@ def _bootstrap_keys() -> None:
     session = get_session_factory()()
     try:
         keys = [
-            BootstrapKey(name=n, service_name=s, raw_key=k, role="viewer")
+            BootstrapKey(
+                name=n,
+                service_name=s,
+                raw_key=k,
+                role=_BOOTSTRAP_ROLES.get(n, "viewer"),
+            )
             for n, s, k in triples
         ]
         n = upsert_bootstrap_keys(session, keys)
@@ -85,10 +101,13 @@ def create_app() -> FastAPI:
     application.include_router(profiles_router.router, prefix="/v1")
     application.include_router(states_router.router, prefix="/v1")
     application.include_router(metrics_router.router, prefix="/v1")
+    application.include_router(bars_router.router, prefix="/v1")
     application.include_router(sentiment_router.router, prefix="/v1")
     application.include_router(insights_router.router, prefix="/v1")
     application.include_router(news_router.router, prefix="/v1")
+    application.include_router(scoring_router.router, prefix="/v1")
     application.include_router(ops_router.router, prefix="/v1")
+    application.include_router(admin_keys_router.router, prefix="/v1")
 
     def custom_openapi() -> dict:
         if application.openapi_schema:

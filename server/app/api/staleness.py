@@ -15,6 +15,7 @@ from app.models.source_registry import SourceRegistry
 ENDPOINT_FEED_MAP: dict[str, tuple[str, ...]] = {
     "assets": ("mt5.prices",),
     "metrics": ("mt5.prices",),
+    "bars": ("mt5.prices",),
     "state": ("mt5.prices",),
     "profiles": ("mt5.prices",),
     "news": ("finnhub.news", "finnhub.calendar"),

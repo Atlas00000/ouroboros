@@ -95,10 +95,42 @@ jobs:
       - run: python -m contracts.export_jsonschema
       - run: python -m pytest -q
 
-  client-placeholder:
-    name: client Dockerfile placeholder
+  client:
+    name: client (build · playwright smoke)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
     steps:
       - uses: actions/checkout@v4
-      - name: Build client image (placeholder)
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+          cache-dependency-path: client/pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_API_URL: http://127.0.0.1:8000
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Playwright smoke
+        run: pnpm test:e2e
+        env:
+          CI: "true"
+          NEXT_PUBLIC_API_URL: http://127.0.0.1:8000
+
+      - name: Build client image
+        working-directory: .
         run: docker build -t ouroboros-client:ci ./client

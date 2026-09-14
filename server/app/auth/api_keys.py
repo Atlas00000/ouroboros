@@ -72,11 +72,21 @@ def upsert_bootstrap_keys(session: Session, keys: list[BootstrapKey]) -> int:
                 )
             )
             n += 1
-        elif existing.key_hash != digest:
-            existing.key_hash = digest
-            existing.service_name = item.service_name
-            existing.role = item.role
-            existing.is_active = True
-            n += 1
+        else:
+            changed = False
+            if existing.key_hash != digest:
+                existing.key_hash = digest
+                changed = True
+            if existing.service_name != item.service_name:
+                existing.service_name = item.service_name
+                changed = True
+            if existing.role != item.role:
+                existing.role = item.role
+                changed = True
+            if not existing.is_active:
+                existing.is_active = True
+                changed = True
+            if changed:
+                n += 1
     session.commit()
     return n

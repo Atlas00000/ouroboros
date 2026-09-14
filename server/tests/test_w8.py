@@ -81,7 +81,7 @@ def test_prometheus_render_contains_http_counters() -> None:
 
 
 def test_endpoint_feed_map_covers_data_routes() -> None:
-    for ep in ("assets", "metrics", "state", "profiles", "news", "sentiment", "insights"):
+    for ep in ("assets", "metrics", "bars", "state", "profiles", "news", "sentiment", "insights"):
         assert ep in ENDPOINT_FEED_MAP
 
 

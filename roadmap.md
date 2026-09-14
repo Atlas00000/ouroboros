@@ -390,22 +390,21 @@ ouroboros/
 
 ### 5.1 UI plan (built Phase 4 — against the live, continuously deployed staging API)
 
+**Screen IA baseline:** [`docs/UIscreens-and-details.md`](docs/UIscreens-and-details.md) (2026-09-14) — canonical pages, nav, use-case flows, section order, and non-goals. Phase 4 day plan implements that baseline.
+
 **Design language:** dark-mode-first (market tooling convention), dense but scannable, shadcn/ui + Tailwind. Latency-honest: every panel shows `generated_at` and a stale badge when applicable — the UI never pretends data is fresher than it is. All app routes sit behind **Clerk**; unsigned users hit sign-in. Role gates hide `/system` and API-key admin from non-ops/admin users.
 
-**Pages:**
+**Pages (summary — details in UI baseline doc):**
 
-1. **Sign-in / invite** — Clerk-hosted social + email; public sign-up disabled (invite-only org).
-2. **Dashboard (`/`)** — asset grid: symbol, sparkline, current regime badge (color-coded), vol percentile, sentiment gauge, staleness indicators. Market-wide summary strip (risk-on/off, top movers, high-impact news ticker).
-3. **Asset detail (`/assets/[symbol]`)** —
-  - Price chart (Lightweight Charts) with regime bands overlaid as background shading.
-  - Profile card: identity, hours, liquidity/vol character, event sensitivities, correlation mini-heatmap.
-  - Market state panel: regime probabilities, trend strength, model version, confidence.
-  - Sentiment panel: score gauge, 24h trend, top driver headlines with links.
-  - Insight feed: LLM narratives, clearly labeled as AI-generated with disclaimer.
-4. **System health (`/system`)** — feed registry with last-seen timestamps and cadence status, watchdog alerts history, weekly scoring results; **ops/admin only**.
-5. **Admin (keys)** — mint/revoke machine API keys for EPG/quant (**admin only**); plaintext shown once.
+1. **Sign-in / invite** — Clerk; invite-only org.
+2. **Dashboard (`/`)** — universe scan: grid + market strip + news ticker.
+3. **Asset detail (`/assets/[symbol]`)** — price/regime, profile, state, sentiment, labeled insights.
+4. **News (`/news`)** — filterable headlines / calendar.
+5. **Scoring (`/scoring`)** — weekly regime accuracy.
+6. **System (`/system`)** — feeds, watchdog, pipe health; **ops/admin only**.
+7. **Admin keys (`/admin/keys`)** — mint/revoke machine API keys; **admin only**.
 
-**The "hug the backend" rule:** the client API layer is *generated* from the server's OpenAPI spec (`openapi-typescript` / `orval`) — pulled from the Railway staging URL. Requests from the browser attach the Clerk session JWT; generated client + TanStack Query hooks never embed machine API keys. CI compiles the generated client on every server PR, so drift is caught mechanically, not aspirationally.
+**The "hug the backend" rule:** the client API layer is *generated* from the server's OpenAPI spec (`openapi-typescript` / `orval`) — pulled from the Railway staging URL (or local OpenAPI until signed off). Requests from the browser attach the Clerk session JWT; generated client + TanStack Query hooks never embed machine API keys. CI compiles the generated client on every server PR, so drift is caught mechanically, not aspirationally.
 
 ### 5.2 Assets
 
@@ -598,6 +597,11 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 | W6·D2–D5            | Done locally — state/metrics/news + outbox→Streams + quant consumer smoke (see `docs/status/w6-status.md`)                                                                                           |
 | W7·D1–D5            | Done locally — multi-model LLM, sentiment cache + `/v1/sentiment`, narratives + `/v1/insights`, guardrails (see `docs/status/w7-status.md`)                                                         |
 | W8·D1–D5            | Done locally — scoring + Resend digest, stale→API, load poll script, `/metrics` + ADR-018; freeze checklist in `docs/status/w8-status.md` (tag `v0.4-api` on sign-off)                              |
+| W9·D1–D5            | Done locally — Dashboard composition + nav + News stub (see `docs/status/w9-status.md`); UI baseline `docs/UIscreens-and-details.md` |
+| W10·D1–D5           | Done locally — Asset detail panels + `GET /v1/bars` (see `docs/status/w10-status.md`)                                                |
+| W11·D1–D5           | Done locally — System/Scoring/Admin + RoleGate + a11y + Playwright; tag `v0.5-client` (see `docs/status/w11-status.md`) |
+
+
 
 
 
@@ -624,24 +628,26 @@ Backend first (Weeks 1–8), then client (Weeks 9–11), then hardening (Week 12
 
 *Per §6.7: one `.tsx` component per step, completed and wired before starting the next.*
 
+**UI baseline (2026-09-14):** top-level screens, IA, use-case flows, and section order are locked in [`docs/UIscreens-and-details.md`](docs/UIscreens-and-details.md). Build W9–W11 components onto those surfaces (Dashboard, Asset detail, News, Scoring, System, Admin). Do not add parallel top-level pages without updating that doc. Local client first until Vercel sign-off; API target `v0.4-api`; tag `v0.5-client` at W11·D5.
+
 
 | Day    | Work                                                                                                                                                                                                                                                                                                                                                                      |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | W9·D1  | `client/`: Next.js 16 + TS + Tailwind + shadcn via pnpm; dark theme tokens incl. regime colors; fonts; Sentry (client). **Clerk**: install SDK, `ClerkProvider` in `layout.tsx`, `middleware.ts` protecting all app routes, sign-in/sign-up catch-all pages; invite-only org configured. Finalize `client/Dockerfile`. Env: `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_CLERK_`*. |
 | W9·D2  | **Generate API client from staging OpenAPI spec** (orval/openapi-typescript) into `lib/api/`; TanStack Query provider that attaches **Clerk session JWT** to requests; **generated-client compile check** in CI for every server PR. Connect Vercel project (root = `client/`) → first preview deploy with Clerk + Resend env vars.                                       |
-| W9·D3  | One file at a time: `layout.tsx` shell + nav + `UserButton` → `lib/queries/assets.ts` → `AssetGrid.tsx` bound to live `GET /v1/assets` (Clerk JWT).                                                                                                                                                                                                                       |
-| W9·D4  | `Sparkline.tsx` → `StateBadge.tsx` → `VolPercentile.tsx` → `StaleBadge.tsx`; compose into dashboard grid.                                                                                                                                                                                                                                                                 |
-| W9·D5  | `MarketSummaryStrip.tsx` → `NewsTicker.tsx`. Vercel preview review (signed-in vs signed-out). Status note.                                                                                                                                                                                                                                                                |
-| W10·D1 | Asset detail: `lib/queries/asset-detail.ts` → `PriceChart.tsx` (Lightweight Charts) → `RegimeBands.tsx` overlay from `/state` history.                                                                                                                                                                                                                                    |
-| W10·D2 | `ProfileCard.tsx` → `CorrelationHeatmap.tsx` → `StatePanel.tsx` (probabilities, confidence, model version, `generated_at`).                                                                                                                                                                                                                                               |
-| W10·D3 | `SentimentGauge.tsx` → `SentimentTrend.tsx` → `DriverHeadlines.tsx` from `/sentiment`.                                                                                                                                                                                                                                                                                    |
-| W10·D4 | `InsightFeed.tsx` with AI-generated labeling + disclaimer; compose full asset detail page.                                                                                                                                                                                                                                                                                |
+| W9·D3  | One file at a time: `layout.tsx` shell + nav + `UserButton` → `lib/queries/assets.ts` → `AssetGrid.tsx` bound to live `GET /v1/assets` (Clerk JWT). **Nav labels match UI baseline:** Dashboard · News · Scoring · System · Admin (role-gated later).                                                                                                                      |
+| W9·D4  | `Sparkline.tsx` → `StateBadge.tsx` → `VolPercentile.tsx` → `StaleBadge.tsx`; compose into **Dashboard** grid (`docs/UIscreens-and-details.md` §2).                                                                                                                                                                                                                          |
+| W9·D5  | `MarketSummaryStrip.tsx` → `NewsTicker.tsx` on Dashboard. Stub or link **News** list route (baseline §5). Vercel preview review (signed-in vs signed-out). Status note.                                                                                                                                                                                                     |
+| W10·D1 | **Asset detail** (baseline §3): `lib/queries/asset-detail.ts` → `PriceChart.tsx` (Lightweight Charts) → `RegimeBands.tsx` overlay from `/state` history.                                                                                                                                                                                                                 |
+| W10·D2 | Asset detail: `ProfileCard.tsx` → `CorrelationHeatmap.tsx` → `StatePanel.tsx` (probabilities, confidence, model version, `generated_at`).                                                                                                                                                                                                                                 |
+| W10·D3 | Asset detail: `SentimentGauge.tsx` → `SentimentTrend.tsx` → `DriverHeadlines.tsx` from `/sentiment`.                                                                                                                                                                                                                                                                      |
+| W10·D4 | Asset detail: `InsightFeed.tsx` with AI-generated labeling + disclaimer; compose full detail page per baseline section order.                                                                                                                                                                                                                                             |
 | W10·D5 | Refetch intervals honest to backend cadences; stale badges across all panels. Vercel preview review. Status note.                                                                                                                                                                                                                                                         |
-| W11·D1 | System page: `FeedRegistryTable.tsx` → `WatchdogAlertsList.tsx` from health/metrics endpoints; `**RoleGate.tsx**` (ops/admin only).                                                                                                                                                                                                                                       |
-| W11·D2 | `ScoringResults.tsx` (weekly regime accuracy); **Admin API-key mint/revoke UI** (admin only); logo/favicon into `client/public/`.                                                                                                                                                                                                                                         |
+| W11·D1 | **System** page (baseline §4): `FeedRegistryTable.tsx` → `WatchdogAlertsList.tsx` from health/metrics endpoints; `**RoleGate.tsx**` (ops/admin only).                                                                                                                                                                                                                     |
+| W11·D2 | **Scoring** (baseline §6): `ScoringResults.tsx`; **Admin** keys (baseline §7): mint/revoke UI (admin only); logo/favicon into `client/public/`.                                                                                                                                                                                                                          |
 | W11·D3 | Responsive + a11y pass; empty/error/loading states, one page at a time; unauthenticated redirect check.                                                                                                                                                                                                                                                                   |
-| W11·D4 | Playwright smoke tests (sign-in gate, 3 pages, role-denied `/system`, critical paths) in CI against preview URL.                                                                                                                                                                                                                                                          |
-| W11·D5 | Polish + bugfix day; UI review against real market hours on Vercel preview. Tag `v0.5-client`.                                                                                                                                                                                                                                                                            |
+| W11·D4 | Playwright smoke tests (sign-in gate, Dashboard + Asset detail + System role-denied, critical paths) in CI against preview URL.                                                                                                                                                                                                                                           |
+| W11·D5 | Polish + bugfix day; UI review against real market hours on Vercel preview. Confirm screens match `docs/UIscreens-and-details.md`. Tag `v0.5-client`.                                                                                                                                                                                                                    |
 
 
 ### Phase 5 — Hardening & production (Week 12)
