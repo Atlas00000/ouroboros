@@ -1,12 +1,19 @@
 import type { ReactNode } from "react";
 
+import { EmptyState as DesignEmpty } from "@/design/patterns/EmptyState";
+import { SkeletonText } from "@/design/patterns/Skeleton";
+import { Surface } from "@/design/primitives/Surface";
+import { Text } from "@/design/primitives/Text";
 import { cn } from "@/lib/utils";
 
 export function LoadingState({ children = "Loading…" }: { children?: ReactNode }) {
   return (
-    <p className="text-sm text-muted" role="status" aria-live="polite">
-      {children}
-    </p>
+    <div className="space-y-3" role="status" aria-live="polite">
+      <SkeletonText lines={3} />
+      <Text as="p" variant="muted" className="sr-only">
+        {children}
+      </Text>
+    </div>
   );
 }
 
@@ -20,13 +27,9 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div
-      className={cn("rounded-md border border-border bg-card p-4", className)}
-      role="status"
-    >
-      {title ? <h2 className="text-sm font-medium text-foreground">{title}</h2> : null}
-      <div className={cn("text-sm text-muted", title && "mt-2")}>{children}</div>
-    </div>
+    <DesignEmpty title={title ?? "Nothing here"} className={className}>
+      {children}
+    </DesignEmpty>
   );
 }
 
@@ -40,12 +43,19 @@ export function ErrorState({
   className?: string;
 }) {
   return (
-    <div
-      className={cn("rounded-md border border-regime-trending-down/40 bg-card p-4", className)}
+    <Surface
+      tone="plane"
+      border="hairline"
+      pad="md"
+      className={cn("border-ds-halt/35", className)}
       role="alert"
     >
-      <h2 className="text-sm font-medium text-foreground">{title}</h2>
-      <div className="mt-2 text-sm text-muted">{children}</div>
-    </div>
+      <Text as="h2" variant="title" className="text-[length:var(--ds-text-body)] text-ds-halt">
+        {title}
+      </Text>
+      <Text as="div" variant="muted" className="mt-2">
+        {children}
+      </Text>
+    </Surface>
   );
 }

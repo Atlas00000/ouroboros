@@ -150,8 +150,21 @@ def test_run_weekly_scoring_sends_email(monkeypatch: pytest.MonkeyPatch) -> None
             n_correct=2,
         )
 
+    def fake_fit_build(session, *, week_start=None, week_end=None, now=None):
+        from app.scoring.fit_accuracy import WeeklyFitAccuracyReport
+
+        return WeeklyFitAccuracyReport(
+            week_start=datetime(2026, 9, 7, tzinfo=UTC),
+            week_end=datetime(2026, 9, 14, tzinfo=UTC),
+            n_scored=0,
+            n_correct=0,
+            n_persistence_correct=0,
+        )
+
     monkeypatch.setattr("app.scoring.weekly.score_due_regime_calls", fake_score)
+    monkeypatch.setattr("app.scoring.weekly.score_due_fit_calls", fake_score)
     monkeypatch.setattr("app.scoring.weekly.build_weekly_accuracy", fake_build)
+    monkeypatch.setattr("app.scoring.weekly.build_weekly_fit_accuracy", fake_fit_build)
 
     class FakeSession:
         def add(self, obj: object) -> None:
@@ -173,7 +186,9 @@ def test_run_weekly_scoring_sends_email(monkeypatch: pytest.MonkeyPatch) -> None
     assert result.email_ok is True
     assert len(notifier.messages) == 1
     assert "accuracy" in notifier.messages[0].subject.lower() or "%" in notifier.messages[0].subject
+    assert "Fit stickiness" in notifier.messages[0].body
     assert result.report_row_id == 7
+    assert result.fit_batch.scored == 0
 
 
 def test_score_due_marks_skipped_prediction() -> None:

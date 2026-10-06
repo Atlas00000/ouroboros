@@ -1,0 +1,92 @@
+/* Price · regime chart */
+
+.ds-price-regime__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin-left: auto;
+}
+
+.ds-price-regime__last {
+  font-family: var(--ds-font-numeric);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink);
+}
+
+.ds-price-regime__last [data-tone="up"] {
+  color: var(--ds-ok);
+}
+
+.ds-price-regime__last [data-tone="down"] {
+  color: var(--ds-halt);
+}
+
+.ds-price-regime__plot {
+  position: relative;
+  height: clamp(12rem, 28vw, 16rem);
+  width: 100%;
+}
+
+.ds-price-tf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem;
+}
+
+.ds-price-tf__tab {
+  position: relative;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.3rem 0.45rem 0.4rem;
+  font-family: var(--ds-font-numeric);
+  font-size: var(--ds-text-micro);
+  color: var(--ds-ink-muted);
+}
+
+.ds-price-tf__tab::after {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  right: 0.35rem;
+  bottom: 0.05rem;
+  height: 2px;
+  background: transparent;
+}
+
+.ds-price-tf__tab:hover,
+.ds-price-tf__tab:focus-visible {
+  color: var(--ds-signal);
+}
+
+.ds-price-tf__tab:focus-visible {
+  outline: 2px solid var(--ds-focus-ring);
+  outline-offset: 2px;
+}
+
+.ds-price-tf__tab.is-active {
+  color: var(--ds-ink);
+}
+
+.ds-price-tf__tab.is-active::after {
+  background: var(--ds-signal);
+}
+
+.ds-price-candles__wick {
+  stroke-width: 1;
+  stroke: var(--ds-ok);
+}
+
+.ds-price-candles__body {
+  fill: var(--ds-ok);
+  stroke: none;
+}
+
+.ds-price-candles g[data-tone="down"] .ds-price-candles__wick {
+  stroke: var(--ds-halt);
+}
+
+.ds-price-candles g[data-tone="down"] .ds-price-candles__body {
+  fill: var(--ds-halt);
+}

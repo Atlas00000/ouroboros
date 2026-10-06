@@ -1,0 +1,22 @@
+/* Elevation — hybrid: jade dark ink / brass light paper */
+
+:root,
+[data-theme="dark"],
+.dark {
+  --ds-shadow-none: none;
+  --ds-shadow-plane: 0 1px 0 color-mix(in srgb, #e4ebe6 4%, transparent),
+    0 14px 44px -26px rgba(0, 0, 0, 0.72);
+  --ds-shadow-raised: 0 1px 0 color-mix(in srgb, #e4ebe6 5%, transparent),
+    0 20px 52px -22px rgba(0, 0, 0, 0.78);
+  --ds-shadow-chrome: 0 1px 0 color-mix(in srgb, var(--ds-line-strong) 70%, transparent);
+}
+
+[data-theme="light"],
+.light {
+  --ds-shadow-none: none;
+  --ds-shadow-plane: 0 1px 0 color-mix(in srgb, #1c1a17 4%, transparent),
+    0 10px 28px -18px rgba(28, 26, 23, 0.12);
+  --ds-shadow-raised: 0 1px 0 color-mix(in srgb, #1c1a17 5%, transparent),
+    0 16px 36px -16px rgba(28, 26, 23, 0.16);
+  --ds-shadow-chrome: 0 1px 0 color-mix(in srgb, var(--ds-line-strong) 55%, transparent);
+}

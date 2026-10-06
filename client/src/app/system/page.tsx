@@ -1,8 +1,9 @@
-import { AppShell } from "@/components/AppShell";
 import { RoleGate } from "@/components/auth/RoleGate";
-import { PipeHealthStrip } from "@/components/system/PipeHealthStrip";
 import { FeedRegistryTable } from "@/components/system/FeedRegistryTable";
+import { PipeHealthStrip } from "@/components/system/PipeHealthStrip";
 import { WatchdogAlertsList } from "@/components/system/WatchdogAlertsList";
+import { AppShell } from "@/design/shells/AppShell";
+import { PageHeader } from "@/design/shells/PageHeader";
 import {
   fetchOpsSummaryServer,
   fetchRegistryServer,
@@ -11,7 +12,7 @@ import {
 
 export const dynamic = "force-dynamic";
 
-export default async function SystemPage() {
+export default async function DeskPage() {
   const [registry, watchdog, summary] = await Promise.all([
     fetchRegistryServer(),
     fetchWatchdogServer(),
@@ -19,13 +20,11 @@ export default async function SystemPage() {
   ]);
 
   return (
-    <AppShell>
-      <div>
-        <h1 className="text-lg font-semibold tracking-tight">System</h1>
-        <p className="mt-1 max-w-xl text-sm text-muted">
-          Trust the pipe — feeds, watchdog, outbox depth. Ops/admin only.
-        </p>
-      </div>
+    <AppShell wide>
+      <PageHeader
+        title="Desk"
+        description="Trust the research desk — feeds, watchdog alerts, and pipe health. Ops and above."
+      />
       <RoleGate minRole="admin">
         <div className="flex flex-col gap-6">
           <PipeHealthStrip data={summary} />

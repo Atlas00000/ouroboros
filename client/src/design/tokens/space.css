@@ -1,0 +1,30 @@
+/* Spacing + radius — tight trading-OS scale */
+
+:root {
+  --ds-space-0: 0;
+  --ds-space-1: 0.25rem; /* 4 */
+  --ds-space-2: 0.5rem; /* 8 */
+  --ds-space-3: 0.75rem; /* 12 */
+  --ds-space-4: 1rem; /* 16 */
+  --ds-space-5: 1.5rem; /* 24 */
+  --ds-space-6: 2rem; /* 32 */
+  --ds-space-7: 3rem; /* 48 */
+  --ds-space-8: 4rem; /* 64 */
+
+  --ds-radius-none: 0;
+  --ds-radius-sm: 2px;
+  --ds-radius-md: 4px;
+  --ds-radius-lg: 8px;
+
+  --ds-shell-max: 75vw; /* desk scan across pages */
+  --ds-shell-wide: 75vw;
+  --ds-rail-width: 20rem;
+  --ds-rail-width-wide: 20rem;
+  --ds-hairline: 1px;
+}
+
+/* Optional opt-in (same width today; keeps API for future narrower dossiers) */
+.ds-app[data-shell="wide"] {
+  --ds-shell-max: var(--ds-shell-wide);
+  --ds-rail-width: var(--ds-rail-width-wide);
+}

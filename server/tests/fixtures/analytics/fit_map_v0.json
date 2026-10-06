@@ -1,0 +1,18 @@
+{
+  "model_version": "fit.map_v0",
+  "families": ["meanrev", "trendfollow"],
+  "matrix": {
+    "meanrev": {
+      "ranging": "MATCH",
+      "trending_up": "MISMATCH",
+      "trending_down": "MISMATCH",
+      "high_volatility": "FRAGILE"
+    },
+    "trendfollow": {
+      "trending_up": "MATCH",
+      "trending_down": "MATCH",
+      "ranging": "MISMATCH",
+      "high_volatility": "FRAGILE"
+    }
+  }
+}

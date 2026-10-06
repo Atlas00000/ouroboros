@@ -7,6 +7,16 @@
 # Usage:
 #   docker-compose up -d
 #   docker-compose down
+# Logs:
+#   docker compose logs -f postgres redis
+#   docker logs --tail 200 ouroboros-postgres
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+    tag: "{{.Name}}"
 
 services:
   postgres:
@@ -21,11 +31,25 @@ services:
       - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - ouroboros_pgdata:/var/lib/postgresql/data
+    # Slow queries (≥500ms) + connect/disconnect for local debug.
+    command:
+      - postgres
+      - -c
+      - log_min_duration_statement=500
+      - -c
+      - log_connections=on
+      - -c
+      - log_disconnections=on
+      - -c
+      - log_line_prefix=%m [%p] %u@%d 
+      - -c
+      - log_timezone=UTC
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ouroboros} -d ${POSTGRES_DB:-ouroboros}"]
       interval: 5s
       timeout: 5s
       retries: 10
+    logging: *default-logging
 
   redis:
     image: redis:7-alpine
@@ -35,15 +59,22 @@ services:
       - "${REDIS_PORT:-6380}:6379"
     volumes:
       - ouroboros_redisdata:/data
-    command: ["redis-server", "--appendonly", "yes"]
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --loglevel
+      - notice
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 10
+    logging: *default-logging
 
   server:
     profiles: ["server"]
+    image: ouroboros-server:local
     build:
       context: .
       dockerfile: server/Dockerfile
@@ -51,8 +82,12 @@ services:
     restart: unless-stopped
     ports:
       - "${SERVER_PORT:-8000}:8000"
+    env_file:
+      - path: server/.env
+        required: false
     environment:
       APP_ENV: local
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: postgresql://ouroboros:${POSTGRES_PASSWORD:-ouroboros}@postgres:5432/ouroboros
       REDIS_URL: redis://redis:6379/0
       CORS_ORIGINS: http://localhost:3000
@@ -61,33 +96,53 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    logging: *default-logging
 
   worker:
     profiles: ["worker"]
+    image: ouroboros-server:local
     build:
       context: .
       dockerfile: server/Dockerfile
     container_name: ouroboros-worker
     restart: unless-stopped
     command: ["python", "-m", "app.scheduler"]
+    env_file:
+      - path: server/.env
+        required: false
     environment:
       APP_ENV: local
       DATABASE_URL: postgresql://ouroboros:${POSTGRES_PASSWORD:-ouroboros}@postgres:5432/ouroboros
       REDIS_URL: redis://redis:6379/0
-      LOG_LEVEL: INFO
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+    logging: *default-logging
 
   client:
     profiles: ["client"]
+    image: ouroboros-client:local
     build:
       context: ./client
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:-}
     container_name: ouroboros-client
     restart: unless-stopped
+    ports:
+      - "${CLIENT_PORT:-3000}:3000"
+    environment:
+      NEXT_PUBLIC_LOG_LEVEL: ${NEXT_PUBLIC_LOG_LEVEL:-info}
+      # Container SSR → compose DNS; browser still uses baked NEXT_PUBLIC_API_URL.
+      API_URL: http://server:8000
+      OUROBOROS_SERVER_API_KEY: ${OUROBOROS_SERVER_API_KEY:-${OUROBOROS_API_KEY_CLIENT:-}}
+    depends_on:
+      - server
+    logging: *default-logging
 
 volumes:
   ouroboros_pgdata:

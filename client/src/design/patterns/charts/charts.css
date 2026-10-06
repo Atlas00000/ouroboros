@@ -1,0 +1,50 @@
+/* Shared chart frame — tokens only */
+
+.ds-chart-frame {
+  position: relative;
+  isolation: isolate;
+  padding: 0.85rem 0.95rem 1rem;
+  background: var(--ds-plane);
+  border-block: var(--ds-hairline, 1px) solid var(--ds-line-strong);
+}
+
+.ds-chart-frame__head {
+  margin-bottom: 0.75rem;
+}
+
+.ds-chart-frame__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.75rem;
+}
+
+.ds-chart-frame__title {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-body);
+  letter-spacing: -0.02em;
+  color: var(--ds-ink);
+  text-transform: none;
+}
+
+.ds-chart-frame__status {
+  margin: 0;
+  padding: 2.5rem 0;
+  text-align: center;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-muted);
+}
+
+.ds-chart-frame__body {
+  min-height: 0;
+}
+
+.ds-chart-tooltip {
+  background: var(--ds-plane-raised);
+  border: 1px solid var(--ds-line);
+  padding: 4px 8px;
+  font-family: var(--ds-font-numeric);
+  font-size: 11px;
+  color: var(--ds-ink);
+}

@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+.env*
+!.env.example
+playwright-report
+test-results
+e2e
+coverage
+.turbo
+.vercel
+*.log
+.DS_Store
+.tsbuildinfo
+next-env.d.ts

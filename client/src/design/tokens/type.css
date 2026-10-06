@@ -1,0 +1,30 @@
+/* Type scale — display / ui / numeric faces set on <html> via next/font */
+
+:root {
+  --ds-font-display: var(--font-display), "IBM Plex Sans", system-ui, sans-serif;
+  --ds-font-ui: var(--font-ui), "IBM Plex Sans", system-ui, sans-serif;
+  --ds-font-numeric: var(--font-numeric), "IBM Plex Mono", ui-monospace, monospace;
+
+  --ds-text-display: 1.75rem;
+  --ds-text-display-lh: 1.15;
+  --ds-text-display-tracking: -0.03em;
+
+  --ds-text-title: 1.125rem;
+  --ds-text-title-lh: 1.3;
+  --ds-text-title-tracking: -0.02em;
+
+  --ds-text-body: 0.875rem;
+  --ds-text-body-lh: 1.5;
+
+  --ds-text-label: 0.75rem;
+  --ds-text-label-lh: 1.35;
+  --ds-text-label-tracking: 0.04em;
+
+  --ds-text-micro: 0.6875rem;
+  --ds-text-micro-lh: 1.35;
+  --ds-text-micro-tracking: 0.06em;
+
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+}

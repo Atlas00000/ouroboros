@@ -1,0 +1,40 @@
+/* Section wrap — prose under section titles */
+
+.ds-section-wrap {
+  max-width: 38rem;
+}
+
+.ds-section-wrap__eyebrow {
+  margin: 0 0 0.35rem;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-section-wrap__body {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: clamp(0.9rem, 1.2vw, 0.98rem);
+  line-height: 1.55;
+  color: var(--ds-ink-muted);
+}
+
+.ds-section-wrap--lane {
+  max-width: 22rem;
+}
+
+.ds-section-wrap--lane .ds-section-wrap__body {
+  font-size: var(--ds-text-micro);
+  line-height: 1.5;
+  color: var(--ds-ink-faint);
+}
+
+.ds-section-wrap--rail {
+  max-width: 100%;
+}
+
+.ds-section-wrap--rail .ds-section-wrap__body {
+  font-size: var(--ds-text-label);
+}

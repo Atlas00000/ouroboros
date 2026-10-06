@@ -1,5 +1,6 @@
-import { AppShell } from "@/components/AppShell";
 import { ScoringResults } from "@/components/scoring/ScoringResults";
+import { AppShell } from "@/design/shells/AppShell";
+import { PageHeader } from "@/design/shells/PageHeader";
 import { fetchWeeklyScoringServer } from "@/lib/queries/system";
 
 export const dynamic = "force-dynamic";
@@ -8,14 +9,11 @@ export default async function ScoringPage() {
   const data = await fetchWeeklyScoringServer(12);
 
   return (
-    <AppShell>
-      <div>
-        <h1 className="text-lg font-semibold tracking-tight">Scoring</h1>
-        <p className="mt-1 max-w-xl text-sm text-muted">
-          Weekly regime hit-rates — same story as the Resend digest. Builds trust without claiming
-          foresight.
-        </p>
-      </div>
+    <AppShell wide>
+      <PageHeader
+        title="Scoring"
+        description="Weekly regime and fit-tag stickiness — honesty about the brain without claiming foresight."
+      />
       <ScoringResults data={data} />
     </AppShell>
   );

@@ -29,12 +29,29 @@ export type AssetProfile = {
     base_currency?: string | null;
     quote_currency?: string | null;
   };
+  trading_hours?: {
+    timezone?: string;
+    sessions?: string[];
+    open_utc?: string | null;
+    close_utc?: string | null;
+    notes?: string | null;
+  };
   volatility?: {
     atr_percentile_30d?: number | null;
     realized_vol_percentile_30d?: number | null;
     typical_daily_range?: number | null;
   };
+  liquidity?: {
+    typical_spread?: number | null;
+    spread_percentile_30d?: number | null;
+    notes?: string | null;
+  };
   correlations: { symbol: string; coefficient: number; window_days: number }[];
+  event_sensitivities?: {
+    event_type: string;
+    typical_move_atr_multiple?: number | null;
+    notes?: string | null;
+  }[];
   regime_distribution?: { regime: string; share: number }[];
   as_of: string;
   provenance: Provenance;

@@ -27,6 +27,27 @@ class SymbolTfAccuracy(BaseModel):
     accuracy: float | None = None
 
 
+class FitFamilyAccuracy(BaseModel):
+    family: str
+    timeframe: str
+    n: int = 0
+    correct: int = 0
+    accuracy: float | None = None
+    persistence_correct: int = 0
+    persistence_accuracy: float | None = None
+
+
+class FitWeeklyBlock(BaseModel):
+    n_scored: int = 0
+    n_correct: int = 0
+    accuracy: float | None = None
+    persistence_correct: int = 0
+    persistence_accuracy: float | None = None
+    delta_vs_persistence: float | None = None
+    by_family: list[FitFamilyAccuracy] = Field(default_factory=list)
+    scoring_model: str | None = None
+
+
 class WeeklyReportItem(BaseModel):
     id: int
     week_start: datetime
@@ -36,12 +57,55 @@ class WeeklyReportItem(BaseModel):
     accuracy: float | None
     by_symbol_tf: list[SymbolTfAccuracy] = Field(default_factory=list)
     scoring_model: str | None = None
+    fit: FitWeeklyBlock | None = None
     email_sent_at: datetime | None = None
     created_at: datetime
 
 
 class WeeklyScoringResponse(BaseModel):
     items: list[WeeklyReportItem]
+
+
+def _parse_fit_block(raw: dict[str, Any] | None) -> FitWeeklyBlock | None:
+    if not isinstance(raw, dict):
+        return None
+    families: list[FitFamilyAccuracy] = []
+    for entry in raw.get("by_family") or []:
+        if not isinstance(entry, dict):
+            continue
+        families.append(
+            FitFamilyAccuracy(
+                family=str(entry.get("family") or ""),
+                timeframe=str(entry.get("timeframe") or ""),
+                n=int(entry.get("n") or 0),
+                correct=int(entry.get("correct") or 0),
+                accuracy=float(entry["accuracy"]) if entry.get("accuracy") is not None else None,
+                persistence_correct=int(entry.get("persistence_correct") or 0),
+                persistence_accuracy=(
+                    float(entry["persistence_accuracy"])
+                    if entry.get("persistence_accuracy") is not None
+                    else None
+                ),
+            )
+        )
+    return FitWeeklyBlock(
+        n_scored=int(raw.get("n_scored") or 0),
+        n_correct=int(raw.get("n_correct") or 0),
+        accuracy=float(raw["accuracy"]) if raw.get("accuracy") is not None else None,
+        persistence_correct=int(raw.get("persistence_correct") or 0),
+        persistence_accuracy=(
+            float(raw["persistence_accuracy"])
+            if raw.get("persistence_accuracy") is not None
+            else None
+        ),
+        delta_vs_persistence=(
+            float(raw["delta_vs_persistence"])
+            if raw.get("delta_vs_persistence") is not None
+            else None
+        ),
+        by_family=families,
+        scoring_model=raw.get("scoring_model"),
+    )
 
 
 def _parse_report(row: ScoringWeeklyReport) -> WeeklyReportItem:
@@ -78,6 +142,7 @@ def _parse_report(row: ScoringWeeklyReport) -> WeeklyReportItem:
         accuracy=acc,
         by_symbol_tf=by,
         scoring_model=raw.get("scoring_model"),
+        fit=_parse_fit_block(raw.get("fit") if isinstance(raw.get("fit"), dict) else None),
         email_sent_at=row.email_sent_at,
         created_at=row.created_at,
     )

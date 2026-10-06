@@ -1,0 +1,35 @@
+# Monorepo build context for Railway / `docker build -f server/Dockerfile .`
+# Keep packages/contracts + server/**; drop heavy / secret paths.
+
+.git
+.github
+.cursor
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.ruff_cache
+**/node_modules
+**/.next
+**/playwright-report
+**/test-results
+**/.turbo
+**/.vercel
+client
+docs
+ops
+scripts
+*.md
+!server/README.md
+!packages/contracts/README.md
+!packages/contracts/**/*.md
+.env
+.env.*
+!**/.env.example
+server/.env
+**/*.log
+.DS_Store
+wrangler.toml
+preset-factory-roadmap.md
+roadmap.md
+concept.md

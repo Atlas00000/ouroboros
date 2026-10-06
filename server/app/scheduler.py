@@ -18,6 +18,7 @@ from sqlalchemy import select
 
 from app import __version__
 from app.analytics.bars import load_ohlcv
+from app.analytics.fit.log import classify_and_log_fits
 from app.analytics.forecast_log import classify_and_log_regimes
 from app.analytics.metrics import compute_metric_snapshot
 from app.analytics.profile_refresh import refresh_symbol_profile, run_event_triggered_refresh
@@ -33,6 +34,7 @@ logger = logging.getLogger("ouroboros.scheduler")
 # Cadences (UTC). Tunable later via settings if needed.
 METRICS_INTERVAL_MINUTES = 15
 REGIME_LOG_INTERVAL_MINUTES = 15
+FIT_LOG_INTERVAL_MINUTES = 15
 PROFILE_EVENTS_INTERVAL_MINUTES = 15
 OUTBOX_RELAY_INTERVAL_SECONDS = 30
 DAILY_PROFILES_CRON_HOUR = 0
@@ -90,6 +92,24 @@ def job_regime_log() -> None:
         )
     except Exception:
         logger.exception("regime_log failed")
+        raise
+    finally:
+        session.close()
+
+
+def job_fit_log() -> None:
+    """Classify latest regimes → fit.* rows on forecast_log (H1/D1 × families)."""
+    session = get_session_factory()()
+    try:
+        report = classify_and_log_fits(session, commit=True)
+        logger.info(
+            "fit_log inserted=%s dupes=%s errors=%s",
+            report.inserted,
+            report.skipped_dupes,
+            len(report.errors),
+        )
+    except Exception:
+        logger.exception("fit_log failed")
         raise
     finally:
         session.close()
@@ -231,7 +251,8 @@ def job_narratives_refresh() -> None:
 
 
 def job_score_regime_calls() -> None:
-    """Fill realized outcomes on due forecast_log regime rows (W8·D1)."""
+    """Fill realized outcomes on due forecast_log regime + fit rows."""
+    from app.scoring.fit_accuracy import score_due_fit_calls
     from app.scoring.regime_accuracy import score_due_regime_calls
 
     session = get_session_factory()()
@@ -243,6 +264,14 @@ def job_score_regime_calls() -> None:
             report.correct,
             report.skipped,
             len(report.errors),
+        )
+        fit_report = score_due_fit_calls(session, commit=True)
+        logger.info(
+            "score_fit_calls scored=%s correct=%s skipped=%s errors=%s",
+            fit_report.scored,
+            fit_report.correct,
+            fit_report.skipped,
+            len(fit_report.errors),
         )
     except Exception:
         logger.exception("score_regime_calls failed")
@@ -294,6 +323,7 @@ def job_watchdog_check() -> None:
 JOB_FUNCS = {
     "metrics_cadence": job_metrics_cadence,
     "regime_log": job_regime_log,
+    "fit_log": job_fit_log,
     "profile_events": job_profile_events,
     "outbox_relay": job_outbox_relay,
     "daily_profiles": job_daily_profiles,
@@ -326,6 +356,14 @@ def build_scheduler() -> BlockingScheduler:
         job_regime_log,
         IntervalTrigger(minutes=REGIME_LOG_INTERVAL_MINUTES),
         id="regime_log",
+        max_instances=1,
+        coalesce=True,
+        replace_existing=True,
+    )
+    sched.add_job(
+        job_fit_log,
+        IntervalTrigger(minutes=FIT_LOG_INTERVAL_MINUTES),
+        id="fit_log",
         max_instances=1,
         coalesce=True,
         replace_existing=True,

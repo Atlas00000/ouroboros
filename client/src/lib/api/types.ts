@@ -46,6 +46,7 @@ export type NewsListItem = {
   symbol?: string | null;
   headline: string;
   source: string;
+  url?: string | null;
   impact?: string | null;
   published_at?: string | null;
 };
@@ -109,6 +110,27 @@ export type SymbolTfAccuracy = {
   accuracy?: number | null;
 };
 
+export type FitFamilyAccuracy = {
+  family: string;
+  timeframe: string;
+  n: number;
+  correct: number;
+  accuracy?: number | null;
+  persistence_correct: number;
+  persistence_accuracy?: number | null;
+};
+
+export type FitWeeklyBlock = {
+  n_scored: number;
+  n_correct: number;
+  accuracy?: number | null;
+  persistence_correct: number;
+  persistence_accuracy?: number | null;
+  delta_vs_persistence?: number | null;
+  by_family: FitFamilyAccuracy[];
+  scoring_model?: string | null;
+};
+
 export type WeeklyReportItem = {
   id: number;
   week_start: string;
@@ -118,12 +140,32 @@ export type WeeklyReportItem = {
   accuracy?: number | null;
   by_symbol_tf: SymbolTfAccuracy[];
   scoring_model?: string | null;
+  fit?: FitWeeklyBlock | null;
   email_sent_at?: string | null;
   created_at: string;
 };
 
 export type WeeklyScoringResponse = {
   items: WeeklyReportItem[];
+};
+
+export type FitTag = "MATCH" | "MISMATCH" | "FRAGILE";
+export type EdgeFamily = "meanrev" | "trendfollow";
+
+export type FitSnapshot = {
+  schema_id: string;
+  symbol: string;
+  timeframe: string;
+  family: EdgeFamily;
+  tag: FitTag;
+  regime?: string | null;
+  allow_on: boolean;
+  shares?: Record<string, number> | null;
+  window?: string | null;
+  fragile_reasons: string[];
+  as_of: string;
+  provenance: Provenance;
+  disclaimer?: { text: string };
 };
 
 export type ApiKeyPublic = {

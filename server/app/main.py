@@ -14,6 +14,7 @@ from app.api.errors import register_exception_handlers
 from app.api.v1 import admin_keys as admin_keys_router
 from app.api.v1 import assets as assets_router
 from app.api.v1 import bars as bars_router
+from app.api.v1 import fit as fit_router
 from app.api.v1 import health as health_router
 from app.api.v1 import insights as insights_router
 from app.api.v1 import metrics as metrics_router
@@ -29,6 +30,7 @@ from app.config import get_settings
 from app.db.session import get_session_factory
 from app.observability.logging import configure_logging
 from app.observability.metrics_http import mount_metrics
+from app.observability.request_logging import RequestLoggingMiddleware
 from app.observability.sentry import init_sentry
 
 logger = logging.getLogger(__name__)
@@ -93,7 +95,10 @@ def create_app() -> FastAPI:
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
+        expose_headers=["X-Request-Id"],
     )
+    # Outer: request_id + duration (added after CORS → runs first).
+    application.add_middleware(RequestLoggingMiddleware)
     register_exception_handlers(application)
     mount_metrics(application)
     application.include_router(health_router.router, prefix="/v1")
@@ -102,6 +107,7 @@ def create_app() -> FastAPI:
     application.include_router(states_router.router, prefix="/v1")
     application.include_router(metrics_router.router, prefix="/v1")
     application.include_router(bars_router.router, prefix="/v1")
+    application.include_router(fit_router.router, prefix="/v1")
     application.include_router(sentiment_router.router, prefix="/v1")
     application.include_router(insights_router.router, prefix="/v1")
     application.include_router(news_router.router, prefix="/v1")

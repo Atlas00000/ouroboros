@@ -1,0 +1,40 @@
+@import "./color.css";
+@import "./space.css";
+@import "./type.css";
+@import "./motion.css";
+@import "./elevation.css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-regime-trending-up: var(--regime-trending-up);
+  --color-regime-trending-down: var(--regime-trending-down);
+  --color-regime-ranging: var(--regime-ranging);
+  --color-regime-high-vol: var(--regime-high-vol);
+  --color-stale: var(--stale);
+
+  --color-ds-canvas: var(--ds-canvas);
+  --color-ds-canvas-elevated: var(--ds-canvas-elevated);
+  --color-ds-plane: var(--ds-plane);
+  --color-ds-plane-raised: var(--ds-plane-raised);
+  --color-ds-ink: var(--ds-ink);
+  --color-ds-ink-muted: var(--ds-ink-muted);
+  --color-ds-ink-faint: var(--ds-ink-faint);
+  --color-ds-line: var(--ds-line);
+  --color-ds-line-strong: var(--ds-line-strong);
+  --color-ds-signal: var(--ds-signal);
+  --color-ds-signal-soft: var(--ds-signal-soft);
+  --color-ds-ok: var(--ds-ok);
+  --color-ds-warn: var(--ds-warn);
+  --color-ds-halt: var(--ds-halt);
+  --color-ds-idle: var(--ds-idle);
+  --color-ds-vol: var(--ds-vol);
+
+  --font-sans: var(--ds-font-ui);
+  --font-mono: var(--ds-font-numeric);
+  --font-display: var(--ds-font-display);
+}

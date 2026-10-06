@@ -1,19 +1,20 @@
 # Railway — API service config-as-code.
 #
-# Dashboard:
-#   Root Directory = repository root (so packages/contracts is in the build context)
-#   Config file = server/railway.toml (optional; or paste these settings)
+# Full steps: ../DEPLOYMENT.md
 #
-# Worker: create a second service with the same build, startCommand from
-# server/railway.worker.toml (`python -m app.scheduler`).
+# Dashboard / CLI:
+#   Root Directory = repository root (so packages/contracts is in the build context)
+#   Prefer repo-root railway.toml when using `railway up`
+#
+# Start command: use image CMD (shell-expanded PORT) — do not set bare `$PORT`.
+# Worker: create a second service with startCommand `python -m app.scheduler`
+# (see server/railway.worker.toml).
 
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "server/Dockerfile"
 
 [deploy]
-startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
-# Image WORKDIR is /app (server package + alembic.ini)
 releaseCommand = "python -m alembic upgrade head"
 healthcheckPath = "/v1/health/live"
 healthcheckTimeout = 30

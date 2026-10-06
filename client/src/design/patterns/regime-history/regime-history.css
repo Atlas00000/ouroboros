@@ -1,0 +1,647 @@
+/* Regime history field — living share plane (tokens only) */
+
+@keyframes ds-reg-hist-aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.82;
+  }
+  50% {
+    transform: translate3d(-3%, 4%, 0) scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes ds-reg-hist-seg-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0.15);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ds-reg-hist-lane-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-reg-hist-fill-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ds-reg-hist-focus-in {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ds-reg-hist-dial-in {
+  from {
+    stroke-dashoffset: var(--ds-reg-dial-circ, 226);
+  }
+  to {
+    stroke-dashoffset: var(--ds-reg-dial-offset, 0);
+  }
+}
+
+@keyframes ds-reg-hist-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.ds-reg-hist {
+  --ds-reg-tone: var(--ds-signal);
+  --ds-reg-tone-soft: color-mix(in oklab, var(--ds-reg-tone) 18%, transparent);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 0;
+  background:
+    linear-gradient(
+      168deg,
+      color-mix(in oklab, var(--ds-plane-raised) 82%, var(--ds-reg-tone)) 0%,
+      var(--ds-plane) 42%,
+      color-mix(in oklab, var(--ds-plane) 88%, var(--ds-vol)) 100%
+    );
+  clip-path: polygon(0 14px, 22px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 16px) 100%, 0 100%);
+}
+
+.ds-reg-hist__atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ds-reg-hist__aurora {
+  position: absolute;
+  inset: -28% -18% auto 10%;
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at 55% 15%,
+    color-mix(in oklab, var(--ds-reg-tone) 40%, transparent),
+    color-mix(in oklab, var(--ds-vol) 12%, transparent) 45%,
+    transparent 72%
+  );
+  animation: ds-reg-hist-aurora 15s var(--ds-ease-out-soft) infinite;
+  filter: blur(2px);
+}
+
+.ds-reg-hist__wash {
+  position: absolute;
+  inset: auto -12% -28% 15%;
+  height: 48%;
+  background: radial-gradient(
+    ellipse at 40% 85%,
+    color-mix(in oklab, var(--ds-idle) 18%, transparent),
+    transparent 65%
+  );
+}
+
+.ds-reg-hist__shear {
+  position: absolute;
+  inset: 15% -15% -20% 30%;
+  background: linear-gradient(
+    130deg,
+    transparent 0%,
+    color-mix(in oklab, var(--ds-plane-raised) 75%, transparent) 40%,
+    transparent 78%
+  );
+  transform: skewY(-3deg);
+  opacity: 0.55;
+}
+
+.ds-reg-hist__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--ds-line) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--ds-line) 70%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(160deg, black 0%, transparent 65%);
+}
+
+.ds-reg-hist__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 45% 30%,
+    transparent 40%,
+    color-mix(in oklab, var(--ds-canvas) 30%, transparent) 100%
+  );
+}
+
+.ds-reg-hist__rule {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--ds-reg-tone),
+    color-mix(in oklab, var(--ds-reg-tone) 40%, var(--ds-line-strong)) 50%,
+    transparent 95%
+  );
+  z-index: 1;
+  box-shadow: 0 0 18px color-mix(in oklab, var(--ds-reg-tone) 45%, transparent);
+}
+
+.ds-reg-hist__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1rem 1rem 1.05rem 1.15rem;
+}
+
+/* —— Mast —— */
+
+.ds-reg-hist__mast {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "kicker kicker"
+    "pct badge"
+    "meta meta";
+  gap: 0.15rem 0.75rem;
+  align-items: start;
+}
+
+.ds-reg-hist__kicker {
+  grid-area: kicker;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-reg-hist__lead-pct {
+  grid-area: pct;
+  margin: 0.1rem 0 0;
+  font-family: var(--ds-font-numeric);
+  font-size: clamp(1.9rem, 4.2vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--ds-reg-tone);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 36px color-mix(in oklab, var(--ds-reg-tone) 40%, transparent);
+}
+
+.ds-reg-hist__badge {
+  grid-area: badge;
+  justify-self: end;
+  align-self: center;
+  margin: 0;
+  padding: 0.2rem 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ds-reg-tone);
+  border-bottom: 1px solid var(--ds-reg-tone);
+}
+
+.ds-reg-hist__meta {
+  grid-area: meta;
+  margin: 0.28rem 0 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  color: var(--ds-ink-muted);
+}
+
+.ds-reg-hist__meta strong {
+  font-weight: 500;
+  color: var(--ds-ink);
+}
+
+.ds-reg-hist__meta-key {
+  color: var(--ds-ink-faint);
+  text-transform: capitalize;
+}
+
+/* —— Stack ribbon —— */
+
+.ds-reg-hist-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ds-reg-hist-stack__ribbon {
+  display: flex;
+  width: 100%;
+  height: 2.6rem;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.ds-reg-hist-stack__seg {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0.35rem;
+  cursor: pointer;
+  position: relative;
+  background: color-mix(in oklab, var(--ds-reg-tone) 72%, transparent);
+  transform-origin: left center;
+  animation: ds-reg-hist-seg-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+  transition:
+    filter var(--ds-duration-swift) var(--ds-ease-out-soft),
+    box-shadow var(--ds-duration-swift) var(--ds-ease-out-soft);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+}
+
+.ds-reg-hist-stack__seg:hover {
+  filter: brightness(1.12);
+}
+
+.ds-reg-hist-stack__seg[data-active="true"] {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--ds-ink) 35%, transparent),
+    0 0 14px color-mix(in oklab, var(--ds-reg-tone) 45%, transparent);
+  z-index: 1;
+}
+
+.ds-reg-hist-stack__seg:focus-visible {
+  outline: 2px solid var(--ds-signal);
+  outline-offset: 2px;
+  z-index: 2;
+}
+
+.ds-reg-hist-stack__seg-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ds-ink) 90%, transparent);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-inline: 0.25rem;
+}
+
+.ds-reg-hist-stack__legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--ds-font-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+/* —— Lanes —— */
+
+.ds-reg-hist-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.ds-reg-hist-lane {
+  appearance: none;
+  border: 0;
+  border-left: 2px solid var(--ds-line);
+  background: color-mix(in oklab, var(--ds-plane-raised) 42%, transparent);
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition:
+    border-color var(--ds-duration-swift) var(--ds-ease-out-soft),
+    background var(--ds-duration-swift) var(--ds-ease-out-soft),
+    transform var(--ds-duration-swift) var(--ds-ease-out-soft);
+  animation: ds-reg-hist-lane-in var(--ds-duration-pace) var(--ds-ease-out-soft) both;
+}
+
+.ds-reg-hist-lane:hover {
+  transform: translateY(-1px);
+  background: color-mix(in oklab, var(--ds-plane-raised) 70%, transparent);
+}
+
+.ds-reg-hist-lane:focus-visible {
+  outline: 2px solid var(--ds-signal);
+  outline-offset: 2px;
+}
+
+.ds-reg-hist-lane[data-active="true"] {
+  border-left-color: var(--ds-reg-tone);
+  background: var(--ds-reg-tone-soft);
+}
+
+.ds-reg-hist-lane__label {
+  font-family: var(--ds-font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-ink);
+}
+
+.ds-reg-hist-lane__track {
+  position: relative;
+  height: 4px;
+  background: var(--ds-line);
+  overflow: hidden;
+}
+
+.ds-reg-hist-lane__fill {
+  display: block;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    var(--ds-reg-tone),
+    color-mix(in oklab, var(--ds-reg-tone) 45%, transparent)
+  );
+  animation: ds-reg-hist-fill-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+  box-shadow: 0 0 8px color-mix(in oklab, var(--ds-reg-tone) 40%, transparent);
+}
+
+.ds-reg-hist-lane__pct {
+  font-family: var(--ds-font-numeric);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-reg-tone);
+  min-width: 2.8rem;
+  text-align: right;
+}
+
+/* —— Focus —— */
+
+.ds-reg-hist-focus {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem 1rem;
+  align-items: end;
+  padding-top: 0.45rem;
+  border-top: 1px solid color-mix(in oklab, var(--ds-line) 80%, var(--ds-reg-tone));
+  animation: ds-reg-hist-focus-in var(--ds-duration-pace) var(--ds-ease-out-soft) both;
+}
+
+.ds-reg-hist-focus--copy {
+  grid-template-columns: 1fr;
+}
+
+.ds-reg-hist-focus__value {
+  margin: 0;
+  font-family: var(--ds-font-numeric);
+  font-size: clamp(1.85rem, 4.5vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--ds-reg-tone);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 28px color-mix(in oklab, var(--ds-reg-tone) 35%, transparent);
+}
+
+.ds-reg-hist-focus__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  line-height: 1.45;
+  color: var(--ds-ink-muted);
+}
+
+.ds-reg-hist-focus__copy strong {
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  color: var(--ds-ink);
+}
+
+/* —— Dial —— */
+
+.ds-reg-hist-dial {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+.ds-reg-hist-dial__ring {
+  position: relative;
+  width: 5.75rem;
+  height: 5.75rem;
+  flex-shrink: 0;
+}
+
+.ds-reg-hist-dial__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ds-reg-hist-dial__track {
+  fill: none;
+  stroke: var(--ds-line);
+  stroke-width: 5;
+}
+
+.ds-reg-hist-dial__arc {
+  fill: none;
+  stroke: var(--ds-reg-tone);
+  stroke-width: 5;
+  stroke-linecap: butt;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--ds-reg-tone) 55%, transparent));
+  animation: ds-reg-hist-dial-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+}
+
+.ds-reg-hist-dial__core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ds-reg-hist-dial__pct {
+  margin: 0;
+  font-family: var(--ds-font-numeric);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--ds-reg-tone);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ds-reg-hist-dial__name {
+  margin: 0.2rem 0 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ds-ink-muted);
+}
+
+.ds-reg-hist-dial__sats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.ds-reg-hist-sat {
+  appearance: none;
+  border: 0;
+  border-left: 2px solid var(--ds-line);
+  background: color-mix(in oklab, var(--ds-plane-raised) 40%, transparent);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.45rem;
+  cursor: pointer;
+  text-align: left;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  transition:
+    border-color var(--ds-duration-swift) var(--ds-ease-out-soft),
+    background var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+.ds-reg-hist-sat:hover {
+  background: color-mix(in oklab, var(--ds-plane-raised) 72%, transparent);
+}
+
+.ds-reg-hist-sat:focus-visible {
+  outline: 2px solid var(--ds-signal);
+  outline-offset: 2px;
+}
+
+.ds-reg-hist-sat[data-active="true"] {
+  border-left-color: var(--ds-reg-tone);
+  background: var(--ds-reg-tone-soft);
+}
+
+.ds-reg-hist-sat__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-reg-tone);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--ds-reg-tone) 55%, transparent);
+  animation: ds-reg-hist-pulse 2s ease-in-out infinite;
+}
+
+.ds-reg-hist-sat[data-active="false"] .ds-reg-hist-sat__dot {
+  animation: none;
+  opacity: 0.55;
+}
+
+.ds-reg-hist-sat__lab {
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-ink);
+}
+
+.ds-reg-hist-sat__pct {
+  font-family: var(--ds-font-numeric);
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-reg-tone);
+}
+
+.ds-reg-hist__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  margin: 0;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--ds-line);
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  color: var(--ds-ink-faint);
+}
+
+.ds-reg-hist__empty {
+  position: relative;
+  z-index: 1;
+  padding: 1.1rem 1.15rem;
+}
+
+.ds-reg-hist__empty h2 {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ds-ink);
+}
+
+.ds-reg-hist__empty p {
+  margin: 0.5rem 0 0;
+  font-size: var(--ds-text-body);
+  color: var(--ds-ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-reg-hist__aurora,
+  .ds-reg-hist-stack__seg,
+  .ds-reg-hist-lane,
+  .ds-reg-hist-lane__fill,
+  .ds-reg-hist-focus,
+  .ds-reg-hist-dial__arc,
+  .ds-reg-hist-sat__dot {
+    animation: none;
+  }
+
+  .ds-reg-hist-lane:hover {
+    transform: none;
+  }
+}

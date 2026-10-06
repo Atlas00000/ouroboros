@@ -1,0 +1,87 @@
+/* Motion durations, easings, keyframes — honour reduced-motion below */
+
+:root {
+  --ds-duration-instant: 80ms;
+  --ds-duration-swift: 160ms;
+  --ds-duration-pace: 280ms;
+  --ds-duration-stage: 420ms;
+
+  --ds-ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ds-ease-in-out-soft: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@keyframes ds-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ds-skeleton {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes ds-number-flash {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ds-page-enter {
+  animation: ds-page-enter var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+}
+
+.ds-page-enter-delay {
+  animation: ds-page-enter var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+  animation-delay: 80ms;
+}
+
+.ds-state-fade {
+  animation: ds-fade var(--ds-duration-swift) var(--ds-ease-out-soft) both;
+}
+
+.ds-number-tick {
+  animation: ds-number-flash var(--ds-duration-pace) var(--ds-ease-out-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ds-duration-instant: 1ms;
+    --ds-duration-swift: 1ms;
+    --ds-duration-pace: 1ms;
+    --ds-duration-stage: 1ms;
+  }
+
+  .ds-page-enter,
+  .ds-page-enter-delay,
+  .ds-state-fade,
+  .ds-number-tick {
+    animation: ds-fade var(--ds-duration-swift) linear both;
+    transform: none;
+  }
+
+  .ds-skeleton-shimmer {
+    animation: none !important;
+  }
+}

@@ -16,6 +16,7 @@ from contracts.profile_v1 import (
     AssetIdentity,
     AssetProfile,
     CorrelationEntry,
+    EventSensitivity,
     LiquidityCharacter,
     RegimeDistribution,
     TradingHours,
@@ -23,6 +24,7 @@ from contracts.profile_v1 import (
 )
 
 from app.analytics.correlations import CorrelationMatrixResult, compute_correlation_matrix
+from app.analytics.event_sensitivities import compute_event_sensitivities
 from app.analytics.metrics import (
     MODEL_VERSION as METRICS_MODEL_VERSION,
 )
@@ -158,6 +160,8 @@ def build_asset_profile(
     as_of: datetime | None = None,
     regime_params: RegimeParams = DEFAULT_PARAMS,
     stale: bool = False,
+    calendar_events: list[tuple[str, datetime]] | None = None,
+    event_sensitivities: list[EventSensitivity] | None = None,
 ) -> AssetProfile:
     """
     Build a ``profile.v1`` AssetProfile for one symbol.
@@ -166,6 +170,7 @@ def build_asset_profile(
     - Liquidity: range percentile proxy; true spread deferred
     - Correlations: H1 30d matrix vs peers (depth-gated)
     - Regime distribution: confirmed labels on D1 (fallback H1) history
+    - Event sensitivities: calendar taxonomy + optional ATR multiples
     """
     sym = identity.symbol.upper()
     spans = {k.upper(): float(v) for k, v in (m1_span_by_symbol or {}).items()}
@@ -227,6 +232,13 @@ def build_asset_profile(
         corr_count=len(corr_entries),
     )
 
+    if event_sensitivities is None:
+        event_sensitivities = compute_event_sensitivities(
+            sym,
+            h1_ohlcv=h1_ohlcv,
+            events=calendar_events or [],
+        )
+
     return AssetProfile(
         profile_version=profile_version,
         identity=AssetIdentity(
@@ -242,7 +254,7 @@ def build_asset_profile(
         volatility=vol,
         liquidity=liq,
         correlations=corr_entries,
-        event_sensitivities=[],
+        event_sensitivities=event_sensitivities,
         regime_distribution=regime_dist,
         as_of=as_of_dt,
         provenance=Provenance(
@@ -307,6 +319,10 @@ def build_asset_profile_from_session(
         peer_frames[p_up] = load_ohlcv(session, p_up, "H1", lookback_days=max(lookback_days, 45))
         span_map[p_up] = m1_depth_days(session, p_up)
 
+    from app.analytics.event_sensitivities import load_calendar_events_for_symbol
+
+    calendar_events = load_calendar_events_for_symbol(session, sym)
+
     return build_asset_profile(
         identity,
         d1_ohlcv=d1,
@@ -314,4 +330,5 @@ def build_asset_profile_from_session(
         peer_h1_ohlcv=peer_frames,
         m1_span_by_symbol=span_map,
         profile_version=profile_version,
+        calendar_events=calendar_events,
     )

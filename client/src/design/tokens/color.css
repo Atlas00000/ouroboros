@@ -1,0 +1,107 @@
+/* Jade Desk & Champagne Paper — hybrid active theme
+   Dark = Ink & Jade Ledger · Light = Noir & Champagne Brass */
+
+:root,
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+
+  /* Canvas — Ink & Jade Ledger */
+  --ds-canvas: #090c0b;
+  --ds-canvas-elevated: #0d1210;
+  --ds-plane: #111614;
+  --ds-plane-raised: #171d1a;
+
+  --ds-ink: #e4ebe6;
+  --ds-ink-muted: #85948c;
+  --ds-ink-faint: #5a6b63;
+
+  --ds-line: #1c2621;
+  --ds-line-strong: #2a3630;
+
+  /* Signal — muted jade */
+  --ds-signal: #5f9e86;
+  --ds-signal-soft: color-mix(in srgb, var(--ds-signal) 16%, transparent);
+  --ds-signal-ink: #071410;
+
+  --ds-ok: #5f9e86;
+  --ds-ok-soft: color-mix(in srgb, var(--ds-ok) 16%, transparent);
+  --ds-warn: #b8934e;
+  --ds-warn-soft: color-mix(in srgb, var(--ds-warn) 16%, transparent);
+  --ds-halt: #b56a62;
+  --ds-halt-soft: color-mix(in srgb, var(--ds-halt) 15%, transparent);
+  --ds-idle: #85948c;
+  --ds-idle-soft: color-mix(in srgb, var(--ds-idle) 14%, transparent);
+  --ds-vol: #b8934e;
+  --ds-vol-soft: color-mix(in srgb, var(--ds-vol) 15%, transparent);
+
+  --ds-focus-ring: var(--ds-signal);
+
+  --ds-ambient-a: #101816;
+  --ds-ambient-b: #080b0a;
+  --ds-ambient-signal: color-mix(in srgb, var(--ds-signal) 7%, transparent);
+
+  --background: var(--ds-canvas);
+  --foreground: var(--ds-ink);
+  --muted: var(--ds-ink-muted);
+  --card: var(--ds-plane);
+  --border: var(--ds-line);
+  --accent: var(--ds-signal);
+  --regime-trending-up: var(--ds-ok);
+  --regime-trending-down: var(--ds-halt);
+  --regime-ranging: var(--ds-idle);
+  --regime-high-vol: var(--ds-vol);
+  --stale: var(--ds-warn);
+}
+
+/* Daylight — Noir & Champagne Brass paper */
+[data-theme="light"],
+.light {
+  color-scheme: light;
+
+  --ds-canvas: #f7f4ee;
+  --ds-canvas-elevated: #f0ebe3;
+  --ds-plane: #fffdf8;
+  --ds-plane-raised: #ffffff;
+
+  --ds-ink: #1c1a17;
+  --ds-ink-muted: #6f6a62;
+  --ds-ink-faint: #9a9488;
+
+  --ds-line: #e4ddd2;
+  --ds-line-strong: #d0c8ba;
+
+  /* Signal — matte champagne brass */
+  --ds-signal: #9a7b3c;
+  --ds-signal-soft: color-mix(in srgb, var(--ds-signal) 12%, transparent);
+  --ds-signal-ink: #fffdf8;
+
+  --ds-ok: #4f6f54;
+  --ds-ok-soft: color-mix(in srgb, var(--ds-ok) 12%, transparent);
+  --ds-warn: #a67c2e;
+  --ds-warn-soft: color-mix(in srgb, var(--ds-warn) 12%, transparent);
+  --ds-halt: #9a4540;
+  --ds-halt-soft: color-mix(in srgb, var(--ds-halt) 12%, transparent);
+  --ds-idle: #7a756c;
+  --ds-idle-soft: color-mix(in srgb, var(--ds-idle) 12%, transparent);
+  --ds-vol: #a67c2e;
+  --ds-vol-soft: color-mix(in srgb, var(--ds-vol) 12%, transparent);
+
+  --ds-focus-ring: var(--ds-signal);
+
+  --ds-ambient-a: #ebe4d8;
+  --ds-ambient-b: #f7f4ee;
+  --ds-ambient-signal: color-mix(in srgb, var(--ds-signal) 8%, transparent);
+
+  --background: var(--ds-canvas);
+  --foreground: var(--ds-ink);
+  --muted: var(--ds-ink-muted);
+  --card: var(--ds-plane);
+  --border: var(--ds-line);
+  --accent: var(--ds-signal);
+  --regime-trending-up: var(--ds-ok);
+  --regime-trending-down: var(--ds-halt);
+  --regime-ranging: var(--ds-idle);
+  --regime-high-vol: var(--ds-vol);
+  --stale: var(--ds-warn);
+}

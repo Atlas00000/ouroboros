@@ -1,0 +1,347 @@
+/* Desk stage — full-bleed loading / lost pages (Jade Desk language) */
+
+.ds-desk-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  min-height: 100vh;
+  padding:
+    max(1.5rem, env(safe-area-inset-top))
+    1.25rem
+    max(1.5rem, env(safe-area-inset-bottom));
+  overflow: hidden;
+  background: var(--ds-canvas);
+  color: var(--ds-ink);
+}
+
+.ds-desk-stage__frame {
+  position: relative;
+  z-index: 1;
+  width: min(52rem, 100%);
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+/* Asymmetric mast — brand dominates */
+.ds-desk-stage__mast {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 36rem;
+}
+
+.ds-desk-stage__eyebrow {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ds-signal);
+}
+
+.ds-desk-stage__title {
+  margin: 0;
+  font-family: var(--ds-font-display);
+  font-size: clamp(3.2rem, 12vw, 6.5rem);
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  color: var(--ds-ink);
+}
+
+.ds-desk-stage__title[data-tone="halt"] {
+  color: color-mix(in srgb, var(--ds-halt) 75%, var(--ds-ink));
+}
+
+.ds-desk-stage__lede {
+  margin: 0;
+  max-width: 28rem;
+  font-family: var(--ds-font-ui);
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--ds-ink-muted);
+}
+
+.ds-desk-stage__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.ds-desk-stage__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-signal);
+  color: var(--ds-signal-ink);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  font-weight: var(--ds-font-weight-medium);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: filter var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+.ds-desk-stage__cta:hover,
+.ds-desk-stage__cta:focus-visible {
+  filter: brightness(1.08);
+}
+
+.ds-desk-stage__ghost {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.35rem;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.04em;
+  color: var(--ds-ink-muted);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--ds-signal) 45%, transparent);
+  transition: color var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+.ds-desk-stage__ghost:hover,
+.ds-desk-stage__ghost:focus-visible {
+  color: var(--ds-ink);
+}
+
+/* Atmosphere layers */
+.ds-desk-stage__wash {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      900px 520px at var(--ds-stage-mx, 18%) var(--ds-stage-my, 12%),
+      color-mix(in srgb, var(--ds-signal) 22%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      700px 480px at 88% 78%,
+      color-mix(in srgb, var(--ds-vol) 12%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--ds-ambient-a) 80%, transparent) 0%,
+      var(--ds-canvas) 48%,
+      color-mix(in srgb, var(--ds-ambient-b) 90%, transparent) 100%
+    );
+  transition: background-position var(--ds-duration-pace) var(--ds-ease-out-soft);
+}
+
+.ds-desk-stage__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(var(--ds-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ds-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 40% 35%, #000 20%, transparent 75%);
+}
+
+.ds-desk-stage__sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    color-mix(in srgb, var(--ds-signal) 14%, transparent) 48%,
+    transparent 62%
+  );
+  background-size: 220% 100%;
+  animation: ds-desk-stage-sweep 4.8s var(--ds-ease-in-out-soft) infinite;
+}
+
+@keyframes ds-desk-stage-sweep {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -40% 0;
+  }
+}
+
+/* Interactive signal field */
+.ds-desk-signal {
+  position: absolute;
+  right: -8%;
+  top: 8%;
+  width: min(58vw, 34rem);
+  height: min(58vw, 34rem);
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .ds-desk-signal {
+    right: -28%;
+    top: auto;
+    bottom: -12%;
+    width: min(92vw, 26rem);
+    height: min(92vw, 26rem);
+    opacity: 0.85;
+  }
+}
+
+.ds-desk-signal__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ds-desk-signal__ring {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ds-signal) 55%, var(--ds-line-strong));
+  stroke-width: 1.25;
+  stroke-dasharray: 8 14;
+  animation: ds-desk-signal-spin 28s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.ds-desk-signal__ring--inner {
+  stroke: color-mix(in srgb, var(--ds-ink) 18%, transparent);
+  stroke-dasharray: 2 10;
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+
+.ds-desk-signal__path {
+  fill: none;
+  stroke: var(--ds-signal);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--ds-signal) 35%, transparent));
+}
+
+.ds-desk-signal__orbit {
+  fill: var(--ds-signal);
+  opacity: 0.9;
+}
+
+.ds-desk-signal__tick {
+  stroke: var(--ds-ink-faint);
+  stroke-width: 1;
+}
+
+@keyframes ds-desk-signal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading progress ribbon */
+.ds-desk-loadbar {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 22rem;
+}
+
+.ds-desk-loadbar__track {
+  position: relative;
+  height: 2px;
+  overflow: hidden;
+  background: var(--ds-line-strong);
+}
+
+.ds-desk-loadbar__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ds-signal),
+    color-mix(in srgb, var(--ds-vol) 70%, var(--ds-signal))
+  );
+  animation: ds-desk-loadbar 1.65s var(--ds-ease-in-out-soft) infinite;
+}
+
+@keyframes ds-desk-loadbar {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.ds-desk-loadbar__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--ds-font-numeric);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-desk-loadbar__meta strong {
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-signal);
+}
+
+/* 404 code strip */
+.ds-desk-lost__code {
+  margin: 0;
+  font-family: var(--ds-font-numeric);
+  font-size: clamp(5rem, 18vw, 9rem);
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: -0.08em;
+  line-height: 0.85;
+  color: color-mix(in srgb, var(--ds-halt) 55%, var(--ds-ink-faint));
+  text-shadow: 0 0 60px color-mix(in srgb, var(--ds-halt) 25%, transparent);
+}
+
+.ds-desk-lost__hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-desk-lost__hints li::before {
+  content: "";
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-right: 0.45rem;
+  border-radius: 999px;
+  background: var(--ds-signal);
+  vertical-align: 0.1em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-desk-stage__sweep,
+  .ds-desk-signal__ring,
+  .ds-desk-loadbar__fill {
+    animation: none;
+  }
+
+  .ds-desk-loadbar__fill {
+    width: 55%;
+    transform: none;
+  }
+}

@@ -1,0 +1,516 @@
+/* Event sensitivity field — living calendar plane (tokens only) */
+
+@keyframes ds-event-aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(-3%, 3%, 0) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes ds-event-dial-in {
+  from {
+    stroke-dashoffset: var(--ds-event-dial-circ, 214);
+  }
+  to {
+    stroke-dashoffset: var(--ds-event-dial-offset, 0);
+  }
+}
+
+@keyframes ds-event-tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-event-fill-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ds-event-focus-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ds-event-field {
+  --ds-event-tone: var(--ds-vol);
+  --ds-event-tone-soft: color-mix(in oklab, var(--ds-event-tone) 18%, transparent);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0;
+  background:
+    linear-gradient(
+      142deg,
+      color-mix(in oklab, var(--ds-plane-raised) 84%, var(--ds-event-tone)) 0%,
+      var(--ds-plane) 46%,
+      color-mix(in oklab, var(--ds-plane) 90%, var(--ds-signal)) 100%
+    );
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 22px) 100%, 0 100%);
+}
+
+.ds-event-field__atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ds-event-field__aurora {
+  position: absolute;
+  inset: -28% -10% auto 20%;
+  width: 70%;
+  height: 65%;
+  background: radial-gradient(
+    ellipse at 60% 20%,
+    color-mix(in oklab, var(--ds-event-tone) 38%, transparent),
+    color-mix(in oklab, var(--ds-signal) 12%, transparent) 48%,
+    transparent 72%
+  );
+  animation: ds-event-aurora 15s var(--ds-ease-out-soft) infinite;
+  filter: blur(2px);
+}
+
+.ds-event-field__wash {
+  position: absolute;
+  inset: auto -15% -30% 10%;
+  height: 50%;
+  background: radial-gradient(
+    ellipse at 25% 85%,
+    color-mix(in oklab, var(--ds-warn) 16%, transparent),
+    transparent 65%
+  );
+}
+
+.ds-event-field__shear {
+  position: absolute;
+  inset: 8% -10% -25% 35%;
+  background: linear-gradient(
+    118deg,
+    transparent 0%,
+    color-mix(in oklab, var(--ds-plane-raised) 72%, transparent) 40%,
+    transparent 75%
+  );
+  transform: skewY(-4deg);
+  opacity: 0.55;
+}
+
+.ds-event-field__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--ds-line) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--ds-line) 70%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(125deg, black 0%, transparent 70%);
+}
+
+.ds-event-field__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 40% 30%,
+    transparent 40%,
+    color-mix(in oklab, var(--ds-canvas) 30%, transparent) 100%
+  );
+}
+
+.ds-event-field__rule {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 14px;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--ds-event-tone),
+    color-mix(in oklab, var(--ds-event-tone) 40%, var(--ds-line-strong)) 55%,
+    transparent
+  );
+  z-index: 1;
+  box-shadow: 0 0 18px color-mix(in oklab, var(--ds-event-tone) 45%, transparent);
+}
+
+.ds-event-field__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem 1.1rem 1.2rem;
+}
+
+.ds-event-field__split {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 639px) {
+  .ds-event-field__split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* —— Mast —— */
+
+.ds-event-field__mast {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "kicker kicker"
+    "lead badge"
+    "meta meta";
+  gap: 0.15rem 0.75rem;
+}
+
+.ds-event-field__kicker {
+  grid-area: kicker;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-event-field__lead {
+  grid-area: lead;
+  margin: 0.1rem 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--ds-font-numeric);
+  font-size: clamp(1.9rem, 4vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--ds-event-tone);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 36px color-mix(in oklab, var(--ds-event-tone) 40%, transparent);
+}
+
+.ds-event-field__lead-unit {
+  font-family: var(--ds-font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-event-field__badge {
+  grid-area: badge;
+  justify-self: end;
+  align-self: center;
+  margin: 0;
+  padding: 0.2rem 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ds-event-tone);
+  border-bottom: 1px solid var(--ds-event-tone);
+}
+
+.ds-event-field__meta {
+  grid-area: meta;
+  margin: 0.28rem 0 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  color: var(--ds-ink-muted);
+}
+
+.ds-event-field__meta strong {
+  font-weight: 500;
+  color: var(--ds-ink);
+  font-family: var(--ds-font-numeric);
+}
+
+.ds-event-field__meta-sub {
+  color: var(--ds-ink-faint);
+  text-transform: capitalize;
+}
+
+/* —— Dial —— */
+
+.ds-event-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ds-event-dial__ring {
+  position: relative;
+  width: 5.5rem;
+  height: 5.5rem;
+}
+
+.ds-event-dial__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ds-event-dial__track {
+  fill: none;
+  stroke: var(--ds-line);
+  stroke-width: 5;
+}
+
+.ds-event-dial__arc {
+  fill: none;
+  stroke: var(--ds-event-tone);
+  stroke-width: 5;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--ds-event-tone) 55%, transparent));
+  animation: ds-event-dial-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+}
+
+.ds-event-dial[data-measured="false"] .ds-event-dial__arc {
+  stroke: var(--ds-idle);
+  filter: none;
+  opacity: 0.45;
+}
+
+.ds-event-dial__core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ds-event-dial__value {
+  margin: 0;
+  font-family: var(--ds-font-numeric);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ds-event-tone);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ds-event-dial__cap {
+  margin: 0.15rem 0 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-event-dial__scale {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 5.5rem;
+  font-family: var(--ds-font-numeric);
+  font-size: 0.5rem;
+  color: var(--ds-ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* —— Rail / tiles —— */
+
+.ds-event-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: 0.4rem;
+}
+
+.ds-event-tile {
+  appearance: none;
+  border: 0;
+  border-top: 2px solid var(--ds-line);
+  background: color-mix(in oklab, var(--ds-plane-raised) 45%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.55rem 0.55rem 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  transition:
+    border-color var(--ds-duration-swift) var(--ds-ease-out-soft),
+    background var(--ds-duration-swift) var(--ds-ease-out-soft),
+    transform var(--ds-duration-swift) var(--ds-ease-out-soft);
+  animation: ds-event-tile-in var(--ds-duration-pace) var(--ds-ease-out-soft) both;
+}
+
+.ds-event-tile:hover {
+  transform: translateY(-2px);
+  background: color-mix(in oklab, var(--ds-plane-raised) 75%, transparent);
+}
+
+.ds-event-tile:focus-visible {
+  outline: 2px solid var(--ds-signal);
+  outline-offset: 2px;
+}
+
+.ds-event-tile[data-active="true"] {
+  border-top-color: var(--ds-event-tone);
+  background: var(--ds-event-tone-soft);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--ds-event-tone) 25%, transparent);
+}
+
+.ds-event-tile__type {
+  font-family: var(--ds-font-numeric);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ds-ink);
+}
+
+.ds-event-tile__label {
+  font-family: var(--ds-font-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-event-tile__bar {
+  display: block;
+  height: 3px;
+  margin-top: 0.25rem;
+  background: var(--ds-line);
+  overflow: hidden;
+}
+
+.ds-event-tile__fill {
+  display: block;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    var(--ds-event-tone),
+    color-mix(in oklab, var(--ds-event-tone) 40%, transparent)
+  );
+  animation: ds-event-fill-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+}
+
+.ds-event-tile[data-measured="false"] .ds-event-tile__fill {
+  background: var(--ds-idle);
+  opacity: 0.5;
+}
+
+.ds-event-tile__atr {
+  margin-top: 0.15rem;
+  font-family: var(--ds-font-numeric);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-event-tone);
+}
+
+.ds-event-tile[data-measured="false"] .ds-event-tile__atr {
+  color: var(--ds-ink-faint);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--ds-font-ui);
+}
+
+/* —— Focus —— */
+
+.ds-event-focus {
+  padding-top: 0.4rem;
+  border-top: 1px solid color-mix(in oklab, var(--ds-line) 80%, var(--ds-event-tone));
+  animation: ds-event-focus-in var(--ds-duration-pace) var(--ds-ease-out-soft) both;
+}
+
+.ds-event-focus__copy {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  line-height: 1.45;
+  color: var(--ds-ink-muted);
+  max-width: 42rem;
+}
+
+.ds-event-focus__copy strong {
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  color: var(--ds-ink);
+}
+
+.ds-event-field__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  margin: 0;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--ds-line);
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  color: var(--ds-ink-faint);
+}
+
+.ds-event-field__empty {
+  position: relative;
+  z-index: 1;
+  padding: 1.1rem 1.2rem;
+}
+
+.ds-event-field__empty h2 {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ds-ink);
+}
+
+.ds-event-field__empty p {
+  margin: 0.5rem 0 0;
+  font-size: var(--ds-text-body);
+  color: var(--ds-ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-event-field__aurora,
+  .ds-event-dial__arc,
+  .ds-event-tile,
+  .ds-event-tile__fill,
+  .ds-event-focus {
+    animation: none;
+  }
+
+  .ds-event-tile:hover {
+    transform: none;
+  }
+}

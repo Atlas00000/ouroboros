@@ -11,6 +11,7 @@ from contracts.events_v1 import (
     RegimeChangedEvent,
     SentimentSpikeEvent,
 )
+from contracts.fit_v1 import FitSnapshot
 from contracts.insight_v1 import Insight
 from contracts.profile_v1 import AssetProfile
 from contracts.sentiment_v1 import SentimentSnapshot
@@ -24,6 +25,7 @@ MODELS: dict[str, type] = {
     "state.v1": MarketState,
     "sentiment.v1": SentimentSnapshot,
     "insight.v1": Insight,
+    "fit.v1": FitSnapshot,
     "events.v1.regime_changed": RegimeChangedEvent,
     "events.v1.sentiment_spike": SentimentSpikeEvent,
     "events.v1.news_high_impact": NewsHighImpactEvent,

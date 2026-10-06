@@ -1,4 +1,14 @@
-# Ouroboros API server (Railway deploy root)
+# Ouroboros API server (Railway)
+
+FastAPI API + APScheduler worker (same Docker image, different start commands).
+
+**Deploy:** Railway — Root Directory = **repository root**, Dockerfile `server/Dockerfile`.  
+Full steps: [`../DEPLOYMENT.md`](../DEPLOYMENT.md) · walking skeleton: [`../ops/railway/STAGING.md`](../ops/railway/STAGING.md).
+
+| Service | Config | Start |
+| --- | --- | --- |
+| API | [`railway.toml`](./railway.toml) | `uvicorn … --port $PORT` · release `alembic upgrade head` |
+| Worker | [`railway.worker.toml`](./railway.worker.toml) | `python -m app.scheduler` |
 
 ## Local run
 

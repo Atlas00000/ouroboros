@@ -1,5 +1,7 @@
 # Railway staging — walking skeleton (W1·D5)
 
+> **Full deploy guide (Railway + Vercel):** [`../../DEPLOYMENT.md`](../../DEPLOYMENT.md)
+
 Goal: health endpoint live on Railway with TimescaleDB + Redis + API, continuous deploy from `main`.
 
 ## One-time setup (dashboard)

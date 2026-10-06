@@ -54,3 +54,12 @@ data/soak/
 *.pem
 .clerk/
 client-scaffold/
+.vercel/
+.railway/
+client/.vercel/
+.railway-timescale-password.tmp
+*.railway-password.tmp
+_railway-api-update.json
+_railway-mutation.graphql
+_railway-*.json
+_railway-*.graphql

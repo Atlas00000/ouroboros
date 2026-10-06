@@ -1,0 +1,79 @@
+/* Theme switcher — icon trigger + vertical icon preference menu */
+
+.ds-theme-switcher {
+  position: relative;
+}
+
+.ds-theme-switcher__menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: max-content;
+  gap: 0.15rem;
+  padding: 0.3rem;
+  border: var(--ds-hairline) solid var(--ds-line-strong);
+  border-radius: var(--ds-radius-md);
+  background: color-mix(in srgb, var(--ds-plane-raised) 92%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ds-ink) 4%, transparent),
+    0 12px 28px color-mix(in srgb, var(--ds-canvas) 55%, transparent);
+  backdrop-filter: blur(10px);
+  animation: ds-theme-switcher-in var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+@keyframes ds-theme-switcher-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-theme-switcher__menu {
+    animation: none;
+  }
+}
+
+.ds-theme-switcher__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--ds-ink-muted);
+  cursor: pointer;
+  transition:
+    color var(--ds-duration-swift) var(--ds-ease-out-soft),
+    background var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+.ds-theme-switcher__option:hover,
+.ds-theme-switcher__option:focus-visible {
+  color: var(--ds-ink);
+  background: var(--ds-plane);
+}
+
+.ds-theme-switcher__option:focus-visible {
+  outline: 2px solid var(--ds-focus-ring);
+  outline-offset: 1px;
+}
+
+.ds-theme-switcher__option.is-active,
+.ds-theme-switcher__option[data-active="true"] {
+  color: var(--ds-signal);
+  background: var(--ds-signal-soft);
+}

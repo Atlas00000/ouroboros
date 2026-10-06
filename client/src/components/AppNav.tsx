@@ -3,113 +3,77 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
 
-import { readE2eRoleCookie, useClerkAppRole } from "@/components/auth/RoleGate";
-import { roleAtLeast, type AppRole } from "@/lib/auth/roles";
+import { ThemeSwitcher } from "@/design/shells/ThemeSwitcher";
+import { APP_NAV_LINKS, linkActive } from "@/design/shells/nav-config";
+import { Text } from "@/design/primitives/Text";
 import { cn } from "@/lib/utils";
 
 const clerkEnabled = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
-type NavLink = { href: string; label: string; minRole?: AppRole };
-
-const LINKS: NavLink[] = [
-  { href: "/", label: "Dashboard" },
-  { href: "/news", label: "News" },
-  { href: "/scoring", label: "Scoring" },
-  { href: "/system", label: "System", minRole: "admin" },
-  { href: "/admin/keys", label: "Admin", minRole: "admin" },
-];
-
-function linkActive(pathname: string, href: string): boolean {
-  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
-}
-
-function NavLinks({ role }: { role: AppRole | null }) {
-  const pathname = usePathname();
-  const visible = LINKS.filter((l) => {
-    if (!l.minRole) return true;
-    if (role == null) return true;
-    return roleAtLeast(role, l.minRole);
-  });
-
-  return (
-    <nav className="flex items-center gap-3 overflow-x-auto" aria-label="Primary">
-      {visible.map((l) => {
-        const active = linkActive(pathname, l.href);
-        return (
-          <Link
-            key={l.href}
-            href={l.href}
-            aria-current={active ? "page" : undefined}
-            className={cn(
-              "whitespace-nowrap text-xs hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-              active ? "text-foreground" : "text-muted",
-            )}
-          >
-            {l.label}
-          </Link>
-        );
-      })}
-    </nav>
-  );
-}
-
-function ClerkRoleLinks() {
-  const { loaded, role } = useClerkAppRole();
-  return <NavLinks role={loaded ? role : null} />;
-}
-
-function LocalOrE2eLinks() {
-  const [role, setRole] = useState<AppRole | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    setRole(readE2eRoleCookie() ?? "ops");
-    setReady(true);
-  }, []);
-
-  if (!ready) return <NavLinks role={null} />;
-  return <NavLinks role={role} />;
-}
-
+/** Desktop header — brand · centered nav · theme. Hidden below md. */
 export function AppNav() {
+  const pathname = usePathname();
+
   return (
-    <header className="border-b border-border bg-card/80 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
-        <div className="flex min-w-0 items-center gap-6">
+    <header className="ds-desktop-nav sticky top-0 z-40 border-b border-ds-line bg-ds-canvas-elevated/85 shadow-[var(--ds-shadow-chrome)] backdrop-blur-md">
+      <div className="mx-auto grid h-14 max-w-[var(--ds-shell-max)] grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:px-6 lg:px-8">
+        <div className="flex min-w-0 items-center justify-self-start">
           <Link
             href="/"
-            className="flex shrink-0 items-center gap-2 text-sm font-semibold tracking-tight text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="group flex shrink-0 items-center gap-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-signal"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg" alt="" width={22} height={22} className="opacity-90" />
-            <span>Ouroboros</span>
+            <img
+              src="/logo.svg"
+              alt=""
+              width={22}
+              height={22}
+              className="opacity-90 transition-opacity duration-[var(--ds-duration-swift)] group-hover:opacity-100"
+            />
+            <Text
+              as="span"
+              variant="title"
+              className="text-[length:var(--ds-text-body)] tracking-[var(--ds-text-title-tracking)]"
+            >
+              Ouroboros
+            </Text>
+            <span
+              className="hidden h-1.5 w-1.5 rounded-full bg-ds-signal sm:inline-block"
+              aria-hidden
+            />
           </Link>
-          {clerkEnabled ? <ClerkWithE2eOverride /> : <LocalOrE2eLinks />}
         </div>
-        <div className="flex shrink-0 items-center gap-3">
-          {clerkEnabled ? (
-            <UserButton />
-          ) : (
-            <span className="text-[11px] text-muted">Clerk keys unset</span>
-          )}
+
+        <nav
+          className="flex items-center justify-center gap-1 overflow-x-auto sm:gap-2"
+          aria-label="Primary"
+        >
+          {APP_NAV_LINKS.map((link) => {
+            const active = linkActive(pathname, link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "whitespace-nowrap rounded-[var(--ds-radius-md)] px-2.5 py-1.5 text-[length:var(--ds-text-label)] font-medium tracking-wide transition-colors duration-[var(--ds-duration-swift)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-signal",
+                  active
+                    ? "bg-ds-signal-soft text-ds-signal"
+                    : "text-ds-ink-muted hover:bg-ds-plane-raised hover:text-ds-ink",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end sm:gap-3">
+          <ThemeSwitcher />
+          {clerkEnabled ? <UserButton /> : null}
         </div>
       </div>
     </header>
   );
-}
-
-function ClerkWithE2eOverride() {
-  const [e2e, setE2e] = useState<AppRole | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    setE2e(readE2eRoleCookie());
-    setReady(true);
-  }, []);
-
-  if (!ready) return <NavLinks role={null} />;
-  if (e2e != null) return <NavLinks role={e2e} />;
-  return <ClerkRoleLinks />;
 }

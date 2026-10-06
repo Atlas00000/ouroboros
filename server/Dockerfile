@@ -25,6 +25,8 @@ COPY server/alembic.ini ./
 
 RUN pip install .
 
-# Default: API. Worker overrides command to: python -m app.scheduler
+# Default: API. Railway overrides via railway.toml ($PORT).
+# Worker overrides command to: python -m app.scheduler
+ENV PORT=8000
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

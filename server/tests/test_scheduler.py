@@ -10,6 +10,7 @@ def test_build_scheduler_registers_expected_jobs() -> None:
     ids = sorted(j.id for j in sched.get_jobs())
     assert ids == [
         "daily_profiles",
+        "fit_log",
         "metrics_cadence",
         "narratives_refresh",
         "outbox_relay",
@@ -27,6 +28,7 @@ def test_job_funcs_cover_registered_ids() -> None:
     assert set(JOB_FUNCS) == {
         "metrics_cadence",
         "regime_log",
+        "fit_log",
         "profile_events",
         "outbox_relay",
         "daily_profiles",

@@ -1,0 +1,501 @@
+/* Regime nowcast field — living probability plane (tokens only) */
+
+@keyframes ds-reg-now-aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes ds-reg-now-dial-in {
+  from {
+    stroke-dashoffset: var(--ds-reg-now-circ, 226);
+  }
+  to {
+    stroke-dashoffset: var(--ds-reg-now-offset, 0);
+  }
+}
+
+@keyframes ds-reg-now-seg-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0.15);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ds-reg-now-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes ds-reg-now-focus-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ds-reg-now {
+  --ds-reg-tone: var(--ds-signal);
+  --ds-reg-tone-soft: color-mix(in oklab, var(--ds-reg-tone) 18%, transparent);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 0;
+  background:
+    linear-gradient(
+      195deg,
+      color-mix(in oklab, var(--ds-plane-raised) 84%, var(--ds-reg-tone)) 0%,
+      var(--ds-plane) 48%,
+      color-mix(in oklab, var(--ds-plane) 90%, var(--ds-ok)) 100%
+    );
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.ds-reg-now__atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ds-reg-now__aurora {
+  position: absolute;
+  inset: -30% auto auto -20%;
+  width: 78%;
+  height: 62%;
+  background: radial-gradient(
+    ellipse at 35% 20%,
+    color-mix(in oklab, var(--ds-reg-tone) 38%, transparent),
+    transparent 70%
+  );
+  animation: ds-reg-now-aurora 14s var(--ds-ease-out-soft) infinite;
+  filter: blur(2px);
+}
+
+.ds-reg-now__wash {
+  position: absolute;
+  inset: auto -8% -25% 30%;
+  height: 45%;
+  background: radial-gradient(
+    ellipse at 60% 90%,
+    color-mix(in oklab, var(--ds-ok) 16%, transparent),
+    transparent 65%
+  );
+}
+
+.ds-reg-now__shear {
+  position: absolute;
+  inset: 12% -12% -22% 25%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    color-mix(in oklab, var(--ds-plane-raised) 72%, transparent) 42%,
+    transparent 76%
+  );
+  transform: skewY(3deg);
+  opacity: 0.55;
+}
+
+.ds-reg-now__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--ds-line) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--ds-line) 70%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(200deg, black 0%, transparent 68%);
+}
+
+.ds-reg-now__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 40% 35%,
+    transparent 42%,
+    color-mix(in oklab, var(--ds-canvas) 28%, transparent) 100%
+  );
+}
+
+.ds-reg-now__rule {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--ds-reg-tone),
+    color-mix(in oklab, var(--ds-reg-tone) 40%, var(--ds-line-strong)) 50%,
+    transparent 95%
+  );
+  z-index: 1;
+  box-shadow: 0 0 18px color-mix(in oklab, var(--ds-reg-tone) 45%, transparent);
+}
+
+.ds-reg-now__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1.15rem 1.05rem 1rem;
+}
+
+.ds-reg-now__mast {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "kicker kicker"
+    "pct badge"
+    "meta meta";
+  gap: 0.15rem 0.75rem;
+}
+
+.ds-reg-now__kicker {
+  grid-area: kicker;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-reg-now__lead-pct {
+  grid-area: pct;
+  margin: 0.1rem 0 0;
+  font-family: var(--ds-font-numeric);
+  font-size: clamp(1.9rem, 4.2vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--ds-reg-tone);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 36px color-mix(in oklab, var(--ds-reg-tone) 40%, transparent);
+}
+
+.ds-reg-now__badge {
+  grid-area: badge;
+  justify-self: end;
+  align-self: center;
+  margin: 0;
+  padding: 0.2rem 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ds-reg-tone);
+  border-bottom: 1px solid var(--ds-reg-tone);
+}
+
+.ds-reg-now__meta {
+  grid-area: meta;
+  margin: 0.28rem 0 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  color: var(--ds-ink-muted);
+}
+
+.ds-reg-now-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.35rem 0.5rem;
+  margin: 0;
+}
+
+.ds-reg-now-metrics dt {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ds-ink-faint);
+}
+
+.ds-reg-now-metrics dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--ds-font-numeric);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-ink);
+}
+
+.ds-reg-now-metrics__asof {
+  font-size: 0.62rem !important;
+  color: var(--ds-ink-muted) !important;
+}
+
+.ds-reg-now-dial {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+.ds-reg-now-dial__ring {
+  position: relative;
+  width: 5.75rem;
+  height: 5.75rem;
+}
+
+.ds-reg-now-dial__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ds-reg-now-dial__track {
+  fill: none;
+  stroke: var(--ds-line);
+  stroke-width: 5;
+}
+
+.ds-reg-now-dial__arc {
+  fill: none;
+  stroke: var(--ds-reg-tone);
+  stroke-width: 5;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--ds-reg-tone) 55%, transparent));
+  animation: ds-reg-now-dial-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+}
+
+.ds-reg-now-dial__core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ds-reg-now-dial__pct {
+  margin: 0;
+  font-family: var(--ds-font-numeric);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ds-reg-tone);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ds-reg-now-dial__name {
+  margin: 0.2rem 0 0;
+  font-family: var(--ds-font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ds-ink-muted);
+}
+
+.ds-reg-now-dial__sats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.ds-reg-now-sat {
+  appearance: none;
+  border: 0;
+  border-right: 2px solid var(--ds-line);
+  background: color-mix(in oklab, var(--ds-plane-raised) 40%, transparent);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.45rem;
+  cursor: pointer;
+  text-align: left;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition:
+    border-color var(--ds-duration-swift) var(--ds-ease-out-soft),
+    background var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+.ds-reg-now-sat:hover {
+  background: color-mix(in oklab, var(--ds-plane-raised) 72%, transparent);
+}
+
+.ds-reg-now-sat:focus-visible {
+  outline: 2px solid var(--ds-signal);
+  outline-offset: 2px;
+}
+
+.ds-reg-now-sat[data-active="true"] {
+  border-right-color: var(--ds-reg-tone);
+  background: var(--ds-reg-tone-soft);
+}
+
+.ds-reg-now-sat[data-live="true"] .ds-reg-now-sat__dot {
+  animation: ds-reg-now-pulse 1.6s ease-in-out infinite;
+}
+
+.ds-reg-now-sat__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-reg-tone);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--ds-reg-tone) 55%, transparent);
+}
+
+.ds-reg-now-sat__lab {
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-ink);
+}
+
+.ds-reg-now-sat__pct {
+  font-family: var(--ds-font-numeric);
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-reg-tone);
+}
+
+.ds-reg-now-stack__ribbon {
+  display: flex;
+  width: 100%;
+  height: 2.35rem;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.ds-reg-now-stack__seg {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0.35rem;
+  cursor: pointer;
+  position: relative;
+  background: color-mix(in oklab, var(--ds-reg-tone) 72%, transparent);
+  transform-origin: left center;
+  animation: ds-reg-now-seg-in var(--ds-duration-stage) var(--ds-ease-out-soft) both;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+  transition: box-shadow var(--ds-duration-swift) var(--ds-ease-out-soft);
+}
+
+.ds-reg-now-stack__seg[data-active="true"] {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--ds-ink) 35%, transparent),
+    0 0 14px color-mix(in oklab, var(--ds-reg-tone) 45%, transparent);
+  z-index: 1;
+}
+
+.ds-reg-now-stack__seg:focus-visible {
+  outline: 2px solid var(--ds-signal);
+  outline-offset: 2px;
+}
+
+.ds-reg-now-stack__seg-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ds-ink) 90%, transparent);
+  pointer-events: none;
+  overflow: hidden;
+  padding-inline: 0.2rem;
+}
+
+.ds-reg-now-focus {
+  padding-top: 0.4rem;
+  border-top: 1px solid color-mix(in oklab, var(--ds-line) 80%, var(--ds-reg-tone));
+  animation: ds-reg-now-focus-in var(--ds-duration-pace) var(--ds-ease-out-soft) both;
+}
+
+.ds-reg-now-focus__copy {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-micro);
+  line-height: 1.45;
+  color: var(--ds-ink-muted);
+}
+
+.ds-reg-now-focus__copy strong {
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  color: var(--ds-ink);
+}
+
+.ds-reg-now__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  margin: 0;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--ds-line);
+  font-family: var(--ds-font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  color: var(--ds-ink-faint);
+}
+
+.ds-reg-now__empty {
+  position: relative;
+  z-index: 1;
+  padding: 1.1rem 1.15rem;
+}
+
+.ds-reg-now__empty h2 {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ds-ink);
+}
+
+.ds-reg-now__empty p {
+  margin: 0.5rem 0 0;
+  font-size: var(--ds-text-body);
+  color: var(--ds-ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-reg-now__aurora,
+  .ds-reg-now-dial__arc,
+  .ds-reg-now-stack__seg,
+  .ds-reg-now-sat[data-live="true"] .ds-reg-now-sat__dot,
+  .ds-reg-now-focus {
+    animation: none;
+  }
+}

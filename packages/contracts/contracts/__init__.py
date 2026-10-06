@@ -8,6 +8,7 @@ from contracts.events_v1 import (
     RegimeChangedEvent,
     SentimentSpikeEvent,
 )
+from contracts.fit_v1 import FitSnapshot
 from contracts.insight_v1 import Insight
 from contracts.profile_v1 import AssetProfile
 from contracts.sentiment_v1 import SentimentSnapshot
@@ -19,6 +20,7 @@ __all__ = [
     "AssetProfile",
     "Disclaimer",
     "EventName",
+    "FitSnapshot",
     "Insight",
     "MarketState",
     "NewsHighImpactEvent",
