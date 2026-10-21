@@ -1,0 +1,140 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "META",
+    "display_name": "Meta Platforms Inc.",
+    "asset_class": "equity",
+    "venues": [],
+    "mt5_ticker": "Meta",
+    "base_currency": null,
+    "quote_currency": "USD"
+  },
+  "trading_hours": {
+    "timezone": "America/New_York",
+    "sessions": [
+      "new_york"
+    ],
+    "open_utc": "13:30:00",
+    "close_utc": "20:00:00",
+    "notes": "US cash RTH approx 09:30\u201316:00 America/New_York (13:30\u201320:00 UTC during EST; 14:30\u201321:00 UTC during EDT). Broker CFD hours may extend; DST shifts open/close UTC."
+  },
+  "volatility": {
+    "atr_percentile_30d": 53.333333333333336,
+    "realized_vol_percentile_30d": 73.33333333333333,
+    "typical_daily_range": 21.821500000000007
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 10.0,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "US500",
+      "coefficient": 0.4596644894637822,
+      "window_days": 30
+    },
+    {
+      "symbol": "NAS100",
+      "coefficient": 0.4402560610820613,
+      "window_days": 30
+    },
+    {
+      "symbol": "GOOGL",
+      "coefficient": 0.35752349400006683,
+      "window_days": 30
+    },
+    {
+      "symbol": "MSFT",
+      "coefficient": 0.32092203076315834,
+      "window_days": 30
+    },
+    {
+      "symbol": "AMZN",
+      "coefficient": 0.3179919816136337,
+      "window_days": 30
+    },
+    {
+      "symbol": "AVGO",
+      "coefficient": 0.25750038455778734,
+      "window_days": 30
+    },
+    {
+      "symbol": "NVDA",
+      "coefficient": 0.1992073850895854,
+      "window_days": 30
+    },
+    {
+      "symbol": "TSLA",
+      "coefficient": 0.1846509704928209,
+      "window_days": 30
+    },
+    {
+      "symbol": "AAPL",
+      "coefficient": 0.14516617493596706,
+      "window_days": 30
+    },
+    {
+      "symbol": "JPM",
+      "coefficient": 0.09956461594432321,
+      "window_days": 30
+    },
+    {
+      "symbol": "XOM",
+      "coefficient": 0.013752575078558382,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "NFP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for META; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for META; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "FOMC",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for META; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.253125
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.146875
+    },
+    {
+      "regime": "ranging",
+      "share": 0.471875
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.128125
+    }
+  ],
+  "as_of": "2026-10-09T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-11T23:59:46.659238Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

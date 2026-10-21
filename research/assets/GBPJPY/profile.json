@@ -1,0 +1,128 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "GBPJPY",
+    "display_name": "British Pound / Japanese Yen",
+    "asset_class": "fx",
+    "venues": [],
+    "mt5_ticker": "GBPJPY",
+    "base_currency": "GBP",
+    "quote_currency": "JPY"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "sydney",
+      "tokyo",
+      "london",
+      "new_york"
+    ],
+    "open_utc": "22:00:00",
+    "close_utc": "22:00:00",
+    "notes": "FX approx Sun 22:00\u2013Fri 22:00 UTC; session names from calendar module."
+  },
+  "volatility": {
+    "atr_percentile_30d": 76.66666666666667,
+    "realized_vol_percentile_30d": 93.33333333333333,
+    "typical_daily_range": 1.3139000000000067
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 76.66666666666667,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "EURJPY",
+      "coefficient": 0.9528203807908235,
+      "window_days": 30
+    },
+    {
+      "symbol": "USDJPY",
+      "coefficient": 0.9040614535571885,
+      "window_days": 30
+    },
+    {
+      "symbol": "EURUSD",
+      "coefficient": -0.2939088898872151,
+      "window_days": 30
+    },
+    {
+      "symbol": "NZDUSD",
+      "coefficient": -0.2119600892116781,
+      "window_days": 30
+    },
+    {
+      "symbol": "AUDUSD",
+      "coefficient": -0.19735911961119434,
+      "window_days": 30
+    },
+    {
+      "symbol": "GBPUSD",
+      "coefficient": -0.16954409529367337,
+      "window_days": 30
+    },
+    {
+      "symbol": "USDCAD",
+      "coefficient": 0.16833558798245746,
+      "window_days": 30
+    },
+    {
+      "symbol": "EURGBP",
+      "coefficient": -0.1542616324656596,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for GBPJPY; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "GDP",
+      "typical_move_atr_multiple": 2.139,
+      "notes": "Median H1 range / ATR over 3 events (4h window)."
+    },
+    {
+      "event_type": "central_bank",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for GBPJPY; need \u22653 scored windows (have 0 moves from 3 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.17501839287174037
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.10005722226763672
+    },
+    {
+      "regime": "ranging",
+      "share": 0.4788686340227254
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.2460557508378975
+    }
+  ],
+  "as_of": "2026-09-11T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-18T14:34:54.117599Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

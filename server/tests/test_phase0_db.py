@@ -18,7 +18,7 @@ def conn():
 
 def test_alembic_head(conn) -> None:
     version = conn.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-    assert version == "0002_seed"
+    assert version == "0014_ywo_equity_tickers"
 
 
 def test_core_tables_exist(conn) -> None:
@@ -62,12 +62,12 @@ def test_continuous_aggregates(conn) -> None:
 
 def test_seeded_asset_universe(conn) -> None:
     count = conn.execute(text("SELECT count(*) FROM assets WHERE is_active")).scalar_one()
-    assert count >= 15
+    assert count >= 30
     symbols = {
         row[0]
         for row in conn.execute(text("SELECT symbol FROM assets")).fetchall()
     }
-    for required in ("EURUSD", "XAUUSD", "US500"):
+    for required in ("EURUSD", "XAUUSD", "US500", "AAPL", "XTIUSD", "DE40"):
         assert required in symbols
 
 

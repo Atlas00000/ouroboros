@@ -1,0 +1,140 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "NVDA",
+    "display_name": "NVIDIA Corporation",
+    "asset_class": "equity",
+    "venues": [],
+    "mt5_ticker": "NVDA",
+    "base_currency": null,
+    "quote_currency": "USD"
+  },
+  "trading_hours": {
+    "timezone": "America/New_York",
+    "sessions": [
+      "new_york"
+    ],
+    "open_utc": "13:30:00",
+    "close_utc": "20:00:00",
+    "notes": "US cash RTH approx 09:30\u201316:00 America/New_York (13:30\u201320:00 UTC during EST; 14:30\u201321:00 UTC during EDT). Broker CFD hours may extend; DST shifts open/close UTC."
+  },
+  "volatility": {
+    "atr_percentile_30d": 43.333333333333336,
+    "realized_vol_percentile_30d": 16.666666666666664,
+    "typical_daily_range": 4.777500000000002
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 76.66666666666667,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "NAS100",
+      "coefficient": 0.7356922828632613,
+      "window_days": 30
+    },
+    {
+      "symbol": "AVGO",
+      "coefficient": 0.6243887957481439,
+      "window_days": 30
+    },
+    {
+      "symbol": "MSFT",
+      "coefficient": 0.493573275142998,
+      "window_days": 30
+    },
+    {
+      "symbol": "TSLA",
+      "coefficient": 0.3258989063244384,
+      "window_days": 30
+    },
+    {
+      "symbol": "AAPL",
+      "coefficient": 0.32334996468505184,
+      "window_days": 30
+    },
+    {
+      "symbol": "AMZN",
+      "coefficient": 0.30494860721724787,
+      "window_days": 30
+    },
+    {
+      "symbol": "GOOGL",
+      "coefficient": 0.19633791799593248,
+      "window_days": 30
+    },
+    {
+      "symbol": "US500",
+      "coefficient": 0.15660673022538293,
+      "window_days": 30
+    },
+    {
+      "symbol": "JPM",
+      "coefficient": 0.13570098497351832,
+      "window_days": 30
+    },
+    {
+      "symbol": "META",
+      "coefficient": 0.10498040902342311,
+      "window_days": 30
+    },
+    {
+      "symbol": "XOM",
+      "coefficient": 0.008515469980642613,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "NFP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for NVDA; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for NVDA; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "FOMC",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for NVDA; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.2058570198105082
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.21102497846683893
+    },
+    {
+      "regime": "ranging",
+      "share": 0.37123169681309215
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.21188630490956073
+    }
+  ],
+  "as_of": "2026-10-16T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-19T00:01:39.806110Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

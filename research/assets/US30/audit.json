@@ -1,0 +1,3504 @@
+{
+  "symbol": "US30",
+  "generated_at": "2026-10-18T23:55:50.481851+00:00",
+  "disclaimer": "Research / advisory only. Ex-post monthly MATCH boards are not profit claims. fit.map_v0 gates research books \u2014 not execution.",
+  "models": {
+    "fit": "fit.map_v0",
+    "regime": "regimes.rule_v1",
+    "profile": "profiles.v1"
+  },
+  "data_range": {
+    "h1_start": "2024-09-12 03:00:00+00:00",
+    "h1_end": "2026-10-07 14:00:00+00:00",
+    "d1_start": "2024-09-12 00:00:00+00:00",
+    "d1_end": "2026-10-07 00:00:00+00:00",
+    "m1_depth_days": 755.4625,
+    "months": [
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10"
+    ],
+    "month_count": 26
+  },
+  "profile": {
+    "schema_id": "profile.v1",
+    "profile_version": 1,
+    "identity": {
+      "symbol": "US30",
+      "display_name": "Dow Jones Industrial Average",
+      "asset_class": "index",
+      "venues": [],
+      "mt5_ticker": "US30",
+      "base_currency": null,
+      "quote_currency": "USD"
+    },
+    "trading_hours": {
+      "timezone": "UTC",
+      "sessions": [
+        "new_york",
+        "london"
+      ],
+      "open_utc": "13:30:00",
+      "close_utc": "20:00:00",
+      "notes": "Index cash hours approximate (US RTH for US500/US30/NAS100; London/Frankfurt/Tokyo cash for regional indices). Broker CFD session may trade nearly 24h \u2014 treat as research proxy."
+    },
+    "volatility": {
+      "atr_percentile_30d": 80.0,
+      "realized_vol_percentile_30d": 33.33333333333333,
+      "typical_daily_range": 455.18750000000034
+    },
+    "liquidity": {
+      "typical_spread": null,
+      "spread_percentile_30d": 80.0,
+      "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+    },
+    "correlations": [
+      {
+        "symbol": "US500",
+        "coefficient": 0.8230512500082008,
+        "window_days": 30
+      },
+      {
+        "symbol": "DE40",
+        "coefficient": 0.6369694958495922,
+        "window_days": 30
+      },
+      {
+        "symbol": "UK100",
+        "coefficient": 0.6171701143013867,
+        "window_days": 30
+      },
+      {
+        "symbol": "NAS100",
+        "coefficient": 0.5360622926246084,
+        "window_days": 30
+      },
+      {
+        "symbol": "JP225",
+        "coefficient": 0.4227785049953572,
+        "window_days": 30
+      }
+    ],
+    "event_sensitivities": [
+      {
+        "event_type": "NFP",
+        "typical_move_atr_multiple": null,
+        "notes": "Relevant for US30; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+      },
+      {
+        "event_type": "CPI",
+        "typical_move_atr_multiple": 2.53,
+        "notes": "Median H1 range / ATR over 4 events (4h window)."
+      },
+      {
+        "event_type": "FOMC",
+        "typical_move_atr_multiple": null,
+        "notes": "Relevant for US30; need \u22653 scored windows (have 2 moves from 6 calendar hits)."
+      },
+      {
+        "event_type": "GDP",
+        "typical_move_atr_multiple": null,
+        "notes": "Relevant for US30; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+      }
+    ],
+    "regime_distribution": [
+      {
+        "regime": "trending_up",
+        "share": 0.1882917119073471
+      },
+      {
+        "regime": "trending_down",
+        "share": 0.1586138255519363
+      },
+      {
+        "regime": "ranging",
+        "share": 0.3959464350343829
+      },
+      {
+        "regime": "high_volatility",
+        "share": 0.2571480275063337
+      }
+    ],
+    "as_of": "2026-10-07T00:00:00Z",
+    "provenance": {
+      "sources": [
+        "mt5.prices",
+        "metrics.v1",
+        "regimes.rule_v1"
+      ],
+      "generated_at": "2026-10-18T23:55:41.645377Z",
+      "model_version": "profiles.v1",
+      "confidence": 0.99,
+      "stale": false
+    },
+    "disclaimer": {
+      "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+      "url": null
+    }
+  },
+  "nowcast": {
+    "state": {
+      "timeframe": "H1",
+      "regime": "trending_down",
+      "probabilities_json": "[{\"regime\":\"trending_up\",\"probability\":0.018867924528301886},{\"regime\":\"trending_down\",\"probability\":0.9433962264150942},{\"regime\":\"ranging\",\"probability\":0.018867924528301886},{\"regime\":\"high_volatility\",\"probability\":0.018867924528301886}]",
+      "volatility_percentile": "15.83",
+      "trend_strength": "-0.6334",
+      "as_of": "2026-10-07 14:00:00+00:00",
+      "model_version": "regimes.rule_v1",
+      "confidence": "0.9434",
+      "stale": true
+    },
+    "fit_30d_h1": {
+      "meanrev": {
+        "tag": "FRAGILE",
+        "shares": {
+          "MATCH": 0.20631067961165048,
+          "MISMATCH": 0.2669902912621359,
+          "FRAGILE": 0.5266990291262136
+        },
+        "regime_shares": {
+          "high_volatility": 0.5266990291262136,
+          "ranging": 0.20631067961165048,
+          "trending_down": 0.21844660194174756,
+          "trending_up": 0.04854368932038835
+        },
+        "bar_count": 412
+      },
+      "trendfollow": {
+        "tag": "FRAGILE",
+        "shares": {
+          "MATCH": 0.2669902912621359,
+          "MISMATCH": 0.20631067961165048,
+          "FRAGILE": 0.5266990291262136
+        },
+        "regime_shares": {
+          "high_volatility": 0.5266990291262136,
+          "ranging": 0.20631067961165048,
+          "trending_down": 0.21844660194174756,
+          "trending_up": 0.04854368932038835
+        },
+        "bar_count": 412
+      }
+    },
+    "sentiment": {
+      "score": "-0.0428",
+      "item_count": 7,
+      "window_hours": 24,
+      "top_drivers_json": "[{\"title\":\"Prelim UoM Consumer Sentiment\",\"url\":null,\"published_at\":\"2026-10-09T14:00:00Z\",\"contribution\":-0.18,\"source\":\"forexfactory.calendar\"},{\"title\":\"Natural Gas Storage\",\"url\":null,\"published_at\":\"2026-10-08T14:30:00Z\",\"contribution\":-0.1,\"source\":\"forexfactory.calendar\"},{\"title\":\"FOMC Member Collins Speaks\",\"url\":null,\"published_at\":\"2026-10-09T20:00:00Z\",\"contribution\":0.02,\"source\":\"forexfactory.calendar\"},{\"title\":\"30-y Bond Auction\",\"url\":null,\"published_at\":\"2026-10-08T17:01:00Z\",\"contribution\":0.04,\"source\":\"forexfactory.calendar\"},{\"title\":\"Final Wholesale Inventories m/m\",\"url\":null,\"published_at\":\"2026-10-08T14:00:00Z\",\"contribution\":-0.04,\"source\":\"forexfactory.calendar\"}]",
+      "as_of": "2026-10-09 13:03:38.491856+00:00",
+      "model_version": "sentiment.v1",
+      "confidence": "1.0000",
+      "stale": true
+    },
+    "insight": {
+      "insight_type": "narrative",
+      "title": "US30: trending down context",
+      "body": "US30 is currently classified as trending down with realized volatility near the 16th pct of its recent window. News sentiment over the last 24h is -0.04 on a [-1, +1] scale. This narrative summarizes deterministic analytics only and is not a trade signal.",
+      "tags_json": "[\"narrative\", \"auto\", \"trending_down\"]",
+      "related_refs_json": "[\"state:US30:H1:regimes.rule_v1\", \"sentiment:US30:sentiment.v1\"]",
+      "as_of": "2026-10-09 12:48:39.976724+00:00",
+      "model_version": "insight.narrative.v1",
+      "confidence": "0.5000",
+      "stale": true
+    }
+  },
+  "news_count": 208,
+  "recent_news": [
+    {
+      "headline": "FOMC Member Collins Speaks",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-09 20:00:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "high"
+    },
+    {
+      "headline": "Prelim UoM Consumer Sentiment",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-09 14:00:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "medium"
+    },
+    {
+      "headline": "Prelim UoM Inflation Expectations",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-09 14:00:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "medium"
+    },
+    {
+      "headline": "FOMC Member Musalem Speaks",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-08 17:40:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "high"
+    },
+    {
+      "headline": "30-y Bond Auction",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-08 17:01:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "low"
+    },
+    {
+      "headline": "Natural Gas Storage",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-08 14:30:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "low"
+    },
+    {
+      "headline": "Final Wholesale Inventories m/m",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-08 14:00:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "low"
+    },
+    {
+      "headline": "Unemployment Claims",
+      "source": "forexfactory.calendar",
+      "url": null,
+      "published_at": "2026-10-08 12:30:00+00:00",
+      "event_type": "economic_calendar",
+      "impact": "medium"
+    },
+    {
+      "headline": "Morning Kickstart: Stocks fall as oil and yields rise; USD edges higher",
+      "source": "Forexlive",
+      "url": "https://investinglive.com/technical-analysis/morning-kickstart-stocks-fall-as-oil-and-yields-rise-usd-edges-higher/",
+      "published_at": "2026-10-08 12:17:10+00:00",
+      "event_type": "forex",
+      "impact": null
+    },
+    {
+      "headline": "Dow Jones Futures Fall As Oil Prices, Treasury Yields Jump; Samsung, Micron, Taiwan Semi, Sandisk In Focus",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=674107ff4a129f2b03e7ec687e6c6b3035c3196e008a50605f5f78685a44f6f0",
+      "published_at": "2026-10-08 11:51:28+00:00",
+      "event_type": "company",
+      "impact": null
+    },
+    {
+      "headline": "Jensen Huang: 'Nvidia was founded because of Windows'",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=64e3516d5401643ef3b4272eb0f399576e16f1308b7f877db143f598599c0745",
+      "published_at": "2026-10-08 11:18:14+00:00",
+      "event_type": "company",
+      "impact": null
+    },
+    {
+      "headline": "Dell Turned $1,000 Into $11,641 in Five Years as AI Servers Crushed the S&P 500",
+      "source": "Yahoo",
+      "url": "https://finnhub.io/api/news?id=e8b5a880271013782bef8552769362e7b2ff78903a1c23c3598af5bc14e2d26c",
+      "published_at": "2026-10-08 11:15:02+00:00",
+      "event_type": "company",
+      "impact": null
+    }
+  ],
+  "monthly_boards": [
+    {
+      "month": "2024-09",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 132,
+      "shares": {
+        "MATCH": 0.6060606060606061,
+        "MISMATCH": 0.19696969696969696,
+        "FRAGILE": 0.19696969696969696
+      },
+      "regime_shares": {
+        "high_volatility": 0.19696969696969696,
+        "ranging": 0.6060606060606061,
+        "trending_down": 0.05303030303030303,
+        "trending_up": 0.14393939393939395
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2024-10",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 541,
+      "shares": {
+        "MATCH": 0.35489833641404805,
+        "MISMATCH": 0.4177449168207024,
+        "FRAGILE": 0.22735674676524953
+      },
+      "regime_shares": {
+        "high_volatility": 0.22735674676524953,
+        "ranging": 0.35489833641404805,
+        "trending_down": 0.14972273567467653,
+        "trending_up": 0.2680221811460259
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2024-11",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 491,
+      "shares": {
+        "MATCH": 0.24236252545824846,
+        "MISMATCH": 0.46028513238289204,
+        "FRAGILE": 0.2973523421588595
+      },
+      "regime_shares": {
+        "high_volatility": 0.2973523421588595,
+        "ranging": 0.24236252545824846,
+        "trending_down": 0.23828920570264767,
+        "trending_up": 0.2219959266802444
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-12",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 490,
+      "shares": {
+        "MATCH": 0.19591836734693877,
+        "MISMATCH": 0.5775510204081633,
+        "FRAGILE": 0.22653061224489796
+      },
+      "regime_shares": {
+        "high_volatility": 0.22653061224489796,
+        "ranging": 0.19591836734693877,
+        "trending_down": 0.42448979591836733,
+        "trending_up": 0.15306122448979592
+      },
+      "dominant_regime": "trending_down"
+    },
+    {
+      "month": "2025-01",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 512,
+      "shares": {
+        "MATCH": 0.390625,
+        "MISMATCH": 0.26953125,
+        "FRAGILE": 0.33984375
+      },
+      "regime_shares": {
+        "high_volatility": 0.33984375,
+        "ranging": 0.390625,
+        "trending_down": 0.037109375,
+        "trending_up": 0.232421875
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-02",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 452,
+      "shares": {
+        "MATCH": 0.497787610619469,
+        "MISMATCH": 0.3606194690265487,
+        "FRAGILE": 0.1415929203539823
+      },
+      "regime_shares": {
+        "high_volatility": 0.1415929203539823,
+        "ranging": 0.497787610619469,
+        "trending_down": 0.20353982300884957,
+        "trending_up": 0.1570796460176991
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-03",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 483,
+      "shares": {
+        "MATCH": 0.2463768115942029,
+        "MISMATCH": 0.2774327122153209,
+        "FRAGILE": 0.47619047619047616
+      },
+      "regime_shares": {
+        "high_volatility": 0.47619047619047616,
+        "ranging": 0.2463768115942029,
+        "trending_down": 0.10973084886128365,
+        "trending_up": 0.16770186335403728
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-04",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 480,
+      "shares": {
+        "MATCH": 0.3541666666666667,
+        "MISMATCH": 0.20416666666666666,
+        "FRAGILE": 0.44166666666666665
+      },
+      "regime_shares": {
+        "high_volatility": 0.44166666666666665,
+        "ranging": 0.3541666666666667,
+        "trending_down": 0.07916666666666666,
+        "trending_up": 0.125
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-05",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 496,
+      "shares": {
+        "MATCH": 0.6028225806451613,
+        "MISMATCH": 0.37298387096774194,
+        "FRAGILE": 0.024193548387096774
+      },
+      "regime_shares": {
+        "high_volatility": 0.024193548387096774,
+        "ranging": 0.6028225806451613,
+        "trending_down": 0.1592741935483871,
+        "trending_up": 0.21370967741935484
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-06",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 476,
+      "shares": {
+        "MATCH": 0.5966386554621849,
+        "MISMATCH": 0.25210084033613445,
+        "FRAGILE": 0.15126050420168066
+      },
+      "regime_shares": {
+        "high_volatility": 0.15126050420168066,
+        "ranging": 0.5966386554621849,
+        "trending_down": 0.052521008403361345,
+        "trending_up": 0.19957983193277312
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-07",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 241,
+      "shares": {
+        "MATCH": 0.42738589211618255,
+        "MISMATCH": 0.5228215767634855,
+        "FRAGILE": 0.04979253112033195
+      },
+      "regime_shares": {
+        "high_volatility": 0.04979253112033195,
+        "ranging": 0.42738589211618255,
+        "trending_down": 0.24066390041493776,
+        "trending_up": 0.2821576763485477
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-08",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 0,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {},
+      "dominant_regime": null
+    },
+    {
+      "month": "2025-09",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 353,
+      "shares": {
+        "MATCH": 0.45892351274787535,
+        "MISMATCH": 0.37960339943342775,
+        "FRAGILE": 0.16147308781869688
+      },
+      "regime_shares": {
+        "high_volatility": 0.16147308781869688,
+        "ranging": 0.45892351274787535,
+        "trending_down": 0.16997167138810199,
+        "trending_up": 0.2096317280453258
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-10",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 523,
+      "shares": {
+        "MATCH": 0.2887189292543021,
+        "MISMATCH": 0.3632887189292543,
+        "FRAGILE": 0.3479923518164436
+      },
+      "regime_shares": {
+        "high_volatility": 0.3479923518164436,
+        "ranging": 0.2887189292543021,
+        "trending_down": 0.13001912045889102,
+        "trending_up": 0.2332695984703633
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-11",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 442,
+      "shares": {
+        "MATCH": 0.2986425339366516,
+        "MISMATCH": 0.3438914027149321,
+        "FRAGILE": 0.3574660633484163
+      },
+      "regime_shares": {
+        "high_volatility": 0.3574660633484163,
+        "ranging": 0.2986425339366516,
+        "trending_down": 0.12669683257918551,
+        "trending_up": 0.2171945701357466
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-12",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 493,
+      "shares": {
+        "MATCH": 0.4279918864097363,
+        "MISMATCH": 0.4827586206896552,
+        "FRAGILE": 0.08924949290060852
+      },
+      "regime_shares": {
+        "high_volatility": 0.08924949290060852,
+        "ranging": 0.4279918864097363,
+        "trending_down": 0.23123732251521298,
+        "trending_up": 0.2515212981744422
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-01",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 478,
+      "shares": {
+        "MATCH": 0.32217573221757323,
+        "MISMATCH": 0.4560669456066946,
+        "FRAGILE": 0.2217573221757322
+      },
+      "regime_shares": {
+        "high_volatility": 0.2217573221757322,
+        "ranging": 0.32217573221757323,
+        "trending_down": 0.24267782426778242,
+        "trending_up": 0.21338912133891214
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-02",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 455,
+      "shares": {
+        "MATCH": 0.34285714285714286,
+        "MISMATCH": 0.24395604395604395,
+        "FRAGILE": 0.41318681318681316
+      },
+      "regime_shares": {
+        "high_volatility": 0.41318681318681316,
+        "ranging": 0.34285714285714286,
+        "trending_down": 0.0945054945054945,
+        "trending_up": 0.14945054945054945
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-03",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 508,
+      "shares": {
+        "MATCH": 0.3090551181102362,
+        "MISMATCH": 0.16141732283464566,
+        "FRAGILE": 0.5295275590551181
+      },
+      "regime_shares": {
+        "high_volatility": 0.5295275590551181,
+        "ranging": 0.3090551181102362,
+        "trending_down": 0.13188976377952755,
+        "trending_up": 0.02952755905511811
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-04",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 499,
+      "shares": {
+        "MATCH": 0.5050100200400801,
+        "MISMATCH": 0.37675350701402804,
+        "FRAGILE": 0.11823647294589178
+      },
+      "regime_shares": {
+        "high_volatility": 0.11823647294589178,
+        "ranging": 0.5050100200400801,
+        "trending_down": 0.14428857715430862,
+        "trending_up": 0.23246492985971945
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-05",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 479,
+      "shares": {
+        "MATCH": 0.4133611691022965,
+        "MISMATCH": 0.48434237995824636,
+        "FRAGILE": 0.1022964509394572
+      },
+      "regime_shares": {
+        "high_volatility": 0.1022964509394572,
+        "ranging": 0.4133611691022965,
+        "trending_down": 0.2150313152400835,
+        "trending_up": 0.26931106471816285
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-06",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 502,
+      "shares": {
+        "MATCH": 0.42231075697211157,
+        "MISMATCH": 0.20119521912350596,
+        "FRAGILE": 0.37649402390438247
+      },
+      "regime_shares": {
+        "high_volatility": 0.37649402390438247,
+        "ranging": 0.42231075697211157,
+        "trending_down": 0.049800796812749,
+        "trending_up": 0.15139442231075698
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-07",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 523,
+      "shares": {
+        "MATCH": 0.5793499043977055,
+        "MISMATCH": 0.2390057361376673,
+        "FRAGILE": 0.18164435946462715
+      },
+      "regime_shares": {
+        "high_volatility": 0.18164435946462715,
+        "ranging": 0.5793499043977055,
+        "trending_down": 0.06883365200764818,
+        "trending_up": 0.1701720841300191
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-08",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 485,
+      "shares": {
+        "MATCH": 0.6288659793814433,
+        "MISMATCH": 0.28865979381443296,
+        "FRAGILE": 0.08247422680412371
+      },
+      "regime_shares": {
+        "high_volatility": 0.08247422680412371,
+        "ranging": 0.6288659793814433,
+        "trending_down": 0.15051546391752577,
+        "trending_up": 0.13814432989690723
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-09",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 411,
+      "shares": {
+        "MATCH": 0.18491484184914841,
+        "MISMATCH": 0.44768856447688565,
+        "FRAGILE": 0.36739659367396593
+      },
+      "regime_shares": {
+        "high_volatility": 0.36739659367396593,
+        "ranging": 0.18491484184914841,
+        "trending_down": 0.340632603406326,
+        "trending_up": 0.1070559610705596
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-10",
+      "timeframe": "H1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 107,
+      "shares": {
+        "MATCH": 0.18691588785046728,
+        "MISMATCH": 0.1308411214953271,
+        "FRAGILE": 0.6822429906542056
+      },
+      "regime_shares": {
+        "high_volatility": 0.6822429906542056,
+        "ranging": 0.18691588785046728,
+        "trending_down": 0.028037383177570093,
+        "trending_up": 0.102803738317757
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-09",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 132,
+      "shares": {
+        "MATCH": 0.19696969696969696,
+        "MISMATCH": 0.6060606060606061,
+        "FRAGILE": 0.19696969696969696
+      },
+      "regime_shares": {
+        "high_volatility": 0.19696969696969696,
+        "ranging": 0.6060606060606061,
+        "trending_down": 0.05303030303030303,
+        "trending_up": 0.14393939393939395
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2024-10",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 541,
+      "shares": {
+        "MATCH": 0.4177449168207024,
+        "MISMATCH": 0.35489833641404805,
+        "FRAGILE": 0.22735674676524953
+      },
+      "regime_shares": {
+        "high_volatility": 0.22735674676524953,
+        "ranging": 0.35489833641404805,
+        "trending_down": 0.14972273567467653,
+        "trending_up": 0.2680221811460259
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2024-11",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 491,
+      "shares": {
+        "MATCH": 0.46028513238289204,
+        "MISMATCH": 0.24236252545824846,
+        "FRAGILE": 0.2973523421588595
+      },
+      "regime_shares": {
+        "high_volatility": 0.2973523421588595,
+        "ranging": 0.24236252545824846,
+        "trending_down": 0.23828920570264767,
+        "trending_up": 0.2219959266802444
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-12",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 490,
+      "shares": {
+        "MATCH": 0.5775510204081633,
+        "MISMATCH": 0.19591836734693877,
+        "FRAGILE": 0.22653061224489796
+      },
+      "regime_shares": {
+        "high_volatility": 0.22653061224489796,
+        "ranging": 0.19591836734693877,
+        "trending_down": 0.42448979591836733,
+        "trending_up": 0.15306122448979592
+      },
+      "dominant_regime": "trending_down"
+    },
+    {
+      "month": "2025-01",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 512,
+      "shares": {
+        "MATCH": 0.26953125,
+        "MISMATCH": 0.390625,
+        "FRAGILE": 0.33984375
+      },
+      "regime_shares": {
+        "high_volatility": 0.33984375,
+        "ranging": 0.390625,
+        "trending_down": 0.037109375,
+        "trending_up": 0.232421875
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-02",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 452,
+      "shares": {
+        "MATCH": 0.3606194690265487,
+        "MISMATCH": 0.497787610619469,
+        "FRAGILE": 0.1415929203539823
+      },
+      "regime_shares": {
+        "high_volatility": 0.1415929203539823,
+        "ranging": 0.497787610619469,
+        "trending_down": 0.20353982300884957,
+        "trending_up": 0.1570796460176991
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-03",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 483,
+      "shares": {
+        "MATCH": 0.2774327122153209,
+        "MISMATCH": 0.2463768115942029,
+        "FRAGILE": 0.47619047619047616
+      },
+      "regime_shares": {
+        "high_volatility": 0.47619047619047616,
+        "ranging": 0.2463768115942029,
+        "trending_down": 0.10973084886128365,
+        "trending_up": 0.16770186335403728
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-04",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 480,
+      "shares": {
+        "MATCH": 0.20416666666666666,
+        "MISMATCH": 0.3541666666666667,
+        "FRAGILE": 0.44166666666666665
+      },
+      "regime_shares": {
+        "high_volatility": 0.44166666666666665,
+        "ranging": 0.3541666666666667,
+        "trending_down": 0.07916666666666666,
+        "trending_up": 0.125
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-05",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 496,
+      "shares": {
+        "MATCH": 0.37298387096774194,
+        "MISMATCH": 0.6028225806451613,
+        "FRAGILE": 0.024193548387096774
+      },
+      "regime_shares": {
+        "high_volatility": 0.024193548387096774,
+        "ranging": 0.6028225806451613,
+        "trending_down": 0.1592741935483871,
+        "trending_up": 0.21370967741935484
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-06",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 476,
+      "shares": {
+        "MATCH": 0.25210084033613445,
+        "MISMATCH": 0.5966386554621849,
+        "FRAGILE": 0.15126050420168066
+      },
+      "regime_shares": {
+        "high_volatility": 0.15126050420168066,
+        "ranging": 0.5966386554621849,
+        "trending_down": 0.052521008403361345,
+        "trending_up": 0.19957983193277312
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-07",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 241,
+      "shares": {
+        "MATCH": 0.5228215767634855,
+        "MISMATCH": 0.42738589211618255,
+        "FRAGILE": 0.04979253112033195
+      },
+      "regime_shares": {
+        "high_volatility": 0.04979253112033195,
+        "ranging": 0.42738589211618255,
+        "trending_down": 0.24066390041493776,
+        "trending_up": 0.2821576763485477
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-08",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 0,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {},
+      "dominant_regime": null
+    },
+    {
+      "month": "2025-09",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 353,
+      "shares": {
+        "MATCH": 0.37960339943342775,
+        "MISMATCH": 0.45892351274787535,
+        "FRAGILE": 0.16147308781869688
+      },
+      "regime_shares": {
+        "high_volatility": 0.16147308781869688,
+        "ranging": 0.45892351274787535,
+        "trending_down": 0.16997167138810199,
+        "trending_up": 0.2096317280453258
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-10",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 523,
+      "shares": {
+        "MATCH": 0.3632887189292543,
+        "MISMATCH": 0.2887189292543021,
+        "FRAGILE": 0.3479923518164436
+      },
+      "regime_shares": {
+        "high_volatility": 0.3479923518164436,
+        "ranging": 0.2887189292543021,
+        "trending_down": 0.13001912045889102,
+        "trending_up": 0.2332695984703633
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-11",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 442,
+      "shares": {
+        "MATCH": 0.3438914027149321,
+        "MISMATCH": 0.2986425339366516,
+        "FRAGILE": 0.3574660633484163
+      },
+      "regime_shares": {
+        "high_volatility": 0.3574660633484163,
+        "ranging": 0.2986425339366516,
+        "trending_down": 0.12669683257918551,
+        "trending_up": 0.2171945701357466
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-12",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 493,
+      "shares": {
+        "MATCH": 0.4827586206896552,
+        "MISMATCH": 0.4279918864097363,
+        "FRAGILE": 0.08924949290060852
+      },
+      "regime_shares": {
+        "high_volatility": 0.08924949290060852,
+        "ranging": 0.4279918864097363,
+        "trending_down": 0.23123732251521298,
+        "trending_up": 0.2515212981744422
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-01",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 478,
+      "shares": {
+        "MATCH": 0.4560669456066946,
+        "MISMATCH": 0.32217573221757323,
+        "FRAGILE": 0.2217573221757322
+      },
+      "regime_shares": {
+        "high_volatility": 0.2217573221757322,
+        "ranging": 0.32217573221757323,
+        "trending_down": 0.24267782426778242,
+        "trending_up": 0.21338912133891214
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-02",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 455,
+      "shares": {
+        "MATCH": 0.24395604395604395,
+        "MISMATCH": 0.34285714285714286,
+        "FRAGILE": 0.41318681318681316
+      },
+      "regime_shares": {
+        "high_volatility": 0.41318681318681316,
+        "ranging": 0.34285714285714286,
+        "trending_down": 0.0945054945054945,
+        "trending_up": 0.14945054945054945
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-03",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 508,
+      "shares": {
+        "MATCH": 0.16141732283464566,
+        "MISMATCH": 0.3090551181102362,
+        "FRAGILE": 0.5295275590551181
+      },
+      "regime_shares": {
+        "high_volatility": 0.5295275590551181,
+        "ranging": 0.3090551181102362,
+        "trending_down": 0.13188976377952755,
+        "trending_up": 0.02952755905511811
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-04",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 499,
+      "shares": {
+        "MATCH": 0.37675350701402804,
+        "MISMATCH": 0.5050100200400801,
+        "FRAGILE": 0.11823647294589178
+      },
+      "regime_shares": {
+        "high_volatility": 0.11823647294589178,
+        "ranging": 0.5050100200400801,
+        "trending_down": 0.14428857715430862,
+        "trending_up": 0.23246492985971945
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-05",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 479,
+      "shares": {
+        "MATCH": 0.48434237995824636,
+        "MISMATCH": 0.4133611691022965,
+        "FRAGILE": 0.1022964509394572
+      },
+      "regime_shares": {
+        "high_volatility": 0.1022964509394572,
+        "ranging": 0.4133611691022965,
+        "trending_down": 0.2150313152400835,
+        "trending_up": 0.26931106471816285
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-06",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 502,
+      "shares": {
+        "MATCH": 0.20119521912350596,
+        "MISMATCH": 0.42231075697211157,
+        "FRAGILE": 0.37649402390438247
+      },
+      "regime_shares": {
+        "high_volatility": 0.37649402390438247,
+        "ranging": 0.42231075697211157,
+        "trending_down": 0.049800796812749,
+        "trending_up": 0.15139442231075698
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-07",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 523,
+      "shares": {
+        "MATCH": 0.2390057361376673,
+        "MISMATCH": 0.5793499043977055,
+        "FRAGILE": 0.18164435946462715
+      },
+      "regime_shares": {
+        "high_volatility": 0.18164435946462715,
+        "ranging": 0.5793499043977055,
+        "trending_down": 0.06883365200764818,
+        "trending_up": 0.1701720841300191
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-08",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 485,
+      "shares": {
+        "MATCH": 0.28865979381443296,
+        "MISMATCH": 0.6288659793814433,
+        "FRAGILE": 0.08247422680412371
+      },
+      "regime_shares": {
+        "high_volatility": 0.08247422680412371,
+        "ranging": 0.6288659793814433,
+        "trending_down": 0.15051546391752577,
+        "trending_up": 0.13814432989690723
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-09",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 411,
+      "shares": {
+        "MATCH": 0.44768856447688565,
+        "MISMATCH": 0.18491484184914841,
+        "FRAGILE": 0.36739659367396593
+      },
+      "regime_shares": {
+        "high_volatility": 0.36739659367396593,
+        "ranging": 0.18491484184914841,
+        "trending_down": 0.340632603406326,
+        "trending_up": 0.1070559610705596
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-10",
+      "timeframe": "H1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 107,
+      "shares": {
+        "MATCH": 0.1308411214953271,
+        "MISMATCH": 0.18691588785046728,
+        "FRAGILE": 0.6822429906542056
+      },
+      "regime_shares": {
+        "high_volatility": 0.6822429906542056,
+        "ranging": 0.18691588785046728,
+        "trending_down": 0.028037383177570093,
+        "trending_up": 0.102803738317757
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-09",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 0,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {},
+      "dominant_regime": null
+    },
+    {
+      "month": "2024-10",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 17,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.35294117647058826,
+        "FRAGILE": 0.6470588235294118
+      },
+      "regime_shares": {
+        "high_volatility": 0.6470588235294118,
+        "trending_up": 0.35294117647058826
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-11",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 25,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.16,
+        "FRAGILE": 0.84
+      },
+      "regime_shares": {
+        "high_volatility": 0.84,
+        "trending_up": 0.16
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-12",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.14814814814814814,
+        "MISMATCH": 0.7407407407407407,
+        "FRAGILE": 0.1111111111111111
+      },
+      "regime_shares": {
+        "high_volatility": 0.1111111111111111,
+        "ranging": 0.14814814814814814,
+        "trending_down": 0.2962962962962963,
+        "trending_up": 0.4444444444444444
+      },
+      "dominant_regime": "trending_up"
+    },
+    {
+      "month": "2025-01",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.3333333333333333,
+        "MISMATCH": 0.2962962962962963,
+        "FRAGILE": 0.37037037037037035
+      },
+      "regime_shares": {
+        "high_volatility": 0.37037037037037035,
+        "ranging": 0.3333333333333333,
+        "trending_up": 0.2962962962962963
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-02",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 24,
+      "shares": {
+        "MATCH": 0.625,
+        "MISMATCH": 0.375,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.625,
+        "trending_up": 0.375
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-03",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.19230769230769232,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.8076923076923077
+      },
+      "regime_shares": {
+        "high_volatility": 0.8076923076923077,
+        "ranging": 0.19230769230769232
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-04",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 25,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 1.0
+      },
+      "regime_shares": {
+        "high_volatility": 1.0
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-05",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.46153846153846156,
+        "MISMATCH": 0.38461538461538464,
+        "FRAGILE": 0.15384615384615385
+      },
+      "regime_shares": {
+        "high_volatility": 0.15384615384615385,
+        "ranging": 0.46153846153846156,
+        "trending_up": 0.38461538461538464
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-06",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.9615384615384616,
+        "MISMATCH": 0.038461538461538464,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.9615384615384616,
+        "trending_up": 0.038461538461538464
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-07",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 14,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.7857142857142857,
+        "FRAGILE": 0.21428571428571427
+      },
+      "regime_shares": {
+        "high_volatility": 0.21428571428571427,
+        "trending_up": 0.7857142857142857
+      },
+      "dominant_regime": "trending_up"
+    },
+    {
+      "month": "2025-08",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 0,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {},
+      "dominant_regime": null
+    },
+    {
+      "month": "2025-09",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 19,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 1.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "trending_up": 1.0
+      },
+      "dominant_regime": "trending_up"
+    },
+    {
+      "month": "2025-10",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.4074074074074074,
+        "FRAGILE": 0.5925925925925926
+      },
+      "regime_shares": {
+        "high_volatility": 0.5925925925925926,
+        "trending_up": 0.4074074074074074
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-11",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 25,
+      "shares": {
+        "MATCH": 0.4,
+        "MISMATCH": 0.36,
+        "FRAGILE": 0.24
+      },
+      "regime_shares": {
+        "high_volatility": 0.24,
+        "ranging": 0.4,
+        "trending_up": 0.36
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-12",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.5384615384615384,
+        "MISMATCH": 0.2692307692307692,
+        "FRAGILE": 0.19230769230769232
+      },
+      "regime_shares": {
+        "high_volatility": 0.19230769230769232,
+        "ranging": 0.5384615384615384,
+        "trending_up": 0.2692307692307692
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-01",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.46153846153846156,
+        "MISMATCH": 0.23076923076923078,
+        "FRAGILE": 0.3076923076923077
+      },
+      "regime_shares": {
+        "high_volatility": 0.3076923076923077,
+        "ranging": 0.46153846153846156,
+        "trending_up": 0.23076923076923078
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-02",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 24,
+      "shares": {
+        "MATCH": 0.5,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.5
+      },
+      "regime_shares": {
+        "high_volatility": 0.5,
+        "ranging": 0.5
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-03",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.2222222222222222,
+        "MISMATCH": 0.7777777777777778,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.2222222222222222,
+        "trending_down": 0.7777777777777778
+      },
+      "dominant_regime": "trending_down"
+    },
+    {
+      "month": "2026-04",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.3076923076923077,
+        "FRAGILE": 0.6923076923076923
+      },
+      "regime_shares": {
+        "high_volatility": 0.6923076923076923,
+        "trending_up": 0.3076923076923077
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-05",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.9230769230769231,
+        "MISMATCH": 0.07692307692307693,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.9230769230769231,
+        "trending_up": 0.07692307692307693
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-06",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.19230769230769232,
+        "MISMATCH": 0.34615384615384615,
+        "FRAGILE": 0.46153846153846156
+      },
+      "regime_shares": {
+        "high_volatility": 0.46153846153846156,
+        "ranging": 0.19230769230769232,
+        "trending_up": 0.34615384615384615
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-07",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.5555555555555556,
+        "MISMATCH": 0.4074074074074074,
+        "FRAGILE": 0.037037037037037035
+      },
+      "regime_shares": {
+        "high_volatility": 0.037037037037037035,
+        "ranging": 0.5555555555555556,
+        "trending_up": 0.4074074074074074
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-08",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.38461538461538464,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.6153846153846154
+      },
+      "regime_shares": {
+        "high_volatility": 0.6153846153846154,
+        "ranging": 0.38461538461538464
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-09",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MATCH",
+      "bar_count": 23,
+      "shares": {
+        "MATCH": 0.6521739130434783,
+        "MISMATCH": 0.34782608695652173,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.6521739130434783,
+        "trending_down": 0.34782608695652173
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-10",
+      "timeframe": "D1",
+      "family": "meanrev",
+      "tag": "MISMATCH",
+      "bar_count": 6,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 1.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "trending_down": 1.0
+      },
+      "dominant_regime": "trending_down"
+    },
+    {
+      "month": "2024-09",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 0,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {},
+      "dominant_regime": null
+    },
+    {
+      "month": "2024-10",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 17,
+      "shares": {
+        "MATCH": 0.35294117647058826,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.6470588235294118
+      },
+      "regime_shares": {
+        "high_volatility": 0.6470588235294118,
+        "trending_up": 0.35294117647058826
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-11",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 25,
+      "shares": {
+        "MATCH": 0.16,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.84
+      },
+      "regime_shares": {
+        "high_volatility": 0.84,
+        "trending_up": 0.16
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2024-12",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.7407407407407407,
+        "MISMATCH": 0.14814814814814814,
+        "FRAGILE": 0.1111111111111111
+      },
+      "regime_shares": {
+        "high_volatility": 0.1111111111111111,
+        "ranging": 0.14814814814814814,
+        "trending_down": 0.2962962962962963,
+        "trending_up": 0.4444444444444444
+      },
+      "dominant_regime": "trending_up"
+    },
+    {
+      "month": "2025-01",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.2962962962962963,
+        "MISMATCH": 0.3333333333333333,
+        "FRAGILE": 0.37037037037037035
+      },
+      "regime_shares": {
+        "high_volatility": 0.37037037037037035,
+        "ranging": 0.3333333333333333,
+        "trending_up": 0.2962962962962963
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-02",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 24,
+      "shares": {
+        "MATCH": 0.375,
+        "MISMATCH": 0.625,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.625,
+        "trending_up": 0.375
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-03",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.19230769230769232,
+        "FRAGILE": 0.8076923076923077
+      },
+      "regime_shares": {
+        "high_volatility": 0.8076923076923077,
+        "ranging": 0.19230769230769232
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-04",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 25,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 1.0
+      },
+      "regime_shares": {
+        "high_volatility": 1.0
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-05",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.38461538461538464,
+        "MISMATCH": 0.46153846153846156,
+        "FRAGILE": 0.15384615384615385
+      },
+      "regime_shares": {
+        "high_volatility": 0.15384615384615385,
+        "ranging": 0.46153846153846156,
+        "trending_up": 0.38461538461538464
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-06",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.038461538461538464,
+        "MISMATCH": 0.9615384615384616,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.9615384615384616,
+        "trending_up": 0.038461538461538464
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-07",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 14,
+      "shares": {
+        "MATCH": 0.7857142857142857,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.21428571428571427
+      },
+      "regime_shares": {
+        "high_volatility": 0.21428571428571427,
+        "trending_up": 0.7857142857142857
+      },
+      "dominant_regime": "trending_up"
+    },
+    {
+      "month": "2025-08",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 0,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {},
+      "dominant_regime": null
+    },
+    {
+      "month": "2025-09",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 19,
+      "shares": {
+        "MATCH": 1.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "trending_up": 1.0
+      },
+      "dominant_regime": "trending_up"
+    },
+    {
+      "month": "2025-10",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.4074074074074074,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.5925925925925926
+      },
+      "regime_shares": {
+        "high_volatility": 0.5925925925925926,
+        "trending_up": 0.4074074074074074
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2025-11",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 25,
+      "shares": {
+        "MATCH": 0.36,
+        "MISMATCH": 0.4,
+        "FRAGILE": 0.24
+      },
+      "regime_shares": {
+        "high_volatility": 0.24,
+        "ranging": 0.4,
+        "trending_up": 0.36
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2025-12",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.2692307692307692,
+        "MISMATCH": 0.5384615384615384,
+        "FRAGILE": 0.19230769230769232
+      },
+      "regime_shares": {
+        "high_volatility": 0.19230769230769232,
+        "ranging": 0.5384615384615384,
+        "trending_up": 0.2692307692307692
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-01",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.23076923076923078,
+        "MISMATCH": 0.46153846153846156,
+        "FRAGILE": 0.3076923076923077
+      },
+      "regime_shares": {
+        "high_volatility": 0.3076923076923077,
+        "ranging": 0.46153846153846156,
+        "trending_up": 0.23076923076923078
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-02",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 24,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.5,
+        "FRAGILE": 0.5
+      },
+      "regime_shares": {
+        "high_volatility": 0.5,
+        "ranging": 0.5
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-03",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.7777777777777778,
+        "MISMATCH": 0.2222222222222222,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.2222222222222222,
+        "trending_down": 0.7777777777777778
+      },
+      "dominant_regime": "trending_down"
+    },
+    {
+      "month": "2026-04",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.3076923076923077,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.6923076923076923
+      },
+      "regime_shares": {
+        "high_volatility": 0.6923076923076923,
+        "trending_up": 0.3076923076923077
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-05",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.07692307692307693,
+        "MISMATCH": 0.9230769230769231,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.9230769230769231,
+        "trending_up": 0.07692307692307693
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-06",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.34615384615384615,
+        "MISMATCH": 0.19230769230769232,
+        "FRAGILE": 0.46153846153846156
+      },
+      "regime_shares": {
+        "high_volatility": 0.46153846153846156,
+        "ranging": 0.19230769230769232,
+        "trending_up": 0.34615384615384615
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-07",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 27,
+      "shares": {
+        "MATCH": 0.4074074074074074,
+        "MISMATCH": 0.5555555555555556,
+        "FRAGILE": 0.037037037037037035
+      },
+      "regime_shares": {
+        "high_volatility": 0.037037037037037035,
+        "ranging": 0.5555555555555556,
+        "trending_up": 0.4074074074074074
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-08",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "FRAGILE",
+      "bar_count": 26,
+      "shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.38461538461538464,
+        "FRAGILE": 0.6153846153846154
+      },
+      "regime_shares": {
+        "high_volatility": 0.6153846153846154,
+        "ranging": 0.38461538461538464
+      },
+      "dominant_regime": "high_volatility"
+    },
+    {
+      "month": "2026-09",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MISMATCH",
+      "bar_count": 23,
+      "shares": {
+        "MATCH": 0.34782608695652173,
+        "MISMATCH": 0.6521739130434783,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "ranging": 0.6521739130434783,
+        "trending_down": 0.34782608695652173
+      },
+      "dominant_regime": "ranging"
+    },
+    {
+      "month": "2026-10",
+      "timeframe": "D1",
+      "family": "trendfollow",
+      "tag": "MATCH",
+      "bar_count": 6,
+      "shares": {
+        "MATCH": 1.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      },
+      "regime_shares": {
+        "trending_down": 1.0
+      },
+      "dominant_regime": "trending_down"
+    }
+  ],
+  "monthly_regime_table_h1": [
+    {
+      "month": "2024-09",
+      "bar_count": 132,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.19696969696969696,
+        "ranging": 0.6060606060606061,
+        "trending_down": 0.05303030303030303,
+        "trending_up": 0.14393939393939395
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.6060606060606061,
+        "MISMATCH": 0.19696969696969696,
+        "FRAGILE": 0.19696969696969696
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.19696969696969696,
+        "MISMATCH": 0.6060606060606061,
+        "FRAGILE": 0.19696969696969696
+      }
+    },
+    {
+      "month": "2024-10",
+      "bar_count": 541,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.22735674676524953,
+        "ranging": 0.35489833641404805,
+        "trending_down": 0.14972273567467653,
+        "trending_up": 0.2680221811460259
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.35489833641404805,
+        "MISMATCH": 0.4177449168207024,
+        "FRAGILE": 0.22735674676524953
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.4177449168207024,
+        "MISMATCH": 0.35489833641404805,
+        "FRAGILE": 0.22735674676524953
+      }
+    },
+    {
+      "month": "2024-11",
+      "bar_count": 491,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.2973523421588595,
+        "ranging": 0.24236252545824846,
+        "trending_down": 0.23828920570264767,
+        "trending_up": 0.2219959266802444
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.24236252545824846,
+        "MISMATCH": 0.46028513238289204,
+        "FRAGILE": 0.2973523421588595
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.46028513238289204,
+        "MISMATCH": 0.24236252545824846,
+        "FRAGILE": 0.2973523421588595
+      }
+    },
+    {
+      "month": "2024-12",
+      "bar_count": 490,
+      "dominant_regime": "trending_down",
+      "regime_shares": {
+        "high_volatility": 0.22653061224489796,
+        "ranging": 0.19591836734693877,
+        "trending_down": 0.42448979591836733,
+        "trending_up": 0.15306122448979592
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.19591836734693877,
+        "MISMATCH": 0.5775510204081633,
+        "FRAGILE": 0.22653061224489796
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.5775510204081633,
+        "MISMATCH": 0.19591836734693877,
+        "FRAGILE": 0.22653061224489796
+      }
+    },
+    {
+      "month": "2025-01",
+      "bar_count": 512,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.33984375,
+        "ranging": 0.390625,
+        "trending_down": 0.037109375,
+        "trending_up": 0.232421875
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.390625,
+        "MISMATCH": 0.26953125,
+        "FRAGILE": 0.33984375
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.26953125,
+        "MISMATCH": 0.390625,
+        "FRAGILE": 0.33984375
+      }
+    },
+    {
+      "month": "2025-02",
+      "bar_count": 452,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.1415929203539823,
+        "ranging": 0.497787610619469,
+        "trending_down": 0.20353982300884957,
+        "trending_up": 0.1570796460176991
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.497787610619469,
+        "MISMATCH": 0.3606194690265487,
+        "FRAGILE": 0.1415929203539823
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.3606194690265487,
+        "MISMATCH": 0.497787610619469,
+        "FRAGILE": 0.1415929203539823
+      }
+    },
+    {
+      "month": "2025-03",
+      "bar_count": 483,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.47619047619047616,
+        "ranging": 0.2463768115942029,
+        "trending_down": 0.10973084886128365,
+        "trending_up": 0.16770186335403728
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.2463768115942029,
+        "MISMATCH": 0.2774327122153209,
+        "FRAGILE": 0.47619047619047616
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.2774327122153209,
+        "MISMATCH": 0.2463768115942029,
+        "FRAGILE": 0.47619047619047616
+      }
+    },
+    {
+      "month": "2025-04",
+      "bar_count": 480,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.44166666666666665,
+        "ranging": 0.3541666666666667,
+        "trending_down": 0.07916666666666666,
+        "trending_up": 0.125
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.3541666666666667,
+        "MISMATCH": 0.20416666666666666,
+        "FRAGILE": 0.44166666666666665
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.20416666666666666,
+        "MISMATCH": 0.3541666666666667,
+        "FRAGILE": 0.44166666666666665
+      }
+    },
+    {
+      "month": "2025-05",
+      "bar_count": 496,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.024193548387096774,
+        "ranging": 0.6028225806451613,
+        "trending_down": 0.1592741935483871,
+        "trending_up": 0.21370967741935484
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.6028225806451613,
+        "MISMATCH": 0.37298387096774194,
+        "FRAGILE": 0.024193548387096774
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.37298387096774194,
+        "MISMATCH": 0.6028225806451613,
+        "FRAGILE": 0.024193548387096774
+      }
+    },
+    {
+      "month": "2025-06",
+      "bar_count": 476,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.15126050420168066,
+        "ranging": 0.5966386554621849,
+        "trending_down": 0.052521008403361345,
+        "trending_up": 0.19957983193277312
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.5966386554621849,
+        "MISMATCH": 0.25210084033613445,
+        "FRAGILE": 0.15126050420168066
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.25210084033613445,
+        "MISMATCH": 0.5966386554621849,
+        "FRAGILE": 0.15126050420168066
+      }
+    },
+    {
+      "month": "2025-07",
+      "bar_count": 241,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.04979253112033195,
+        "ranging": 0.42738589211618255,
+        "trending_down": 0.24066390041493776,
+        "trending_up": 0.2821576763485477
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.42738589211618255,
+        "MISMATCH": 0.5228215767634855,
+        "FRAGILE": 0.04979253112033195
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.5228215767634855,
+        "MISMATCH": 0.42738589211618255,
+        "FRAGILE": 0.04979253112033195
+      }
+    },
+    {
+      "month": "2025-09",
+      "bar_count": 353,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.16147308781869688,
+        "ranging": 0.45892351274787535,
+        "trending_down": 0.16997167138810199,
+        "trending_up": 0.2096317280453258
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.45892351274787535,
+        "MISMATCH": 0.37960339943342775,
+        "FRAGILE": 0.16147308781869688
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.37960339943342775,
+        "MISMATCH": 0.45892351274787535,
+        "FRAGILE": 0.16147308781869688
+      }
+    },
+    {
+      "month": "2025-10",
+      "bar_count": 523,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.3479923518164436,
+        "ranging": 0.2887189292543021,
+        "trending_down": 0.13001912045889102,
+        "trending_up": 0.2332695984703633
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.2887189292543021,
+        "MISMATCH": 0.3632887189292543,
+        "FRAGILE": 0.3479923518164436
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.3632887189292543,
+        "MISMATCH": 0.2887189292543021,
+        "FRAGILE": 0.3479923518164436
+      }
+    },
+    {
+      "month": "2025-11",
+      "bar_count": 442,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.3574660633484163,
+        "ranging": 0.2986425339366516,
+        "trending_down": 0.12669683257918551,
+        "trending_up": 0.2171945701357466
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.2986425339366516,
+        "MISMATCH": 0.3438914027149321,
+        "FRAGILE": 0.3574660633484163
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.3438914027149321,
+        "MISMATCH": 0.2986425339366516,
+        "FRAGILE": 0.3574660633484163
+      }
+    },
+    {
+      "month": "2025-12",
+      "bar_count": 493,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.08924949290060852,
+        "ranging": 0.4279918864097363,
+        "trending_down": 0.23123732251521298,
+        "trending_up": 0.2515212981744422
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.4279918864097363,
+        "MISMATCH": 0.4827586206896552,
+        "FRAGILE": 0.08924949290060852
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.4827586206896552,
+        "MISMATCH": 0.4279918864097363,
+        "FRAGILE": 0.08924949290060852
+      }
+    },
+    {
+      "month": "2026-01",
+      "bar_count": 478,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.2217573221757322,
+        "ranging": 0.32217573221757323,
+        "trending_down": 0.24267782426778242,
+        "trending_up": 0.21338912133891214
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.32217573221757323,
+        "MISMATCH": 0.4560669456066946,
+        "FRAGILE": 0.2217573221757322
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.4560669456066946,
+        "MISMATCH": 0.32217573221757323,
+        "FRAGILE": 0.2217573221757322
+      }
+    },
+    {
+      "month": "2026-02",
+      "bar_count": 455,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.41318681318681316,
+        "ranging": 0.34285714285714286,
+        "trending_down": 0.0945054945054945,
+        "trending_up": 0.14945054945054945
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.34285714285714286,
+        "MISMATCH": 0.24395604395604395,
+        "FRAGILE": 0.41318681318681316
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.24395604395604395,
+        "MISMATCH": 0.34285714285714286,
+        "FRAGILE": 0.41318681318681316
+      }
+    },
+    {
+      "month": "2026-03",
+      "bar_count": 508,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.5295275590551181,
+        "ranging": 0.3090551181102362,
+        "trending_down": 0.13188976377952755,
+        "trending_up": 0.02952755905511811
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.3090551181102362,
+        "MISMATCH": 0.16141732283464566,
+        "FRAGILE": 0.5295275590551181
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.16141732283464566,
+        "MISMATCH": 0.3090551181102362,
+        "FRAGILE": 0.5295275590551181
+      }
+    },
+    {
+      "month": "2026-04",
+      "bar_count": 499,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.11823647294589178,
+        "ranging": 0.5050100200400801,
+        "trending_down": 0.14428857715430862,
+        "trending_up": 0.23246492985971945
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.5050100200400801,
+        "MISMATCH": 0.37675350701402804,
+        "FRAGILE": 0.11823647294589178
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.37675350701402804,
+        "MISMATCH": 0.5050100200400801,
+        "FRAGILE": 0.11823647294589178
+      }
+    },
+    {
+      "month": "2026-05",
+      "bar_count": 479,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.1022964509394572,
+        "ranging": 0.4133611691022965,
+        "trending_down": 0.2150313152400835,
+        "trending_up": 0.26931106471816285
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.4133611691022965,
+        "MISMATCH": 0.48434237995824636,
+        "FRAGILE": 0.1022964509394572
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.48434237995824636,
+        "MISMATCH": 0.4133611691022965,
+        "FRAGILE": 0.1022964509394572
+      }
+    },
+    {
+      "month": "2026-06",
+      "bar_count": 502,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.37649402390438247,
+        "ranging": 0.42231075697211157,
+        "trending_down": 0.049800796812749,
+        "trending_up": 0.15139442231075698
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.42231075697211157,
+        "MISMATCH": 0.20119521912350596,
+        "FRAGILE": 0.37649402390438247
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.20119521912350596,
+        "MISMATCH": 0.42231075697211157,
+        "FRAGILE": 0.37649402390438247
+      }
+    },
+    {
+      "month": "2026-07",
+      "bar_count": 523,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.18164435946462715,
+        "ranging": 0.5793499043977055,
+        "trending_down": 0.06883365200764818,
+        "trending_up": 0.1701720841300191
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.5793499043977055,
+        "MISMATCH": 0.2390057361376673,
+        "FRAGILE": 0.18164435946462715
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.2390057361376673,
+        "MISMATCH": 0.5793499043977055,
+        "FRAGILE": 0.18164435946462715
+      }
+    },
+    {
+      "month": "2026-08",
+      "bar_count": 485,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.08247422680412371,
+        "ranging": 0.6288659793814433,
+        "trending_down": 0.15051546391752577,
+        "trending_up": 0.13814432989690723
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.6288659793814433,
+        "MISMATCH": 0.28865979381443296,
+        "FRAGILE": 0.08247422680412371
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.28865979381443296,
+        "MISMATCH": 0.6288659793814433,
+        "FRAGILE": 0.08247422680412371
+      }
+    },
+    {
+      "month": "2026-09",
+      "bar_count": 411,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.36739659367396593,
+        "ranging": 0.18491484184914841,
+        "trending_down": 0.340632603406326,
+        "trending_up": 0.1070559610705596
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.18491484184914841,
+        "MISMATCH": 0.44768856447688565,
+        "FRAGILE": 0.36739659367396593
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.44768856447688565,
+        "MISMATCH": 0.18491484184914841,
+        "FRAGILE": 0.36739659367396593
+      }
+    },
+    {
+      "month": "2026-10",
+      "bar_count": 107,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.6822429906542056,
+        "ranging": 0.18691588785046728,
+        "trending_down": 0.028037383177570093,
+        "trending_up": 0.102803738317757
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.18691588785046728,
+        "MISMATCH": 0.1308411214953271,
+        "FRAGILE": 0.6822429906542056
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.1308411214953271,
+        "MISMATCH": 0.18691588785046728,
+        "FRAGILE": 0.6822429906542056
+      }
+    }
+  ],
+  "monthly_regime_table_d1": [
+    {
+      "month": "2024-10",
+      "bar_count": 17,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.6470588235294118,
+        "trending_up": 0.35294117647058826
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.35294117647058826,
+        "FRAGILE": 0.6470588235294118
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.35294117647058826,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.6470588235294118
+      }
+    },
+    {
+      "month": "2024-11",
+      "bar_count": 25,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.84,
+        "trending_up": 0.16
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.16,
+        "FRAGILE": 0.84
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.16,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.84
+      }
+    },
+    {
+      "month": "2024-12",
+      "bar_count": 27,
+      "dominant_regime": "trending_up",
+      "regime_shares": {
+        "high_volatility": 0.1111111111111111,
+        "ranging": 0.14814814814814814,
+        "trending_down": 0.2962962962962963,
+        "trending_up": 0.4444444444444444
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.14814814814814814,
+        "MISMATCH": 0.7407407407407407,
+        "FRAGILE": 0.1111111111111111
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.7407407407407407,
+        "MISMATCH": 0.14814814814814814,
+        "FRAGILE": 0.1111111111111111
+      }
+    },
+    {
+      "month": "2025-01",
+      "bar_count": 27,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.37037037037037035,
+        "ranging": 0.3333333333333333,
+        "trending_up": 0.2962962962962963
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.3333333333333333,
+        "MISMATCH": 0.2962962962962963,
+        "FRAGILE": 0.37037037037037035
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.2962962962962963,
+        "MISMATCH": 0.3333333333333333,
+        "FRAGILE": 0.37037037037037035
+      }
+    },
+    {
+      "month": "2025-02",
+      "bar_count": 24,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "ranging": 0.625,
+        "trending_up": 0.375
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.625,
+        "MISMATCH": 0.375,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.375,
+        "MISMATCH": 0.625,
+        "FRAGILE": 0.0
+      }
+    },
+    {
+      "month": "2025-03",
+      "bar_count": 26,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.8076923076923077,
+        "ranging": 0.19230769230769232
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.19230769230769232,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.8076923076923077
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.19230769230769232,
+        "FRAGILE": 0.8076923076923077
+      }
+    },
+    {
+      "month": "2025-04",
+      "bar_count": 25,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 1.0
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 1.0
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 1.0
+      }
+    },
+    {
+      "month": "2025-05",
+      "bar_count": 26,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.15384615384615385,
+        "ranging": 0.46153846153846156,
+        "trending_up": 0.38461538461538464
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.46153846153846156,
+        "MISMATCH": 0.38461538461538464,
+        "FRAGILE": 0.15384615384615385
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.38461538461538464,
+        "MISMATCH": 0.46153846153846156,
+        "FRAGILE": 0.15384615384615385
+      }
+    },
+    {
+      "month": "2025-06",
+      "bar_count": 26,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "ranging": 0.9615384615384616,
+        "trending_up": 0.038461538461538464
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.9615384615384616,
+        "MISMATCH": 0.038461538461538464,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.038461538461538464,
+        "MISMATCH": 0.9615384615384616,
+        "FRAGILE": 0.0
+      }
+    },
+    {
+      "month": "2025-07",
+      "bar_count": 14,
+      "dominant_regime": "trending_up",
+      "regime_shares": {
+        "high_volatility": 0.21428571428571427,
+        "trending_up": 0.7857142857142857
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.7857142857142857,
+        "FRAGILE": 0.21428571428571427
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.7857142857142857,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.21428571428571427
+      }
+    },
+    {
+      "month": "2025-09",
+      "bar_count": 19,
+      "dominant_regime": "trending_up",
+      "regime_shares": {
+        "trending_up": 1.0
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 1.0,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 1.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      }
+    },
+    {
+      "month": "2025-10",
+      "bar_count": 27,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.5925925925925926,
+        "trending_up": 0.4074074074074074
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.4074074074074074,
+        "FRAGILE": 0.5925925925925926
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.4074074074074074,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.5925925925925926
+      }
+    },
+    {
+      "month": "2025-11",
+      "bar_count": 25,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.24,
+        "ranging": 0.4,
+        "trending_up": 0.36
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.4,
+        "MISMATCH": 0.36,
+        "FRAGILE": 0.24
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.36,
+        "MISMATCH": 0.4,
+        "FRAGILE": 0.24
+      }
+    },
+    {
+      "month": "2025-12",
+      "bar_count": 26,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.19230769230769232,
+        "ranging": 0.5384615384615384,
+        "trending_up": 0.2692307692307692
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.5384615384615384,
+        "MISMATCH": 0.2692307692307692,
+        "FRAGILE": 0.19230769230769232
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.2692307692307692,
+        "MISMATCH": 0.5384615384615384,
+        "FRAGILE": 0.19230769230769232
+      }
+    },
+    {
+      "month": "2026-01",
+      "bar_count": 26,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.3076923076923077,
+        "ranging": 0.46153846153846156,
+        "trending_up": 0.23076923076923078
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.46153846153846156,
+        "MISMATCH": 0.23076923076923078,
+        "FRAGILE": 0.3076923076923077
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.23076923076923078,
+        "MISMATCH": 0.46153846153846156,
+        "FRAGILE": 0.3076923076923077
+      }
+    },
+    {
+      "month": "2026-02",
+      "bar_count": 24,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.5,
+        "ranging": 0.5
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.5,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.5
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.5,
+        "FRAGILE": 0.5
+      }
+    },
+    {
+      "month": "2026-03",
+      "bar_count": 27,
+      "dominant_regime": "trending_down",
+      "regime_shares": {
+        "ranging": 0.2222222222222222,
+        "trending_down": 0.7777777777777778
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.2222222222222222,
+        "MISMATCH": 0.7777777777777778,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.7777777777777778,
+        "MISMATCH": 0.2222222222222222,
+        "FRAGILE": 0.0
+      }
+    },
+    {
+      "month": "2026-04",
+      "bar_count": 26,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.6923076923076923,
+        "trending_up": 0.3076923076923077
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.3076923076923077,
+        "FRAGILE": 0.6923076923076923
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.3076923076923077,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.6923076923076923
+      }
+    },
+    {
+      "month": "2026-05",
+      "bar_count": 26,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "ranging": 0.9230769230769231,
+        "trending_up": 0.07692307692307693
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.9230769230769231,
+        "MISMATCH": 0.07692307692307693,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.07692307692307693,
+        "MISMATCH": 0.9230769230769231,
+        "FRAGILE": 0.0
+      }
+    },
+    {
+      "month": "2026-06",
+      "bar_count": 26,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.46153846153846156,
+        "ranging": 0.19230769230769232,
+        "trending_up": 0.34615384615384615
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.19230769230769232,
+        "MISMATCH": 0.34615384615384615,
+        "FRAGILE": 0.46153846153846156
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.34615384615384615,
+        "MISMATCH": 0.19230769230769232,
+        "FRAGILE": 0.46153846153846156
+      }
+    },
+    {
+      "month": "2026-07",
+      "bar_count": 27,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "high_volatility": 0.037037037037037035,
+        "ranging": 0.5555555555555556,
+        "trending_up": 0.4074074074074074
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.5555555555555556,
+        "MISMATCH": 0.4074074074074074,
+        "FRAGILE": 0.037037037037037035
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.4074074074074074,
+        "MISMATCH": 0.5555555555555556,
+        "FRAGILE": 0.037037037037037035
+      }
+    },
+    {
+      "month": "2026-08",
+      "bar_count": 26,
+      "dominant_regime": "high_volatility",
+      "regime_shares": {
+        "high_volatility": 0.6153846153846154,
+        "ranging": 0.38461538461538464
+      },
+      "meanrev_tag": "FRAGILE",
+      "meanrev_shares": {
+        "MATCH": 0.38461538461538464,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.6153846153846154
+      },
+      "trendfollow_tag": "FRAGILE",
+      "trendfollow_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 0.38461538461538464,
+        "FRAGILE": 0.6153846153846154
+      }
+    },
+    {
+      "month": "2026-09",
+      "bar_count": 23,
+      "dominant_regime": "ranging",
+      "regime_shares": {
+        "ranging": 0.6521739130434783,
+        "trending_down": 0.34782608695652173
+      },
+      "meanrev_tag": "MATCH",
+      "meanrev_shares": {
+        "MATCH": 0.6521739130434783,
+        "MISMATCH": 0.34782608695652173,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MISMATCH",
+      "trendfollow_shares": {
+        "MATCH": 0.34782608695652173,
+        "MISMATCH": 0.6521739130434783,
+        "FRAGILE": 0.0
+      }
+    },
+    {
+      "month": "2026-10",
+      "bar_count": 6,
+      "dominant_regime": "trending_down",
+      "regime_shares": {
+        "trending_down": 1.0
+      },
+      "meanrev_tag": "MISMATCH",
+      "meanrev_shares": {
+        "MATCH": 0.0,
+        "MISMATCH": 1.0,
+        "FRAGILE": 0.0
+      },
+      "trendfollow_tag": "MATCH",
+      "trendfollow_shares": {
+        "MATCH": 1.0,
+        "MISMATCH": 0.0,
+        "FRAGILE": 0.0
+      }
+    }
+  ],
+  "monthly_price": [
+    {
+      "month": "2024-09",
+      "open": 40867.77,
+      "high": 42654.55,
+      "low": 40673.12,
+      "close": 42271.79,
+      "ret_pct": 3.44
+    },
+    {
+      "month": "2024-10",
+      "open": 42271.29,
+      "high": 43340.51,
+      "low": 41792.13,
+      "close": 41798.63,
+      "ret_pct": -1.12
+    },
+    {
+      "month": "2024-11",
+      "open": 41799.88,
+      "high": 44943.27,
+      "low": 41700.14,
+      "close": 44888.5,
+      "ret_pct": 7.39
+    },
+    {
+      "month": "2024-12",
+      "open": 44971.51,
+      "high": 45068.37,
+      "low": 42069.99,
+      "close": 42889.62,
+      "ret_pct": -4.63
+    },
+    {
+      "month": "2025-01",
+      "open": 42890.37,
+      "high": 45014.36,
+      "low": 41639.67,
+      "close": 44479.36,
+      "ret_pct": 3.7
+    },
+    {
+      "month": "2025-02",
+      "open": 44049.25,
+      "high": 45010.65,
+      "low": 43085.7,
+      "close": 43817.2,
+      "ret_pct": -0.53
+    },
+    {
+      "month": "2025-03",
+      "open": 43796.1,
+      "high": 44046.9,
+      "low": 40653.8,
+      "close": 41915.5,
+      "ret_pct": -4.29
+    },
+    {
+      "month": "2025-04",
+      "open": 41913.9,
+      "high": 42570.4,
+      "low": 36424.9,
+      "close": 40756.9,
+      "ret_pct": -2.76
+    },
+    {
+      "month": "2025-05",
+      "open": 40756.2,
+      "high": 42879.1,
+      "low": 40594.1,
+      "close": 42196.9,
+      "ret_pct": 3.53
+    },
+    {
+      "month": "2025-06",
+      "open": 42133.2,
+      "high": 44134.5,
+      "low": 41750.2,
+      "close": 44035.1,
+      "ret_pct": 4.51
+    },
+    {
+      "month": "2025-07",
+      "open": 44035.1,
+      "high": 44882.3,
+      "low": 43873.3,
+      "close": 43958.8,
+      "ret_pct": -0.17
+    },
+    {
+      "month": "2025-09",
+      "open": 45578.0,
+      "high": 46725.0,
+      "low": 45377.1,
+      "close": 46327.5,
+      "ret_pct": 1.64
+    },
+    {
+      "month": "2025-10",
+      "open": 46327.0,
+      "high": 48043.0,
+      "low": 45409.8,
+      "close": 47587.1,
+      "ret_pct": 2.72
+    },
+    {
+      "month": "2025-11",
+      "open": 47599.9,
+      "high": 48424.8,
+      "low": 45708.3,
+      "close": 47664.9,
+      "ret_pct": 0.14
+    },
+    {
+      "month": "2025-12",
+      "open": 47666.9,
+      "high": 48879.5,
+      "low": 47203.6,
+      "close": 48064.2,
+      "ret_pct": 0.83
+    },
+    {
+      "month": "2026-01",
+      "open": 48112.92,
+      "high": 49676.14,
+      "low": 47816.8,
+      "close": 48830.55,
+      "ret_pct": 1.49
+    },
+    {
+      "month": "2026-02",
+      "open": 48742.2,
+      "high": 50510.69,
+      "low": 48379.35,
+      "close": 48858.53,
+      "ret_pct": 0.24
+    },
+    {
+      "month": "2026-03",
+      "open": 48430.2,
+      "high": 49055.88,
+      "low": 44809.2,
+      "close": 46398.53,
+      "ret_pct": -4.2
+    },
+    {
+      "month": "2026-04",
+      "open": 46395.53,
+      "high": 49847.03,
+      "low": 45842.93,
+      "close": 49760.23,
+      "ret_pct": 7.25
+    },
+    {
+      "month": "2026-05",
+      "open": 49760.73,
+      "high": 51128.33,
+      "low": 48895.43,
+      "close": 51044.88,
+      "ret_pct": 2.58
+    },
+    {
+      "month": "2026-06",
+      "open": 51045.38,
+      "high": 52673.83,
+      "low": 49704.88,
+      "close": 52195.08,
+      "ret_pct": 2.25
+    },
+    {
+      "month": "2026-07",
+      "open": 52197.08,
+      "high": 53335.21,
+      "low": 51434.22,
+      "close": 52366.97,
+      "ret_pct": 0.33
+    },
+    {
+      "month": "2026-08",
+      "open": 52685.97,
+      "high": 54735.02,
+      "low": 52636.35,
+      "close": 53222.12,
+      "ret_pct": 1.02
+    },
+    {
+      "month": "2026-09",
+      "open": 53221.76,
+      "high": 53748.22,
+      "low": 50876.37,
+      "close": 51084.7,
+      "ret_pct": -4.02
+    },
+    {
+      "month": "2026-10",
+      "open": 51085.19,
+      "high": 51660.77,
+      "low": 50520.54,
+      "close": 50945.77,
+      "ret_pct": -0.27
+    }
+  ],
+  "tag_summary": {
+    "H1|meanrev": {
+      "MATCH": 10,
+      "MISMATCH": 9,
+      "FRAGILE": 6
+    },
+    "H1|trendfollow": {
+      "MISMATCH": 10,
+      "MATCH": 9,
+      "FRAGILE": 6
+    },
+    "D1|meanrev": {
+      "FRAGILE": 10,
+      "MISMATCH": 5,
+      "MATCH": 9
+    },
+    "D1|trendfollow": {
+      "FRAGILE": 9,
+      "MATCH": 5,
+      "MISMATCH": 10
+    }
+  }
+}

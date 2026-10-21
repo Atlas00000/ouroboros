@@ -36,11 +36,49 @@ def test_flag_event_country_map() -> None:
         unit="%",
         raw={},
     )
-    flagged = flag_event(ev, active_symbols={"EURUSD", "XAUUSD", "GBPUSD"})
+    flagged = flag_event(ev, active_symbols={"EURUSD", "XAUUSD", "GBPUSD", "AAPL"})
     assert flagged.high_impact is True
     assert flagged.impact == "high"
     assert "EURUSD" in flagged.symbols
     assert "XAUUSD" in flagged.symbols
+    # Equities must not auto-attach to every US macro print
+    assert "AAPL" not in flagged.symbols
+
+
+def test_flag_event_regional_indices() -> None:
+    de = RawCalendarEvent(
+        provider="finnhub",
+        provider_id="de1",
+        country="DE",
+        event="GDP",
+        impact_raw="high",
+        scheduled_at=datetime(2026, 9, 12, tzinfo=UTC),
+        actual=None,
+        estimate=None,
+        previous=None,
+        unit="%",
+        raw={},
+    )
+    flagged = flag_event(de, active_symbols={"EURUSD", "DE40", "UK100", "JP225"})
+    assert "DE40" in flagged.symbols
+    assert "UK100" not in flagged.symbols
+
+    jp = RawCalendarEvent(
+        provider="finnhub",
+        provider_id="jp1",
+        country="JP",
+        event="BoJ Interest Rate Decision",
+        impact_raw="medium",
+        scheduled_at=datetime(2026, 9, 12, tzinfo=UTC),
+        actual=None,
+        estimate=None,
+        previous=None,
+        unit="%",
+        raw={},
+    )
+    flagged_jp = flag_event(jp, active_symbols={"USDJPY", "JP225"})
+    assert "JP225" in flagged_jp.symbols
+    assert flagged_jp.high_impact is True
 
 
 def test_calendar_and_macro_upsert() -> None:

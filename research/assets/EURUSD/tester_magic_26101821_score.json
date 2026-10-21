@@ -1,0 +1,215 @@
+{
+  "magic": "26101821",
+  "ea": "EPG",
+  "scored_at": "2026-10-18T13:38:29.254511+00:00",
+  "log": "C:\\Users\\emili\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Tester\\logs\\20261018.log",
+  "framework": "unified_edge_framework Stage 0-1 (R from deal pairs; Leak prior 20pt RT)",
+  "runs": [
+    {
+      "label": "run1_L938107",
+      "window": "2026.01.01 -> 2026.10.17",
+      "sl": 250.0,
+      "tp": 310.0,
+      "rr_design": 1.24,
+      "level1_atr": "1.0",
+      "atr_max": "0.0",
+      "max_levels": "1",
+      "deposit": null,
+      "final": 493.3,
+      "pnl_currency": null,
+      "n_opens": 135,
+      "n_deal_pairs": 135,
+      "n_scored": 135,
+      "wins": 0,
+      "losses": 135,
+      "WR": 0.0,
+      "AW": 0.0,
+      "AL": 0.0199,
+      "R": 0.0,
+      "BWR": 1.0,
+      "BM": -1.0,
+      "Leak_prior": 0.0,
+      "EF_prior": -1.0,
+      "E_N": -1.0,
+      "E_N_designR": -1.0,
+      "BWR_design": 0.4464,
+      "sum_R": -2.68,
+      "kinds": {
+        "TP": 0,
+        "SL": 0,
+        "other": 135
+      },
+      "tp_lt_sl_opens": 0,
+      "closes": {
+        "EMA50 invalidation": 135
+      },
+      "denies_top": {
+        "outside session": 355,
+        "weekday blocked (Tue)": 110,
+        "spread too wide": 29
+      },
+      "tip_202605_20261007": {
+        "n": 74,
+        "WR": 0.0,
+        "R": 0.0,
+        "BWR": 1.0,
+        "E_N": -1.0,
+        "sum_R": -1.256,
+        "monthly": {
+          "2026.05": {
+            "n": 13,
+            "WR": 0.0,
+            "sum_R": -0.3
+          },
+          "2026.06": {
+            "n": 17,
+            "WR": 0.0,
+            "sum_R": -0.28
+          },
+          "2026.07": {
+            "n": 9,
+            "WR": 0.0,
+            "sum_R": -0.12
+          },
+          "2026.08": {
+            "n": 8,
+            "WR": 0.0,
+            "sum_R": -0.12
+          },
+          "2026.09": {
+            "n": 23,
+            "WR": 0.0,
+            "sum_R": -0.37
+          },
+          "2026.10": {
+            "n": 4,
+            "WR": 0.0,
+            "sum_R": -0.06
+          }
+        }
+      },
+      "events_preview": [
+        "2026.01.02 15:45:00 sell R=-0.03 other",
+        "2026.01.05 15:15:00 sell R=-0.02 other",
+        "2026.01.05 15:30:00 sell R=-0.02 other",
+        "2026.01.05 15:45:00 sell R=-0.02 other",
+        "2026.01.05 16:00:00 sell R=-0.02 other",
+        "2026.01.05 16:15:00 sell R=-0.03 other",
+        "2026.01.09 13:45:00 sell R=-0.02 other",
+        "2026.01.12 17:30:00 buy R=-0.02 other",
+        "2026.01.12 18:00:00 buy R=-0.03 other",
+        "2026.01.12 18:15:00 buy R=-0.03 other"
+      ],
+      "open_geom_sample": [
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310"
+      ]
+    },
+    {
+      "label": "run2_L940783",
+      "window": "2026.01.01 -> 2026.10.17",
+      "sl": 250.0,
+      "tp": 310.0,
+      "rr_design": 1.24,
+      "level1_atr": "1.0",
+      "atr_max": "0.0",
+      "max_levels": "1",
+      "deposit": null,
+      "final": 493.3,
+      "pnl_currency": null,
+      "n_opens": 135,
+      "n_deal_pairs": 135,
+      "n_scored": 135,
+      "wins": 0,
+      "losses": 135,
+      "WR": 0.0,
+      "AW": 0.0,
+      "AL": 0.0199,
+      "R": 0.0,
+      "BWR": 1.0,
+      "BM": -1.0,
+      "Leak_prior": 0.0,
+      "EF_prior": -1.0,
+      "E_N": -1.0,
+      "E_N_designR": -1.0,
+      "BWR_design": 0.4464,
+      "sum_R": -2.68,
+      "kinds": {
+        "TP": 0,
+        "SL": 0,
+        "other": 135
+      },
+      "tp_lt_sl_opens": 0,
+      "closes": {
+        "EMA50 invalidation": 135
+      },
+      "denies_top": {
+        "outside session": 355,
+        "weekday blocked (Tue)": 110,
+        "spread too wide": 29
+      },
+      "tip_202605_20261007": {
+        "n": 74,
+        "WR": 0.0,
+        "R": 0.0,
+        "BWR": 1.0,
+        "E_N": -1.0,
+        "sum_R": -1.256,
+        "monthly": {
+          "2026.05": {
+            "n": 13,
+            "WR": 0.0,
+            "sum_R": -0.3
+          },
+          "2026.06": {
+            "n": 17,
+            "WR": 0.0,
+            "sum_R": -0.28
+          },
+          "2026.07": {
+            "n": 9,
+            "WR": 0.0,
+            "sum_R": -0.12
+          },
+          "2026.08": {
+            "n": 8,
+            "WR": 0.0,
+            "sum_R": -0.12
+          },
+          "2026.09": {
+            "n": 23,
+            "WR": 0.0,
+            "sum_R": -0.37
+          },
+          "2026.10": {
+            "n": 4,
+            "WR": 0.0,
+            "sum_R": -0.06
+          }
+        }
+      },
+      "events_preview": [
+        "2026.01.02 15:45:00 sell R=-0.03 other",
+        "2026.01.05 15:15:00 sell R=-0.02 other",
+        "2026.01.05 15:30:00 sell R=-0.02 other",
+        "2026.01.05 15:45:00 sell R=-0.02 other",
+        "2026.01.05 16:00:00 sell R=-0.02 other",
+        "2026.01.05 16:15:00 sell R=-0.03 other",
+        "2026.01.09 13:45:00 sell R=-0.02 other",
+        "2026.01.12 17:30:00 buy R=-0.02 other",
+        "2026.01.12 18:00:00 buy R=-0.03 other",
+        "2026.01.12 18:15:00 buy R=-0.03 other"
+      ],
+      "open_geom_sample": [
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310",
+        "sell SL=250 TP=310"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "DE40",
+    "display_name": "Germany 40 (DAX)",
+    "asset_class": "index",
+    "venues": [],
+    "mt5_ticker": "DE30",
+    "base_currency": null,
+    "quote_currency": "EUR"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "new_york",
+      "london"
+    ],
+    "open_utc": "13:30:00",
+    "close_utc": "20:00:00",
+    "notes": "Index cash hours approximate (US RTH for US500/US30/NAS100; London/Frankfurt/Tokyo cash for regional indices). Broker CFD session may trade nearly 24h \u2014 treat as research proxy."
+  },
+  "volatility": {
+    "atr_percentile_30d": 86.66666666666667,
+    "realized_vol_percentile_30d": 83.33333333333334,
+    "typical_daily_range": 289.6330000000004
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 73.33333333333333,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "UK100",
+      "coefficient": 0.806608658506487,
+      "window_days": 30
+    },
+    {
+      "symbol": "US30",
+      "coefficient": 0.6369694958495923,
+      "window_days": 30
+    },
+    {
+      "symbol": "US500",
+      "coefficient": 0.6300444076825196,
+      "window_days": 30
+    },
+    {
+      "symbol": "NAS100",
+      "coefficient": 0.5313268335109477,
+      "window_days": 30
+    },
+    {
+      "symbol": "JP225",
+      "coefficient": 0.43705421422352597,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for DE40; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "GDP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for DE40; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "central_bank",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for DE40; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.18402823160371193
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.1214220363351196
+    },
+    {
+      "regime": "ranging",
+      "share": 0.43706705005881585
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.25748268200235264
+    }
+  ],
+  "as_of": "2026-10-07T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-18T23:48:27.481724Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

@@ -1,0 +1,414 @@
+﻿===== lines 342580-342720 =====
+342580:RN	0	13:54:00.377	Core 01	2026.08.28 18:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342581:EM	0	13:54:00.377	Core 01	2026.08.28 18:30:00   [BMRG][INFO] bar=2026.08.28 18:15 U=4626.24668 M=4518.80650 L=4411.36632 C=4456.12000 ATR=2022.2pt BBw=4.76% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342582:FE	0	13:54:00.377	Core 01	2026.08.28 18:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342583:NJ	0	13:54:00.377	Core 01	2026.08.28 18:45:00   [BMRG][INFO] bar=2026.08.28 18:30 U=4613.96400 M=4511.13150 L=4408.29900 C=4451.26000 ATR=1933.3pt BBw=4.56% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342584:LM	0	13:54:00.377	Core 01	2026.08.28 19:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342585:KR	0	13:54:00.377	Core 01	2026.08.28 19:00:00   [BMRG][INFO] bar=2026.08.28 18:45 U=4597.77902 M=4503.68950 L=4409.59998 C=4456.89000 ATR=1878.5pt BBw=4.18% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342586:NE	0	13:54:00.377	Core 01	2026.08.28 19:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342587:KK	0	13:54:00.377	Core 01	2026.08.28 19:15:00   [BMRG][INFO] bar=2026.08.28 19:00 U=4593.27931 M=4499.23000 L=4405.18069 C=4457.04000 ATR=1711.1pt BBw=4.18% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342588:IL	0	13:54:00.377	Core 01	2026.08.28 19:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342589:IS	0	13:54:00.377	Core 01	2026.08.28 19:30:00   [BMRG][INFO] bar=2026.08.28 19:15 U=4586.41130 M=4494.73550 L=4403.05970 C=4462.17000 ATR=1614.5pt BBw=4.08% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342590:MD	0	13:54:00.377	Core 01	2026.08.28 19:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342591:OK	0	13:54:00.377	Core 01	2026.08.28 19:45:00   [BMRG][INFO] bar=2026.08.28 19:30 U=4576.14629 M=4489.92050 L=4403.69471 C=4464.98000 ATR=1432.4pt BBw=3.84% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342592:NK	0	13:54:00.377	Core 01	2026.08.28 20:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342593:LP	0	13:54:00.377	Core 01	2026.08.28 20:00:00   [BMRG][INFO] bar=2026.08.28 19:45 U=4559.44902 M=4484.00400 L=4408.55898 C=4458.23000 ATR=1235.6pt BBw=3.37% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342594:LS	0	13:54:00.377	Core 01	2026.08.28 20:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342595:LH	0	13:54:00.377	Core 01	2026.08.28 20:15:00   [BMRG][INFO] bar=2026.08.28 20:00 U=4544.95412 M=4478.92450 L=4412.89488 C=4457.76000 ATR=1136.3pt BBw=2.95% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342596:GK	0	13:54:00.377	Core 01	2026.08.28 20:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342597:CP	0	13:54:00.377	Core 01	2026.08.28 20:30:00   [BMRG][INFO] bar=2026.08.28 20:15 U=4523.08210 M=4473.49000 L=4423.89790 C=4457.99000 ATR=1070.4pt BBw=2.22% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342598:KR	0	13:54:00.377	Core 01	2026.08.28 20:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342599:EI	0	13:54:00.377	Core 01	2026.08.28 20:45:00   [BMRG][INFO] bar=2026.08.28 20:30 U=4506.81180 M=4469.39250 L=4431.97320 C=4457.17000 ATR=1019.6pt BBw=1.67% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342600:KJ	0	13:54:00.377	Core 01	2026.08.30 22:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342601:KR	0	13:54:00.377	Core 01	2026.08.30 22:00:00   [BMRG][INFO] bar=2026.08.28 20:45 U=4491.55500 M=4465.91800 L=4440.28100 C=4455.00000 ATR=972.1pt BBw=1.15% side=NONE n=0 sig=0 no signal spr=34 halt=0 pause=0
+342602:KR	0	13:54:00.377	Core 01	2026.08.30 22:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342603:HI	0	13:54:00.377	Core 01	2026.08.30 22:15:00   [BMRG][INFO] bar=2026.08.30 22:00 U=4484.03936 M=4463.96850 L=4443.89764 C=4458.93000 ATR=1050.5pt BBw=0.90% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342604:DI	0	13:54:00.377	Core 01	2026.08.30 22:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342605:DF	0	13:54:00.377	Core 01	2026.08.30 22:30:00   [BMRG][INFO] bar=2026.08.30 22:15 U=4481.09093 M=4462.89200 L=4444.69307 C=4459.54000 ATR=1055.5pt BBw=0.82% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342606:LQ	0	13:54:00.377	Core 01	2026.08.30 22:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342607:IN	0	13:54:00.377	Core 01	2026.08.30 22:45:00   [BMRG][INFO] bar=2026.08.30 22:30 U=4480.40642 M=4462.32850 L=4444.25058 C=4457.78000 ATR=1037.6pt BBw=0.81% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342608:RI	0	13:54:00.377	Core 01	2026.08.30 23:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342609:DD	0	13:54:00.377	Core 01	2026.08.30 23:00:00   [BMRG][INFO] bar=2026.08.30 22:45 U=4477.30431 M=4461.42550 L=4445.54669 C=4461.39000 ATR=999.9pt BBw=0.71% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342610:JP	0	13:54:00.377	Core 01	2026.08.30 23:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342611:PL	0	13:54:00.377	Core 01	2026.08.30 23:15:00   [BMRG][INFO] bar=2026.08.30 23:00 U=4472.98009 M=4460.42200 L=4447.86391 C=4460.61000 ATR=954.9pt BBw=0.56% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342612:GH	0	13:54:00.377	Core 01	2026.08.30 23:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342613:OD	0	13:54:00.377	Core 01	2026.08.30 23:30:00   [BMRG][INFO] bar=2026.08.30 23:15 U=4468.38592 M=4459.40350 L=4450.42108 C=4457.54000 ATR=955.5pt BBw=0.40% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+342614:MP	0	13:54:00.377	Core 01	2026.08.30 23:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+342615:GP	0	13:54:00.377	Core 01	2026.08.30 23:45:00   [BMRG][INFO] bar=2026.08.30 23:30 U=4468.18980 M=4458.41400 L=4448.63820 C=4447.46000 ATR=967.9pt BBw=0.44% side=NONE n=0 sig=1 enter buy L0 spr=23 halt=0 pause=0
+342616:QE	0	13:54:00.377	Core 01	2026.08.30 23:45:00   [BMRG][INFO] Entry blocked: weekday blocked
+342617:MP	0	13:54:00.377	Core 01	final balance 385.54 USD
+342618:ME	0	13:54:00.377	Core 01	2026.08.30 23:59:59   [BMRG][INFO] BMRG deinit reason=1
+342619:DE	0	13:54:00.377	Core 01	XAUUSD,M15: 23201660 ticks, 7875 bars generated. Environment synchronized in 0:00:00.019. Test passed in 0:00:03.779 (including ticks preprocessing 0:00:00.859).
+342620:FR	0	13:54:00.377	Core 01	XAUUSD,M15: total time from login to stop testing 0:00:03.798 (including 0:00:00.019 for history data synchronization)
+342621:QQ	0	13:54:00.377	Core 01	549 Mb memory used including 2 Mb of history data, 448 Mb of tick data
+342622:NE	0	13:54:00.377	Core 01	log file "C:\Users\emili\AppData\Roaming\MetaQuotes\Tester\D0E8209F77C8CF37AD8BF550E51FF075\Agent-127.0.0.1-3001\logs\20261009.log" written
+342623:KQ	0	13:54:00.817	Core 01	connection closed
+342624:NH	0	13:54:39.406	Tester	"BMRG\BMRG.ex5" X64
+342625:JK	0	13:54:39.626	Tester	XAUUSD: history data begins from 2016.06.27 00:00
+342626:MI	0	13:54:39.626	Core 01	connecting to 127.0.0.1:3001
+342627:OH	0	13:54:39.638	Core 01	connected
+342628:QN	0	13:54:39.642	Core 01	authorized (agent build 6230)
+342629:EE	0	13:54:39.656	Tester	XAUUSD,M15 (YWO-Trade): testing of Experts\BMRG\BMRG.ex5 from 2026.05.01 00:00 to 2026.10.08 00:00
+342630:IJ	0	13:54:39.707	Core 01	common synchronization completed
+342631:FR	0	13:54:39.713	Core 01	XAUUSD: history for 2026 year synchronized
+342632:FD	0	13:54:39.713	Core 01	XAUUSD: history synchronization completed [145 Kb]
+342633:IM	0	13:54:39.713	Core 01	XAUUSD: 145.59 Kb of history processed in 0:00:00.000
+342634:FF	0	13:54:39.776	Tester	quality of analyzed history is 100%
+342635:DO	0	13:54:44.497	Core 01	test Experts\BMRG\BMRG.ex5 on XAUUSD,M15 thread finished
+342636:CP	0	13:54:44.497	Core 01	prepare for shutdown
+342637:KL	0	13:54:44.497	Core 01	shutdown finished
+342638:JD	0	13:54:44.497	Core 01	login (build 6230)
+342639:IM	0	13:54:44.497	Core 01	account info found with currency USD
+342640:QF	0	13:54:44.497	Core 01	1478 bytes of tester parameters loaded
+342641:OS	0	13:54:44.497	Core 01	39108 bytes of input parameters loaded
+342642:GJ	0	13:54:44.497	Core 01	7309 Mb available, 91 blocks set for ticks generating
+342643:PS	0	13:54:44.497	Core 01	initial deposit 400.00 USD, leverage 1:500
+342644:FJ	0	13:54:44.497	Core 01	successfully initialized
+342645:KM	0	13:54:44.497	Core 01	2584 bytes of total initialization data received
+342646:NI	0	13:54:44.497	Core 01	Intel Core i7-10750H  @ 2.60GHz, 24358 MB
+342647:KL	0	13:54:44.497	Core 01	XAUUSD: symbol to be synchronized
+342648:NF	0	13:54:44.497	Core 01	XAUUSD: symbol synchronized already, 18 bytes received
+342649:DH	0	13:54:44.497	Core 01	XAUUSD: load 145 Kb of history data to synchronize in 0:00:00.016
+342650:EQ	0	13:54:44.497	Core 01	XAUUSD: history synchronized from 2018.01.02 to 2026.10.08
+342651:MD	0	13:54:44.497	Core 01	XAUUSD,M15: history cache allocated for 42217 bars and contains 31245 bars from 2025.01.01 23:00 to 2026.04.30 23:45
+342652:NS	0	13:54:44.497	Core 01	XAUUSD,M15: history begins from 2025.01.01 23:00
+342653:CK	0	13:54:44.497	Core 01	XAUUSD,M15 (YWO-Trade): every tick generating
+342654:JQ	0	13:54:44.497	Core 01	XAUUSD,M15: testing of Experts\BMRG\BMRG.ex5 from 2026.05.01 00:00 to 2026.10.08 00:00 started with inputs:
+342655:FL	0	13:54:44.497	Core 01	  === Indicators ====
+342656:FF	0	13:54:44.497	Core 01	  InpBBPeriod=20
+342657:HQ	0	13:54:44.497	Core 01	  InpBBDev=2.2
+342658:RM	0	13:54:44.497	Core 01	  InpATRPeriod=14
+342659:DK	0	13:54:44.497	Core 01	  === Grid ====
+342660:KR	0	13:54:44.497	Core 01	  InpMaxLevels=1
+342661:QR	0	13:54:44.497	Core 01	  InpLevelStepSigma=0.5
+342662:FH	0	13:54:44.497	Core 01	  === Lot / risk % ====
+342663:DP	0	13:54:44.497	Core 01	  InpLotMode=1
+342664:KM	0	13:54:44.497	Core 01	  InpLot=0.01
+342665:PF	0	13:54:44.497	Core 01	  InpRiskPercent=0.5
+342666:LO	0	13:54:44.497	Core 01	  InpRiskBase=1
+342667:CG	0	13:54:44.497	Core 01	  InpMaxLot=0.50
+342668:JK	0	13:54:44.497	Core 01	  InpMinLotOverride=0.0
+342669:EQ	0	13:54:44.497	Core 01	  === Stops & friction ====
+342670:CJ	0	13:54:44.497	Core 01	  InpSL_Points=1200
+342671:QQ	0	13:54:44.497	Core 01	  InpTP_Points=1500
+342672:GM	0	13:54:44.497	Core 01	  InpMaxSpread=100
+342673:HI	0	13:54:44.497	Core 01	  InpSlippage=40
+342674:DN	0	13:54:44.497	Core 01	  InpCooldownBars=2
+342675:LH	0	13:54:44.497	Core 01	  === Exposure & account gates ====
+342676:JJ	0	13:54:44.497	Core 01	  InpMaxEntries=1
+342677:OP	0	13:54:44.497	Core 01	  InpMaxExposurePct=15.0
+342678:EK	0	13:54:44.497	Core 01	  InpMinFreeMarginPct=50.0
+342679:DO	0	13:54:44.497	Core 01	  InpMaxBasketLossPct=2.5
+342680:DK	0	13:54:44.497	Core 01	  InpEquityHaltPct=15.0
+342681:EE	0	13:54:44.497	Core 01	  InpMaxDailyLossPct=2.5
+342682:IM	0	13:54:44.497	Core 01	  InpMaxDailyEntries=12
+342683:ED	0	13:54:44.497	Core 01	  === Time filter (server) ====
+342684:QN	0	13:54:44.497	Core 01	  InpUseTimeFilter=true
+342685:NJ	0	13:54:44.497	Core 01	  InpStartHour=12
+342686:CS	0	13:54:44.497	Core 01	  InpStartMinute=0
+342687:RM	0	13:54:44.497	Core 01	  InpEndHour=20
+342688:PH	0	13:54:44.497	Core 01	  InpEndMinute=0
+342689:KO	0	13:54:44.497	Core 01	  InpTradeMon=true
+342690:JO	0	13:54:44.497	Core 01	  InpTradeTue=false
+342691:OJ	0	13:54:44.497	Core 01	  InpTradeWed=true
+342692:JM	0	13:54:44.497	Core 01	  InpTradeThu=true
+342693:RQ	0	13:54:44.497	Core 01	  InpTradeFri=true
+342694:ND	0	13:54:44.497	Core 01	  InpTradeSat=false
+342695:NR	0	13:54:44.497	Core 01	  InpTradeSun=false
+342696:KE	0	13:54:44.497	Core 01	  === Regime gates ====
+342697:JK	0	13:54:44.497	Core 01	  InpUseATRRegime=true
+342698:OR	0	13:54:44.497	Core 01	  InpATRMinPoints=0.0
+342699:PI	0	13:54:44.497	Core 01	  InpATRMaxPoints=1000.0
+342700:RP	0	13:54:44.497	Core 01	  InpUseBBWidthRegime=false
+342701:PI	0	13:54:44.497	Core 01	  InpBBWidthMinPct=0.0
+342702:RF	0	13:54:44.497	Core 01	  InpBBWidthMaxPct=0.0
+342703:HN	0	13:54:44.497	Core 01	  === Failure containment ====
+342704:GD	0	13:54:44.497	Core 01	  InpMaxOrderFails=3
+342705:ER	0	13:54:44.497	Core 01	  InpMaxLossStreak=3
+342706:PJ	0	13:54:44.497	Core 01	  InpFailPauseBars=12
+342707:DH	0	13:54:44.497	Core 01	  InpCloseOnDailyLoss=true
+342708:HN	0	13:54:44.497	Core 01	  InpBlockBusyTradeCtx=true
+342709:RJ	0	13:54:44.497	Core 01	  === Permissions ====
+342710:PM	0	13:54:44.497	Core 01	  InpAllowBuy=true
+342711:LI	0	13:54:44.497	Core 01	  InpAllowSell=true
+342712:ND	0	13:54:44.497	Core 01	  InpMagic=26100915
+342713:CS	0	13:54:44.497	Core 01	  === Logging ====
+342714:EG	0	13:54:44.497	Core 01	  InpLogToComment=true
+342715:NS	0	13:54:44.497	Core 01	  InpLogGateBlocks=true
+342716:DP	0	13:54:44.497	Core 01	  === AOS (AI OS) ====
+342717:GF	0	13:54:44.497	Core 01	  InpAOS_Enable=false
+342718:IR	0	13:54:44.497	Core 01	  InpAOS_L3_Enable=false
+342719:ND	0	13:54:44.497	Core 01	  InpAOS_L4_SizeMod=false
+342720:DN	0	13:54:44.497	Core 01	  InpAiOsMode=0
+===== lines 359780-360050 =====
+359780:QD	0	13:54:44.497	Core 01	2026.08.31 15:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359781:RK	0	13:54:44.497	Core 01	2026.08.31 15:15:00   [BMRG][INFO] bar=2026.08.31 15:00 U=4469.87261 M=4442.63850 L=4415.40439 C=4435.21000 ATR=1142.9pt BBw=1.23% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359782:FL	0	13:54:44.497	Core 01	2026.08.31 15:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359783:NS	0	13:54:44.497	Core 01	2026.08.31 15:30:00   [BMRG][INFO] bar=2026.08.31 15:15 U=4469.32231 M=4441.86650 L=4414.41069 C=4432.91000 ATR=1178.6pt BBw=1.24% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359784:RS	0	13:54:44.497	Core 01	2026.08.31 15:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359785:HH	0	13:54:44.497	Core 01	2026.08.31 15:45:00   [BMRG][INFO] bar=2026.08.31 15:30 U=4468.58408 M=4440.69050 L=4412.79692 C=4427.39000 ATR=1161.3pt BBw=1.26% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359786:JK	0	13:54:44.497	Core 01	2026.08.31 16:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359787:DP	0	13:54:44.497	Core 01	2026.08.31 16:00:00   [BMRG][INFO] bar=2026.08.31 15:45 U=4467.19972 M=4439.30650 L=4411.41328 C=4426.16000 ATR=1144.0pt BBw=1.26% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359788:HS	0	13:54:44.497	Core 01	2026.08.31 16:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359789:KI	0	13:54:44.497	Core 01	2026.08.31 16:15:00   [BMRG][INFO] bar=2026.08.31 16:00 U=4465.35265 M=4438.35850 L=4411.36435 C=4434.73000 ATR=1161.6pt BBw=1.22% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359790:KJ	0	13:54:44.497	Core 01	2026.08.31 16:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359791:JQ	0	13:54:44.497	Core 01	2026.08.31 16:30:00   [BMRG][INFO] bar=2026.08.31 16:15 U=4461.00409 M=4437.11350 L=4413.22291 C=4438.39000 ATR=1156.1pt BBw=1.08% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359792:GR	0	13:54:44.497	Core 01	2026.08.31 16:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359793:FI	0	13:54:44.497	Core 01	2026.08.31 16:45:00   [BMRG][INFO] bar=2026.08.31 16:30 U=4458.34567 M=4436.16400 L=4413.98233 C=4435.71000 ATR=1129.2pt BBw=1.00% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359794:QI	0	13:54:44.497	Core 01	2026.08.31 17:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359795:JF	0	13:54:44.497	Core 01	2026.08.31 17:00:00   [BMRG][INFO] bar=2026.08.31 16:45 U=4455.02950 M=4435.05650 L=4415.08350 C=4433.22000 ATR=1102.6pt BBw=0.90% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359796:OQ	0	13:54:44.497	Core 01	2026.08.31 17:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359797:LN	0	13:54:44.497	Core 01	2026.08.31 17:15:00   [BMRG][INFO] bar=2026.08.31 17:00 U=4450.42575 M=4433.88600 L=4417.34625 C=4433.83000 ATR=1025.4pt BBw=0.75% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359798:DI	0	13:54:44.497	Core 01	2026.08.31 17:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359799:EE	0	13:54:44.497	Core 01	2026.08.31 17:30:00   [BMRG][INFO] bar=2026.08.31 17:15 U=4448.08084 M=4433.02350 L=4417.96616 C=4430.44000 ATR=956.4pt BBw=0.68% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359800:RP	0	13:54:44.497	Core 01	2026.08.31 17:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359801:KL	0	13:54:44.497	Core 01	2026.08.31 17:45:00   [BMRG][INFO] bar=2026.08.31 17:30 U=4447.53342 M=4432.82900 L=4418.12458 C=4436.56000 ATR=921.9pt BBw=0.66% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359802:HH	0	13:54:44.497	Core 01	2026.08.31 18:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359803:ED	0	13:54:44.497	Core 01	2026.08.31 18:00:00   [BMRG][INFO] bar=2026.08.31 17:45 U=4447.60729 M=4432.86450 L=4418.12171 C=4436.49000 ATR=849.0pt BBw=0.67% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359804:PP	0	13:54:44.497	Core 01	2026.08.31 18:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359805:FL	0	13:54:44.497	Core 01	2026.08.31 18:15:00   [BMRG][INFO] bar=2026.08.31 18:00 U=4445.42576 M=4432.24750 L=4419.06924 C=4433.70000 ATR=774.9pt BBw=0.59% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359806:QH	0	13:54:44.497	Core 01	2026.08.31 18:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359807:QD	0	13:54:44.497	Core 01	2026.08.31 18:30:00   [BMRG][INFO] bar=2026.08.31 18:15 U=4442.72013 M=4431.44250 L=4420.16487 C=4429.76000 ATR=738.3pt BBw=0.51% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359808:CO	0	13:54:44.497	Core 01	2026.08.31 18:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359809:EO	0	13:54:44.497	Core 01	2026.08.31 18:45:00   [BMRG][INFO] bar=2026.08.31 18:30 U=4442.48432 M=4431.21600 L=4419.94768 C=4429.16000 ATR=699.4pt BBw=0.51% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359810:GG	0	13:54:44.497	Core 01	2026.08.31 19:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359811:CG	0	13:54:44.497	Core 01	2026.08.31 19:00:00   [BMRG][INFO] bar=2026.08.31 18:45 U=4441.10809 M=4431.83200 L=4422.55591 C=4430.82000 ATR=676.1pt BBw=0.42% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359812:OO	0	13:54:44.497	Core 01	2026.08.31 19:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359813:MO	0	13:54:44.497	Core 01	2026.08.31 19:15:00   [BMRG][INFO] bar=2026.08.31 19:00 U=4441.18724 M=4432.15000 L=4423.11276 C=4433.75000 ATR=664.1pt BBw=0.41% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359814:RG	0	13:54:44.497	Core 01	2026.08.31 19:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359815:GG	0	13:54:44.497	Core 01	2026.08.31 19:30:00   [BMRG][INFO] bar=2026.08.31 19:15 U=4440.82213 M=4433.16300 L=4425.50387 C=4440.44000 ATR=667.0pt BBw=0.35% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359816:DN	0	13:54:44.497	Core 01	2026.08.31 19:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359817:HM	0	13:54:44.497	Core 01	2026.08.31 19:45:00   [BMRG][INFO] bar=2026.08.31 19:30 U=4442.62994 M=4433.66100 L=4424.69206 C=4442.91000 ATR=615.4pt BBw=0.40% side=NONE n=0 sig=2 enter sell L0 spr=21 halt=0 pause=0
+359818:NF	0	13:54:44.497	Core 01	2026.08.31 19:45:00   market sell 0.01 XAUUSD sl: 4454.92 tp: 4427.92 (4442.92 / 4443.13 / 4442.92)
+359819:LE	0	13:54:44.497	Core 01	2026.08.31 19:45:00   deal #92 sell 0.01 XAUUSD at 4442.92 done (based on order #92)
+359820:KG	0	13:54:44.497	Core 01	2026.08.31 19:45:00   deal performed [#92 sell 0.01 XAUUSD at 4442.92]
+359821:DN	0	13:54:44.497	Core 01	2026.08.31 19:45:00   order performed sell 0.01 at 4442.92 [#92 sell 0.01 XAUUSD at 4442.92]
+359822:QR	0	13:54:44.497	Core 01	2026.08.31 19:45:00   CTrade::OrderSend: market sell 0.01 XAUUSD sl: 4454.92 tp: 4427.92 [done at 4442.92]
+359823:QN	0	13:54:44.497	Core 01	2026.08.31 19:45:00   [BMRG][TRADE] OPEN SELL lot=0.01 price=4442.92000 sl=4454.92000 tp=4427.92000 level=0 riskMode=1 spread=21 deal=92
+359824:RF	0	13:54:44.497	Core 01	2026.08.31 19:45:00   [BMRG][INFO] Basket rebuild: side=SELL entries=1 levelsFilled=1
+359825:EH	0	13:54:44.497	Core 01	2026.08.31 20:00:00   [BMRG][INFO] Basket rebuild: side=SELL entries=1 levelsFilled=1
+359826:QH	0	13:54:44.497	Core 01	2026.08.31 20:00:00   [BMRG][INFO] bar=2026.08.31 19:45 U=4447.68715 M=4434.74600 L=4421.80485 C=4453.34000 ATR=664.4pt BBw=0.58% side=SELL n=1 sig=0 max levels filled spr=21 halt=0 pause=0
+359827:IP	0	13:54:44.497	Core 01	2026.08.31 20:00:40   stop loss triggered #92 sell 0.01 XAUUSD 4442.92 sl: 4454.92 tp: 4427.92 [#93 buy 0.01 XAUUSD at 4454.92]
+359828:PQ	0	13:54:44.497	Core 01	2026.08.31 20:00:40   deal #93 buy 0.01 XAUUSD at 4454.92 done (based on order #93)
+359829:RO	0	13:54:44.497	Core 01	2026.08.31 20:00:40   deal performed [#93 buy 0.01 XAUUSD at 4454.92]
+359830:RQ	0	13:54:44.497	Core 01	2026.08.31 20:00:40   order performed buy 0.01 at 4454.92 [#93 buy 0.01 XAUUSD at 4454.92]
+359831:GD	0	13:54:44.497	Core 01	2026.08.31 20:00:40   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359832:EF	0	13:54:44.497	Core 01	2026.08.31 20:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359833:OF	0	13:54:44.497	Core 01	2026.08.31 20:15:00   [BMRG][INFO] bar=2026.08.31 20:00 U=4450.37733 M=4435.48950 L=4420.60167 C=4450.08000 ATR=643.3pt BBw=0.67% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359834:LM	0	13:54:44.497	Core 01	2026.08.31 20:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359835:GQ	0	13:54:44.497	Core 01	2026.08.31 20:30:00   [BMRG][INFO] bar=2026.08.31 20:15 U=4452.04574 M=4436.20550 L=4420.36526 C=4447.23000 ATR=630.8pt BBw=0.71% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359836:RE	0	13:54:44.497	Core 01	2026.08.31 20:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359837:HI	0	13:54:44.497	Core 01	2026.08.31 20:45:00   [BMRG][INFO] bar=2026.08.31 20:30 U=4453.40767 M=4437.24250 L=4421.07733 C=4448.13000 ATR=616.4pt BBw=0.73% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359838:CM	0	13:54:44.497	Core 01	2026.08.31 22:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359839:CQ	0	13:54:44.497	Core 01	2026.08.31 22:00:00   [BMRG][INFO] bar=2026.08.31 20:45 U=4454.28609 M=4438.33950 L=4422.39291 C=4448.10000 ATR=570.8pt BBw=0.72% side=NONE n=0 sig=0 no signal spr=34 halt=0 pause=0
+359840:CE	0	13:54:44.497	Core 01	2026.08.31 22:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359841:EI	0	13:54:44.497	Core 01	2026.08.31 22:15:00   [BMRG][INFO] bar=2026.08.31 22:00 U=4456.26525 M=4439.19300 L=4422.12075 C=4451.80000 ATR=583.1pt BBw=0.77% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359842:NL	0	13:54:44.497	Core 01	2026.08.31 22:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359843:OP	0	13:54:44.497	Core 01	2026.08.31 22:30:00   [BMRG][INFO] bar=2026.08.31 22:15 U=4457.57240 M=4439.76500 L=4421.95760 C=4449.83000 ATR=583.1pt BBw=0.80% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359844:PD	0	13:54:44.497	Core 01	2026.08.31 22:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359845:GH	0	13:54:44.497	Core 01	2026.08.31 22:45:00   [BMRG][INFO] bar=2026.08.31 22:30 U=4458.46256 M=4440.37300 L=4422.28344 C=4447.87000 ATR=564.8pt BBw=0.81% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359846:DL	0	13:54:44.497	Core 01	2026.08.31 23:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359847:JP	0	13:54:44.497	Core 01	2026.08.31 23:00:00   [BMRG][INFO] bar=2026.08.31 22:45 U=4459.03145 M=4441.05900 L=4423.08655 C=4446.94000 ATR=548.5pt BBw=0.81% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359848:DD	0	13:54:44.497	Core 01	2026.08.31 23:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359849:NH	0	13:54:44.497	Core 01	2026.08.31 23:15:00   [BMRG][INFO] bar=2026.08.31 23:00 U=4459.21603 M=4441.57200 L=4423.92797 C=4444.09000 ATR=543.6pt BBw=0.79% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359850:MK	0	13:54:44.497	Core 01	2026.08.31 23:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359851:MS	0	13:54:44.497	Core 01	2026.08.31 23:30:00   [BMRG][INFO] bar=2026.08.31 23:15 U=4458.94953 M=4442.21500 L=4425.48047 C=4443.30000 ATR=522.5pt BBw=0.75% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359852:OS	0	13:54:44.497	Core 01	2026.08.31 23:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359853:GK	0	13:54:44.497	Core 01	2026.08.31 23:45:00   [BMRG][INFO] bar=2026.08.31 23:30 U=4459.23201 M=4442.67200 L=4426.11199 C=4445.70000 ATR=512.2pt BBw=0.75% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359854:EK	0	13:54:44.497	Core 01	2026.09.01 00:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359855:CS	0	13:54:44.497	Core 01	2026.09.01 00:00:00   [BMRG][INFO] bar=2026.08.31 23:45 U=4460.33002 M=4443.46350 L=4426.59698 C=4452.32000 ATR=494.0pt BBw=0.76% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359856:ES	0	13:54:44.497	Core 01	2026.09.01 00:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359857:DK	0	13:54:44.497	Core 01	2026.09.01 00:15:00   [BMRG][INFO] bar=2026.09.01 00:00 U=4461.54296 M=4444.53850 L=4427.53404 C=4455.20000 ATR=532.0pt BBw=0.77% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359858:LJ	0	13:54:44.497	Core 01	2026.09.01 00:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359859:OR	0	13:54:44.497	Core 01	2026.09.01 00:30:00   [BMRG][INFO] bar=2026.09.01 00:15 U=4462.93611 M=4446.06250 L=4429.18889 C=4460.24000 ATR=507.4pt BBw=0.76% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359860:RR	0	13:54:44.497	Core 01	2026.09.01 00:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359861:EJ	0	13:54:44.497	Core 01	2026.09.01 00:45:00   [BMRG][INFO] bar=2026.09.01 00:30 U=4462.13363 M=4447.26650 L=4432.39937 C=4453.24000 ATR=528.4pt BBw=0.67% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359862:FJ	0	13:54:44.497	Core 01	2026.09.01 01:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359863:RR	0	13:54:44.497	Core 01	2026.09.01 01:00:00   [BMRG][INFO] bar=2026.09.01 00:45 U=4461.02411 M=4448.40850 L=4435.79289 C=4453.66000 ATR=576.4pt BBw=0.57% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359864:FR	0	13:54:44.497	Core 01	2026.09.01 01:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359865:NJ	0	13:54:44.497	Core 01	2026.09.01 01:15:00   [BMRG][INFO] bar=2026.09.01 01:00 U=4459.34711 M=4449.03700 L=4438.72689 C=4446.32000 ATR=641.1pt BBw=0.46% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359866:KI	0	13:54:44.497	Core 01	2026.09.01 01:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359867:HE	0	13:54:44.497	Core 01	2026.09.01 01:30:00   [BMRG][INFO] bar=2026.09.01 01:15 U=4459.45287 M=4449.00350 L=4438.55413 C=4439.77000 ATR=697.9pt BBw=0.47% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359868:QQ	0	13:54:44.497	Core 01	2026.09.01 01:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359869:CM	0	13:54:44.497	Core 01	2026.09.01 01:45:00   [BMRG][INFO] bar=2026.09.01 01:30 U=4459.27991 M=4449.14250 L=4439.00509 C=4445.69000 ATR=703.3pt BBw=0.46% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359870:CI	0	13:54:44.497	Core 01	2026.09.01 02:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359871:NE	0	13:54:44.497	Core 01	2026.09.01 02:00:00   [BMRG][INFO] bar=2026.09.01 01:45 U=4458.84655 M=4448.69250 L=4438.53845 C=4444.34000 ATR=723.9pt BBw=0.46% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359872:CQ	0	13:54:44.497	Core 01	2026.09.01 02:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359873:DM	0	13:54:44.497	Core 01	2026.09.01 02:15:00   [BMRG][INFO] bar=2026.09.01 02:00 U=4458.71596 M=4448.43850 L=4438.16104 C=4445.00000 ATR=748.3pt BBw=0.46% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359874:NH	0	13:54:44.497	Core 01	2026.09.01 02:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359875:KD	0	13:54:44.497	Core 01	2026.09.01 02:30:00   [BMRG][INFO] bar=2026.09.01 02:15 U=4459.04131 M=4448.10800 L=4437.17469 C=4440.62000 ATR=787.1pt BBw=0.49% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+359876:PP	0	13:54:44.497	Core 01	2026.09.01 02:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359877:RP	0	13:54:44.497	Core 01	2026.09.01 02:45:00   [BMRG][INFO] bar=2026.09.01 02:30 U=4460.73288 M=4447.29150 L=4433.85012 C=4431.80000 ATR=831.5pt BBw=0.60% side=NONE n=0 sig=1 enter buy L0 spr=23 halt=0 pause=0
+359878:PJ	0	13:54:44.497	Core 01	2026.09.01 02:45:00   [BMRG][INFO] Entry blocked: weekday blocked
+359879:DL	0	13:54:44.497	Core 01	2026.09.01 03:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359880:FP	0	13:54:44.497	Core 01	2026.09.01 03:00:00   [BMRG][INFO] bar=2026.09.01 02:45 U=4460.62419 M=4447.03900 L=4433.45381 C=4443.05000 ATR=923.4pt BBw=0.61% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359881:DD	0	13:54:44.497	Core 01	2026.09.01 03:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359882:IH	0	13:54:44.497	Core 01	2026.09.01 03:15:00   [BMRG][INFO] bar=2026.09.01 03:00 U=4460.21949 M=4446.44200 L=4432.66451 C=4439.86000 ATR=928.3pt BBw=0.62% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359883:MK	0	13:54:44.497	Core 01	2026.09.01 03:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359884:FS	0	13:54:44.497	Core 01	2026.09.01 03:30:00   [BMRG][INFO] bar=2026.09.01 03:15 U=4460.52686 M=4445.65250 L=4430.77814 C=4434.04000 ATR=940.7pt BBw=0.67% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359885:OS	0	13:54:44.497	Core 01	2026.09.01 03:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359886:KK	0	13:54:44.497	Core 01	2026.09.01 03:45:00   [BMRG][INFO] bar=2026.09.01 03:30 U=4460.39220 M=4445.18650 L=4429.98080 C=4438.55000 ATR=896.7pt BBw=0.68% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359887:IK	0	13:54:44.497	Core 01	2026.09.01 04:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359888:HS	0	13:54:44.497	Core 01	2026.09.01 04:00:00   [BMRG][INFO] bar=2026.09.01 03:45 U=4460.38113 M=4444.67300 L=4428.96487 C=4436.67000 ATR=881.4pt BBw=0.71% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359889:IS	0	13:54:44.497	Core 01	2026.09.01 04:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359890:EK	0	13:54:44.497	Core 01	2026.09.01 04:15:00   [BMRG][INFO] bar=2026.09.01 04:00 U=4461.02683 M=4444.02450 L=4427.02217 C=4431.12000 ATR=871.3pt BBw=0.77% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359891:PJ	0	13:54:44.497	Core 01	2026.09.01 04:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359892:IR	0	13:54:44.497	Core 01	2026.09.01 04:30:00   [BMRG][INFO] bar=2026.09.01 04:15 U=4461.69534 M=4443.34050 L=4424.98566 C=4429.62000 ATR=828.4pt BBw=0.83% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359893:NR	0	13:54:44.497	Core 01	2026.09.01 04:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359894:MJ	0	13:54:44.497	Core 01	2026.09.01 04:45:00   [BMRG][INFO] bar=2026.09.01 04:30 U=4462.20086 M=4442.44400 L=4422.68714 C=4427.77000 ATR=774.4pt BBw=0.89% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359895:JJ	0	13:54:44.497	Core 01	2026.09.01 05:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359896:HR	0	13:54:44.497	Core 01	2026.09.01 05:00:00   [BMRG][INFO] bar=2026.09.01 04:45 U=4461.63544 M=4441.15950 L=4420.68356 C=4426.63000 ATR=732.9pt BBw=0.92% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359897:JR	0	13:54:44.497	Core 01	2026.09.01 05:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359898:EJ	0	13:54:44.497	Core 01	2026.09.01 05:15:00   [BMRG][INFO] bar=2026.09.01 05:00 U=4459.79511 M=4439.86850 L=4419.94189 C=4429.38000 ATR=712.2pt BBw=0.90% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359899:OI	0	13:54:44.497	Core 01	2026.09.01 05:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359900:KE	0	13:54:44.497	Core 01	2026.09.01 05:30:00   [BMRG][INFO] bar=2026.09.01 05:15 U=4456.20460 M=4438.19850 L=4420.19240 C=4426.84000 ATR=698.6pt BBw=0.81% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359901:MQ	0	13:54:44.497	Core 01	2026.09.01 05:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359902:NM	0	13:54:44.497	Core 01	2026.09.01 05:45:00   [BMRG][INFO] bar=2026.09.01 05:30 U=4454.19381 M=4437.67100 L=4421.14819 C=4442.69000 ATR=785.2pt BBw=0.74% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359903:GI	0	13:54:44.497	Core 01	2026.09.01 06:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359904:FE	0	13:54:44.497	Core 01	2026.09.01 06:00:00   [BMRG][INFO] bar=2026.09.01 05:45 U=4451.50324 M=4436.99650 L=4422.48976 C=4440.17000 ATR=769.8pt BBw=0.65% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359905:GQ	0	13:54:44.497	Core 01	2026.09.01 06:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359906:FM	0	13:54:44.497	Core 01	2026.09.01 06:15:00   [BMRG][INFO] bar=2026.09.01 06:00 U=4450.15640 M=4436.32500 L=4422.49360 C=4432.89000 ATR=763.9pt BBw=0.62% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359907:RH	0	13:54:44.497	Core 01	2026.09.01 06:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359908:ID	0	13:54:44.497	Core 01	2026.09.01 06:30:00   [BMRG][INFO] bar=2026.09.01 06:15 U=4449.92923 M=4435.78650 L=4421.64377 C=4429.00000 ATR=706.1pt BBw=0.64% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359909:LP	0	13:54:44.497	Core 01	2026.09.01 06:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359910:LL	0	13:54:44.497	Core 01	2026.09.01 06:45:00   [BMRG][INFO] bar=2026.09.01 06:30 U=4448.47640 M=4435.24500 L=4422.01360 C=4434.86000 ATR=715.1pt BBw=0.60% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359911:HH	0	13:54:44.497	Core 01	2026.09.01 07:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359912:RD	0	13:54:44.497	Core 01	2026.09.01 07:00:00   [BMRG][INFO] bar=2026.09.01 06:45 U=4447.16331 M=4434.50700 L=4421.85069 C=4429.58000 ATR=703.8pt BBw=0.57% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359913:HP	0	13:54:44.497	Core 01	2026.09.01 07:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359914:DL	0	13:54:44.497	Core 01	2026.09.01 07:15:00   [BMRG][INFO] bar=2026.09.01 07:00 U=4445.41597 M=4433.91450 L=4422.41303 C=4433.15000 ATR=704.4pt BBw=0.52% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359915:QG	0	13:54:44.497	Core 01	2026.09.01 07:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359916:RG	0	13:54:44.497	Core 01	2026.09.01 07:30:00   [BMRG][INFO] bar=2026.09.01 07:15 U=4444.74343 M=4433.19100 L=4421.63857 C=4426.15000 ATR=712.7pt BBw=0.52% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359917:KO	0	13:54:44.497	Core 01	2026.09.01 07:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359918:CS	0	13:54:44.497	Core 01	2026.09.01 07:45:00   [BMRG][INFO] bar=2026.09.01 07:30 U=4446.12980 M=4432.50800 L=4418.88620 C=4418.14000 ATR=774.2pt BBw=0.61% side=NONE n=0 sig=1 enter buy L0 spr=21 halt=0 pause=0
+359919:KE	0	13:54:44.497	Core 01	2026.09.01 07:45:00   [BMRG][INFO] Entry blocked: weekday blocked
+359920:MK	0	13:54:44.497	Core 01	2026.09.01 08:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359921:ES	0	13:54:44.497	Core 01	2026.09.01 08:00:00   [BMRG][INFO] bar=2026.09.01 07:45 U=4445.12062 M=4431.36300 L=4417.60538 C=4420.15000 ATR=789.2pt BBw=0.62% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359922:MS	0	13:54:44.497	Core 01	2026.09.01 08:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359923:DG	0	13:54:44.497	Core 01	2026.09.01 08:15:00   [BMRG][INFO] bar=2026.09.01 08:00 U=4447.51917 M=4429.64450 L=4411.76983 C=4405.49000 ATR=979.6pt BBw=0.81% side=NONE n=0 sig=1 enter buy L0 spr=21 halt=0 pause=0
+359924:MH	0	13:54:44.497	Core 01	2026.09.01 08:15:00   [BMRG][INFO] Entry blocked: weekday blocked
+359925:DN	0	13:54:44.497	Core 01	2026.09.01 08:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359926:RQ	0	13:54:44.497	Core 01	2026.09.01 08:30:00   [BMRG][INFO] bar=2026.09.01 08:15 U=4455.54024 M=4427.09400 L=4398.64776 C=4383.03000 ATR=1121.9pt BBw=1.29% side=NONE n=0 sig=1 enter buy L0 spr=21 halt=0 pause=0
+359927:JD	0	13:54:44.497	Core 01	2026.09.01 08:30:00   [BMRG][INFO] Entry blocked: weekday blocked
+359928:HJ	0	13:54:44.497	Core 01	2026.09.01 08:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359929:IM	0	13:54:44.497	Core 01	2026.09.01 08:45:00   [BMRG][INFO] bar=2026.09.01 08:30 U=4460.96524 M=4423.94850 L=4386.93176 C=4375.64000 ATR=1172.8pt BBw=1.67% side=NONE n=0 sig=1 enter buy L0 spr=27 halt=0 pause=0
+359930:NS	0	13:54:44.497	Core 01	2026.09.01 08:45:00   [BMRG][INFO] Entry blocked: weekday blocked
+359931:RF	0	13:54:44.497	Core 01	2026.09.01 09:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359932:OI	0	13:54:44.497	Core 01	2026.09.01 09:00:00   [BMRG][INFO] bar=2026.09.01 08:45 U=4464.96025 M=4420.65300 L=4376.34575 C=4370.76000 ATR=1201.3pt BBw=2.00% side=NONE n=0 sig=1 enter buy L0 spr=27 halt=0 pause=0
+359933:DO	0	13:54:44.497	Core 01	2026.09.01 09:00:00   [BMRG][INFO] Entry blocked: weekday blocked
+359934:HQ	0	13:54:44.497	Core 01	2026.09.01 09:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359935:PN	0	13:54:44.497	Core 01	2026.09.01 09:15:00   [BMRG][INFO] bar=2026.09.01 09:00 U=4466.70820 M=4417.89650 L=4369.08480 C=4375.99000 ATR=1131.4pt BBw=2.21% side=NONE n=0 sig=0 no signal spr=27 halt=0 pause=0
+359936:KI	0	13:54:44.497	Core 01	2026.09.01 09:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359937:DF	0	13:54:44.497	Core 01	2026.09.01 09:30:00   [BMRG][INFO] bar=2026.09.01 09:15 U=4467.98042 M=4415.06000 L=4362.13958 C=4372.89000 ATR=1142.4pt BBw=2.40% side=NONE n=0 sig=0 no signal spr=27 halt=0 pause=0
+359938:OQ	0	13:54:44.497	Core 01	2026.09.01 09:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359939:NO	0	13:54:44.497	Core 01	2026.09.01 09:45:00   [BMRG][INFO] bar=2026.09.01 09:30 U=4468.65013 M=4412.25000 L=4355.84987 C=4371.57000 ATR=1133.7pt BBw=2.56% side=NONE n=0 sig=0 no signal spr=27 halt=0 pause=0
+359940:RH	0	13:54:44.497	Core 01	2026.09.01 10:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359941:MG	0	13:54:44.497	Core 01	2026.09.01 10:00:00   [BMRG][INFO] bar=2026.09.01 09:45 U=4469.42213 M=4409.15150 L=4348.88087 C=4364.66000 ATR=1145.9pt BBw=2.73% side=NONE n=0 sig=0 no signal spr=27 halt=0 pause=0
+359942:HP	0	13:54:44.497	Core 01	2026.09.01 10:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359943:MO	0	13:54:44.497	Core 01	2026.09.01 10:15:00   [BMRG][INFO] bar=2026.09.01 10:00 U=4467.69372 M=4406.59450 L=4345.49528 C=4378.24000 ATR=1223.1pt BBw=2.77% side=NONE n=0 sig=0 no signal spr=27 halt=0 pause=0
+359944:KG	0	13:54:44.497	Core 01	2026.09.01 10:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359945:ED	0	13:54:44.497	Core 01	2026.09.01 10:30:00   [BMRG][INFO] bar=2026.09.01 10:15 U=4465.54316 M=4404.49700 L=4343.45084 C=4384.89000 ATR=1225.4pt BBw=2.77% side=NONE n=0 sig=0 no signal spr=27 halt=0 pause=0
+359946:OO	0	13:54:44.497	Core 01	2026.09.01 10:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359947:RL	0	13:54:44.497	Core 01	2026.09.01 10:45:00   [BMRG][INFO] bar=2026.09.01 10:30 U=4460.22818 M=4401.43700 L=4342.64582 C=4381.49000 ATR=1217.6pt BBw=2.67% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359948:IG	0	13:54:44.497	Core 01	2026.09.01 11:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359949:ED	0	13:54:44.497	Core 01	2026.09.01 11:00:00   [BMRG][INFO] bar=2026.09.01 10:45 U=4454.71042 M=4398.33550 L=4341.96058 C=4378.14000 ATR=1209.1pt BBw=2.56% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359950:ON	0	13:54:44.497	Core 01	2026.09.01 11:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359951:FM	0	13:54:44.497	Core 01	2026.09.01 11:15:00   [BMRG][INFO] bar=2026.09.01 11:00 U=4449.95151 M=4395.55600 L=4341.16049 C=4377.30000 ATR=1145.5pt BBw=2.48% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359952:DF	0	13:54:44.497	Core 01	2026.09.01 11:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359953:IE	0	13:54:44.497	Core 01	2026.09.01 11:30:00   [BMRG][INFO] bar=2026.09.01 11:15 U=4445.23263 M=4393.13150 L=4341.03037 C=4380.51000 ATR=1150.6pt BBw=2.37% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359954:HN	0	13:54:44.497	Core 01	2026.09.01 11:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359955:EQ	0	13:54:44.497	Core 01	2026.09.01 11:45:00   [BMRG][INFO] bar=2026.09.01 11:30 U=4438.35967 M=4390.59050 L=4342.82133 C=4384.04000 ATR=978.6pt BBw=2.18% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359956:NE	0	13:54:44.497	Core 01	2026.09.01 12:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359957:LI	0	13:54:44.497	Core 01	2026.09.01 12:00:00   [BMRG][INFO] bar=2026.09.01 11:45 U=4431.87621 M=4387.84800 L=4343.81979 C=4374.73000 ATR=916.4pt BBw=2.01% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359958:NM	0	13:54:44.497	Core 01	2026.09.01 12:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359959:RQ	0	13:54:44.497	Core 01	2026.09.01 12:15:00   [BMRG][INFO] bar=2026.09.01 12:00 U=4422.99962 M=4384.74100 L=4346.48238 C=4371.01000 ATR=875.2pt BBw=1.75% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359960:CE	0	13:54:44.497	Core 01	2026.09.01 12:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359961:HI	0	13:54:44.497	Core 01	2026.09.01 12:30:00   [BMRG][INFO] bar=2026.09.01 12:15 U=4414.60524 M=4381.85900 L=4349.11276 C=4368.51000 ATR=881.1pt BBw=1.49% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359962:IM	0	13:54:44.497	Core 01	2026.09.01 12:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359963:QP	0	13:54:44.497	Core 01	2026.09.01 12:45:00   [BMRG][INFO] bar=2026.09.01 12:30 U=4407.29406 M=4379.19250 L=4351.09094 C=4364.81000 ATR=933.1pt BBw=1.28% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359964:MD	0	13:54:44.497	Core 01	2026.09.01 13:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359965:HH	0	13:54:44.497	Core 01	2026.09.01 13:00:00   [BMRG][INFO] bar=2026.09.01 12:45 U=4397.46946 M=4376.00200 L=4354.53454 C=4356.34000 ATR=977.7pt BBw=0.98% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359966:ML	0	13:54:44.497	Core 01	2026.09.01 13:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359967:QO	0	13:54:44.497	Core 01	2026.09.01 13:15:00   [BMRG][INFO] bar=2026.09.01 13:00 U=4398.71930 M=4372.20450 L=4345.68970 C=4329.54000 ATR=1148.4pt BBw=1.21% side=NONE n=0 sig=1 enter buy L0 spr=21 halt=0 pause=0
+359968:GQ	0	13:54:44.497	Core 01	2026.09.01 13:15:00   [BMRG][INFO] Entry blocked: weekday blocked
+359969:JH	0	13:54:44.497	Core 01	2026.09.01 13:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359970:EG	0	13:54:44.497	Core 01	2026.09.01 13:30:00   [BMRG][INFO] bar=2026.09.01 13:15 U=4399.56799 M=4370.20000 L=4340.83201 C=4342.94000 ATR=1213.6pt BBw=1.34% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359971:NO	0	13:54:44.497	Core 01	2026.09.01 13:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359972:FL	0	13:54:44.497	Core 01	2026.09.01 13:45:00   [BMRG][INFO] bar=2026.09.01 13:30 U=4399.00570 M=4369.50550 L=4340.00530 C=4361.75000 ATR=1237.6pt BBw=1.35% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359973:JG	0	13:54:44.497	Core 01	2026.09.01 14:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359974:ED	0	13:54:44.497	Core 01	2026.09.01 14:00:00   [BMRG][INFO] bar=2026.09.01 13:45 U=4398.78888 M=4369.22150 L=4339.65412 C=4365.08000 ATR=1278.1pt BBw=1.35% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359975:HO	0	13:54:44.497	Core 01	2026.09.01 14:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359976:EM	0	13:54:44.497	Core 01	2026.09.01 14:15:00   [BMRG][INFO] bar=2026.09.01 14:00 U=4398.30473 M=4368.92900 L=4339.55327 C=4370.14000 ATR=1369.1pt BBw=1.34% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359977:KF	0	13:54:44.497	Core 01	2026.09.01 14:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359978:ME	0	13:54:44.497	Core 01	2026.09.01 14:30:00   [BMRG][INFO] bar=2026.09.01 14:15 U=4397.91583 M=4368.57500 L=4339.23417 C=4365.81000 ATR=1391.9pt BBw=1.34% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359979:GN	0	13:54:44.497	Core 01	2026.09.01 14:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359980:OM	0	13:54:44.497	Core 01	2026.09.01 14:45:00   [BMRG][INFO] bar=2026.09.01 14:30 U=4397.65547 M=4368.34550 L=4339.03553 C=4366.98000 ATR=1404.0pt BBw=1.34% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359981:QE	0	13:54:44.497	Core 01	2026.09.01 15:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359982:MJ	0	13:54:44.497	Core 01	2026.09.01 15:00:00   [BMRG][INFO] bar=2026.09.01 14:45 U=4397.64440 M=4368.12600 L=4338.60760 C=4360.27000 ATR=1449.3pt BBw=1.35% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359983:OM	0	13:54:44.497	Core 01	2026.09.01 15:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359984:IR	0	13:54:44.497	Core 01	2026.09.01 15:15:00   [BMRG][INFO] bar=2026.09.01 15:00 U=4396.57325 M=4367.07150 L=4337.56975 C=4357.15000 ATR=1457.7pt BBw=1.35% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359985:DE	0	13:54:44.497	Core 01	2026.09.01 15:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359986:PJ	0	13:54:44.497	Core 01	2026.09.01 15:30:00   [BMRG][INFO] bar=2026.09.01 15:15 U=4394.21600 M=4366.11800 L=4338.02000 C=4365.82000 ATR=1417.1pt BBw=1.29% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359987:PL	0	13:54:44.497	Core 01	2026.09.01 15:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359988:OS	0	13:54:44.497	Core 01	2026.09.01 15:45:00   [BMRG][INFO] bar=2026.09.01 15:30 U=4392.71234 M=4365.58100 L=4338.44966 C=4370.75000 ATR=1427.1pt BBw=1.24% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359989:HD	0	13:54:44.497	Core 01	2026.09.01 16:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359990:CK	0	13:54:44.497	Core 01	2026.09.01 16:00:00   [BMRG][INFO] bar=2026.09.01 15:45 U=4391.97315 M=4365.31800 L=4338.66285 C=4372.88000 ATR=1392.5pt BBw=1.22% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359991:JL	0	13:54:44.497	Core 01	2026.09.01 16:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359992:LP	0	13:54:44.497	Core 01	2026.09.01 16:15:00   [BMRG][INFO] bar=2026.09.01 16:00 U=4390.55803 M=4364.57600 L=4338.59397 C=4362.46000 ATR=1360.4pt BBw=1.19% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359993:MS	0	13:54:44.497	Core 01	2026.09.01 16:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359994:JH	0	13:54:44.497	Core 01	2026.09.01 16:30:00   [BMRG][INFO] bar=2026.09.01 16:15 U=4388.44406 M=4363.19350 L=4337.94294 C=4352.86000 ATR=1355.8pt BBw=1.16% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359995:IK	0	13:54:44.497	Core 01	2026.09.01 16:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359996:MP	0	13:54:44.497	Core 01	2026.09.01 16:45:00   [BMRG][INFO] bar=2026.09.01 16:30 U=4384.94823 M=4361.73700 L=4338.52577 C=4354.91000 ATR=1207.7pt BBw=1.06% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359997:OR	0	13:54:44.497	Core 01	2026.09.01 17:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+359998:KI	0	13:54:44.497	Core 01	2026.09.01 17:00:00   [BMRG][INFO] bar=2026.09.01 16:45 U=4383.31884 M=4360.56350 L=4337.80816 C=4351.26000 ATR=1135.8pt BBw=1.04% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+359999:QJ	0	13:54:44.497	Core 01	2026.09.01 17:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360000:FQ	0	13:54:44.497	Core 01	2026.09.01 17:15:00   [BMRG][INFO] bar=2026.09.01 17:00 U=4382.41144 M=4359.33300 L=4336.25456 C=4346.40000 ATR=1040.3pt BBw=1.06% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360001:FR	0	13:54:44.497	Core 01	2026.09.01 17:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360002:KJ	0	13:54:44.497	Core 01	2026.09.01 17:30:00   [BMRG][INFO] bar=2026.09.01 17:15 U=4381.41152 M=4358.40700 L=4335.40248 C=4349.99000 ATR=999.6pt BBw=1.06% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360003:PI	0	13:54:44.497	Core 01	2026.09.01 17:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360004:QE	0	13:54:44.497	Core 01	2026.09.01 17:45:00   [BMRG][INFO] bar=2026.09.01 17:30 U=4381.10564 M=4357.37550 L=4333.64536 C=4344.18000 ATR=942.7pt BBw=1.09% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360005:JQ	0	13:54:44.497	Core 01	2026.09.01 18:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360006:RM	0	13:54:44.497	Core 01	2026.09.01 18:00:00   [BMRG][INFO] bar=2026.09.01 17:45 U=4381.42966 M=4356.70350 L=4331.97734 C=4342.90000 ATR=898.1pt BBw=1.14% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360007:RI	0	13:54:44.497	Core 01	2026.09.01 18:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360008:QE	0	13:54:44.497	Core 01	2026.09.01 18:15:00   [BMRG][INFO] bar=2026.09.01 18:00 U=4380.10524 M=4357.04850 L=4333.99176 C=4336.44000 ATR=906.0pt BBw=1.06% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360009:OQ	0	13:54:44.497	Core 01	2026.09.01 18:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360010:EM	0	13:54:44.497	Core 01	2026.09.01 18:30:00   [BMRG][INFO] bar=2026.09.01 18:15 U=4380.76742 M=4356.77650 L=4332.78558 C=4337.50000 ATR=854.1pt BBw=1.10% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360011:EH	0	13:54:44.497	Core 01	2026.09.01 18:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360012:HD	0	13:54:44.497	Core 01	2026.09.01 18:45:00   [BMRG][INFO] bar=2026.09.01 18:30 U=4382.28757 M=4355.17100 L=4328.05443 C=4329.64000 ATR=864.2pt BBw=1.25% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360013:IP	0	13:54:44.497	Core 01	2026.09.01 19:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360014:NL	0	13:54:44.497	Core 01	2026.09.01 19:00:00   [BMRG][INFO] bar=2026.09.01 18:45 U=4382.33832 M=4353.50100 L=4324.66368 C=4331.68000 ATR=838.4pt BBw=1.32% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360015:QH	0	13:54:44.497	Core 01	2026.09.01 19:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360016:ND	0	13:54:44.497	Core 01	2026.09.01 19:15:00   [BMRG][INFO] bar=2026.09.01 19:00 U=4380.40900 M=4351.85850 L=4323.30800 C=4337.29000 ATR=831.4pt BBw=1.31% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360017:PP	0	13:54:44.497	Core 01	2026.09.01 19:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360018:GL	0	13:54:44.497	Core 01	2026.09.01 19:30:00   [BMRG][INFO] bar=2026.09.01 19:15 U=4379.09097 M=4350.29050 L=4321.49003 C=4334.45000 ATR=824.6pt BBw=1.32% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360019:FG	0	13:54:44.497	Core 01	2026.09.01 19:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360020:KG	0	13:54:44.497	Core 01	2026.09.01 19:45:00   [BMRG][INFO] bar=2026.09.01 19:30 U=4377.92423 M=4348.26400 L=4318.60377 C=4326.45000 ATR=821.0pt BBw=1.36% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360021:OO	0	13:54:44.497	Core 01	2026.09.01 20:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360022:DO	0	13:54:44.497	Core 01	2026.09.01 20:00:00   [BMRG][INFO] bar=2026.09.01 19:45 U=4377.25236 M=4346.61100 L=4315.96964 C=4327.21000 ATR=777.1pt BBw=1.41% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360023:GG	0	13:54:44.497	Core 01	2026.09.01 20:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360024:KG	0	13:54:44.497	Core 01	2026.09.01 20:15:00   [BMRG][INFO] bar=2026.09.01 20:00 U=4376.75974 M=4345.03550 L=4313.31126 C=4325.64000 ATR=751.1pt BBw=1.46% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360025:JO	0	13:54:44.497	Core 01	2026.09.01 20:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360026:LO	0	13:54:44.497	Core 01	2026.09.01 20:30:00   [BMRG][INFO] bar=2026.09.01 20:15 U=4374.19554 M=4343.04450 L=4311.89346 C=4326.00000 ATR=722.4pt BBw=1.43% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360027:LF	0	13:54:44.497	Core 01	2026.09.01 20:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360028:JF	0	13:54:44.497	Core 01	2026.09.01 20:45:00   [BMRG][INFO] bar=2026.09.01 20:30 U=4369.51959 M=4340.88700 L=4312.25441 C=4327.60000 ATR=703.4pt BBw=1.32% side=NONE n=0 sig=0 no signal spr=21 halt=0 pause=0
+360029:QN	0	13:54:44.497	Core 01	2026.09.01 22:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360030:EN	0	13:54:44.497	Core 01	2026.09.01 22:00:00   [BMRG][INFO] bar=2026.09.01 20:45 U=4362.86048 M=4338.67100 L=4314.48152 C=4328.56000 ATR=673.4pt BBw=1.12% side=NONE n=0 sig=0 no signal spr=34 halt=0 pause=0
+360031:IF	0	13:54:44.497	Core 01	2026.09.01 22:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360032:OF	0	13:54:44.497	Core 01	2026.09.01 22:15:00   [BMRG][INFO] bar=2026.09.01 22:00 U=4358.37389 M=4337.00800 L=4315.64211 C=4329.20000 ATR=651.4pt BBw=0.99% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360033:HN	0	13:54:44.497	Core 01	2026.09.01 22:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360034:RN	0	13:54:44.497	Core 01	2026.09.01 22:30:00   [BMRG][INFO] bar=2026.09.01 22:15 U=4355.96955 M=4335.75450 L=4315.53945 C=4327.79000 ATR=641.3pt BBw=0.93% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360035:NE	0	13:54:44.497	Core 01	2026.09.01 22:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360036:OI	0	13:54:44.497	Core 01	2026.09.01 22:45:00   [BMRG][INFO] bar=2026.09.01 22:30 U=4352.44891 M=4334.41700 L=4316.38509 C=4328.16000 ATR=592.8pt BBw=0.83% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360037:RM	0	13:54:44.497	Core 01	2026.09.01 23:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360038:JQ	0	13:54:44.497	Core 01	2026.09.01 23:00:00   [BMRG][INFO] bar=2026.09.01 22:45 U=4349.35019 M=4333.31900 L=4317.28781 C=4329.30000 ATR=574.8pt BBw=0.74% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360039:JE	0	13:54:44.497	Core 01	2026.09.01 23:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360040:JI	0	13:54:44.497	Core 01	2026.09.01 23:15:00   [BMRG][INFO] bar=2026.09.01 23:00 U=4347.16926 M=4332.52700 L=4317.88474 C=4330.56000 ATR=547.6pt BBw=0.68% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360041:GM	0	13:54:44.497	Core 01	2026.09.01 23:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360042:EQ	0	13:54:44.497	Core 01	2026.09.01 23:30:00   [BMRG][INFO] bar=2026.09.01 23:15 U=4343.26840 M=4331.57050 L=4319.87260 C=4330.86000 ATR=543.2pt BBw=0.54% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360043:MD	0	13:54:44.497	Core 01	2026.09.01 23:45:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360044:IH	0	13:54:44.497	Core 01	2026.09.01 23:45:00   [BMRG][INFO] bar=2026.09.01 23:30 U=4340.96189 M=4331.05050 L=4321.13911 C=4333.78000 ATR=519.9pt BBw=0.46% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360045:PL	0	13:54:44.497	Core 01	2026.09.02 00:00:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360046:FP	0	13:54:44.497	Core 01	2026.09.02 00:00:00   [BMRG][INFO] bar=2026.09.01 23:45 U=4338.54548 M=4330.12350 L=4321.70152 C=4324.36000 ATR=566.3pt BBw=0.39% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360047:HD	0	13:54:44.497	Core 01	2026.09.02 00:15:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360048:JH	0	13:54:44.497	Core 01	2026.09.02 00:15:00   [BMRG][INFO] bar=2026.09.02 00:00 U=4337.54383 M=4329.70750 L=4321.87117 C=4328.12000 ATR=577.6pt BBw=0.36% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0
+360049:IL	0	13:54:44.497	Core 01	2026.09.02 00:30:00   [BMRG][INFO] Basket rebuild: side=NONE entries=0 levelsFilled=0
+360050:QP	0	13:54:44.497	Core 01	2026.09.02 00:30:00   [BMRG][INFO] bar=2026.09.02 00:15 U=4336.10217 M=4329.12450 L=4322.14683 C=4325.84000 ATR=612.7pt BBw=0.32% side=NONE n=0 sig=0 no signal spr=23 halt=0 pause=0

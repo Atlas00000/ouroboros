@@ -1,10 +1,10 @@
-"""Finnhub market news API client."""
+"""Finnhub market + company news API client."""
 
 from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any
 
 import httpx
@@ -15,7 +15,10 @@ from app.ingestion.httputil import FINNHUB_LIMITER, get_json
 logger = logging.getLogger(__name__)
 
 FINNHUB_NEWS_URL = "https://finnhub.io/api/v1/news"
-DEFAULT_CATEGORIES = ("forex", "general")
+FINNHUB_COMPANY_NEWS_URL = "https://finnhub.io/api/v1/company-news"
+# Finnhub /news categories. "merger" is the equity-adjacent market feed;
+# per-ticker depth comes from /company-news (see fetch_company_news).
+DEFAULT_CATEGORIES = ("forex", "general", "merger")
 
 
 @dataclass(frozen=True)
@@ -96,8 +99,61 @@ class FinnhubNewsClient:
                 by_id.setdefault(article.provider_id, article)
         return list(by_id.values())
 
+    def fetch_company_news(
+        self,
+        symbol: str,
+        *,
+        from_date: date,
+        to_date: date,
+    ) -> list[RawNewsArticle]:
+        """
+        Fetch Finnhub company-news for one equity ticker.
+
+        ``related`` is forced to the canonical symbol so downstream mapping
+        always attaches the polled equity even when headlines omit the ticker.
+        """
+        sym = symbol.upper().strip()
+        params = {
+            "symbol": sym,
+            "from": from_date.isoformat(),
+            "to": to_date.isoformat(),
+        }
+        headers = {"X-Finnhub-Token": self.api_key}
+        payload = get_json(
+            FINNHUB_COMPANY_NEWS_URL,
+            timeout=self._timeout,
+            headers=headers,
+            params=params,
+            rate_limiter=FINNHUB_LIMITER,
+            transport=self._transport,
+        )
+        if not isinstance(payload, list):
+            raise RuntimeError(f"unexpected Finnhub company-news payload type: {type(payload)}")
+
+        articles: list[RawNewsArticle] = []
+        for item in payload:
+            if not isinstance(item, dict):
+                continue
+            parsed = self._parse_item(item, category="company", force_related=sym)
+            if parsed is not None:
+                articles.append(parsed)
+
+        logger.info(
+            "finnhub company-news fetched symbol=%s count=%s from=%s to=%s",
+            sym,
+            len(articles),
+            from_date.isoformat(),
+            to_date.isoformat(),
+        )
+        return articles
+
     @staticmethod
-    def _parse_item(item: dict[str, Any], *, category: str) -> RawNewsArticle | None:
+    def _parse_item(
+        item: dict[str, Any],
+        *,
+        category: str,
+        force_related: str | None = None,
+    ) -> RawNewsArticle | None:
         provider_id = item.get("id")
         headline = (item.get("headline") or "").strip()
         if provider_id is None or not headline:
@@ -108,6 +164,10 @@ class FinnhubNewsClient:
         if isinstance(ts, (int, float)) and ts > 0:
             published = datetime.fromtimestamp(int(ts), tz=UTC)
 
+        related = force_related or (item.get("related") or None)
+        if related is not None:
+            related = str(related)
+
         return RawNewsArticle(
             provider="finnhub",
             provider_id=str(provider_id),
@@ -116,7 +176,7 @@ class FinnhubNewsClient:
             url=(item.get("url") or None),
             source_name=str(item.get("source") or "finnhub"),
             published_at=published,
-            related=(item.get("related") or None),
+            related=related,
             category=str(item.get("category") or category),
             raw=item,
         )

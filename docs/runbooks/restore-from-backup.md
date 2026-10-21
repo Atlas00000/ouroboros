@@ -58,7 +58,7 @@ docker exec ouroboros-postgres psql -U ouroboros -d ouroboros -c "CREATE EXTENSI
 
 ## C. Verification checklist
 
-- [ ] `SELECT count(*) FROM assets;` matches expected universe (~15)
+- [ ] `SELECT count(*) FROM assets;` matches expected universe (~30 after equities/materials/extra indices)
 - [ ] `SELECT count(*) FROM source_registry;` ≥ 4
 - [ ] `SELECT max(ts) FROM prices;` within RPO or backfill started
 - [ ] Health: `GET /v1/health` OK

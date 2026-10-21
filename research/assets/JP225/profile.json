@@ -1,0 +1,111 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "JP225",
+    "display_name": "Japan 225 (Nikkei)",
+    "asset_class": "index",
+    "venues": [],
+    "mt5_ticker": "JPN225",
+    "base_currency": null,
+    "quote_currency": "JPY"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "new_york",
+      "london"
+    ],
+    "open_utc": "13:30:00",
+    "close_utc": "20:00:00",
+    "notes": "Index cash hours approximate (US RTH for US500/US30/NAS100; London/Frankfurt/Tokyo cash for regional indices). Broker CFD session may trade nearly 24h \u2014 treat as research proxy."
+  },
+  "volatility": {
+    "atr_percentile_30d": 20.0,
+    "realized_vol_percentile_30d": 6.666666666666667,
+    "typical_daily_range": 1317.3150000000023
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 83.33333333333334,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "NAS100",
+      "coefficient": 0.6757598905034045,
+      "window_days": 30
+    },
+    {
+      "symbol": "US500",
+      "coefficient": 0.5920845881776557,
+      "window_days": 30
+    },
+    {
+      "symbol": "DE40",
+      "coefficient": 0.43705421422352597,
+      "window_days": 30
+    },
+    {
+      "symbol": "US30",
+      "coefficient": 0.4227785049953572,
+      "window_days": 30
+    },
+    {
+      "symbol": "UK100",
+      "coefficient": 0.32520024694772925,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for JP225; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "GDP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for JP225; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "central_bank",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for JP225; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.18077154394707448
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.11641893633473666
+    },
+    {
+      "regime": "ranging",
+      "share": 0.4353466792679784
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.2674628404502105
+    }
+  ],
+  "as_of": "2026-10-07T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-18T23:54:07.054297Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "category": "company news",
+    "datetime": 1729000000,
+    "headline": "Apple unveils new product lineup",
+    "id": 9102001,
+    "image": "",
+    "related": "AAPL",
+    "source": "fixture-wire",
+    "summary": "Cupertino giant refreshes devices ahead of holiday season.",
+    "url": "https://example.com/aapl-1"
+  },
+  {
+    "category": "company news",
+    "datetime": 1729086400,
+    "headline": "Services revenue lifts quarterly outlook",
+    "id": 9102002,
+    "image": "",
+    "related": "",
+    "source": "fixture-wire",
+    "summary": "Analysts lift targets after guidance.",
+    "url": "https://example.com/aapl-2"
+  }
+]

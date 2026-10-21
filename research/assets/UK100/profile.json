@@ -1,0 +1,111 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "UK100",
+    "display_name": "UK 100 (FTSE)",
+    "asset_class": "index",
+    "venues": [],
+    "mt5_ticker": "UK100",
+    "base_currency": null,
+    "quote_currency": "GBP"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "new_york",
+      "london"
+    ],
+    "open_utc": "13:30:00",
+    "close_utc": "20:00:00",
+    "notes": "Index cash hours approximate (US RTH for US500/US30/NAS100; London/Frankfurt/Tokyo cash for regional indices). Broker CFD session may trade nearly 24h \u2014 treat as research proxy."
+  },
+  "volatility": {
+    "atr_percentile_30d": 43.333333333333336,
+    "realized_vol_percentile_30d": 36.666666666666664,
+    "typical_daily_range": 100.53199999999988
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 3.3333333333333335,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "DE40",
+      "coefficient": 0.806608658506487,
+      "window_days": 30
+    },
+    {
+      "symbol": "US30",
+      "coefficient": 0.6171701143013867,
+      "window_days": 30
+    },
+    {
+      "symbol": "US500",
+      "coefficient": 0.5295243055276732,
+      "window_days": 30
+    },
+    {
+      "symbol": "NAS100",
+      "coefficient": 0.3849026818783803,
+      "window_days": 30
+    },
+    {
+      "symbol": "JP225",
+      "coefficient": 0.32520024694772925,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for UK100; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "GDP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for UK100; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "central_bank",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for UK100; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.13208389112003568
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.1108879964301651
+    },
+    {
+      "regime": "ranging",
+      "share": 0.465417224453369
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.29161088799643015
+    }
+  ],
+  "as_of": "2026-10-11T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-12T00:05:37.153695Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

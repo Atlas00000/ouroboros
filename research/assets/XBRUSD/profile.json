@@ -1,0 +1,108 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "XBRUSD",
+    "display_name": "Brent Crude Oil",
+    "asset_class": "metal",
+    "venues": [],
+    "mt5_ticker": "BRENT",
+    "base_currency": "XBR",
+    "quote_currency": "USD"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "sydney",
+      "tokyo",
+      "london",
+      "new_york"
+    ],
+    "open_utc": "22:00:00",
+    "close_utc": "21:00:00",
+    "notes": "Metals/energy CFDs follow broker session (approx Sun 22:00\u2013Fri 21:00 UTC); gap-aware metrics applied. Softs/inventory calendars deferred."
+  },
+  "volatility": {
+    "atr_percentile_30d": 66.66666666666666,
+    "realized_vol_percentile_30d": 23.333333333333332,
+    "typical_daily_range": 3.5539999999999994
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 20.0,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "XTIUSD",
+      "coefficient": 0.957205945315559,
+      "window_days": 30
+    },
+    {
+      "symbol": "XAUUSD",
+      "coefficient": -0.3847428585379444,
+      "window_days": 30
+    },
+    {
+      "symbol": "XAGUSD",
+      "coefficient": -0.3371572980348611,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "NFP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XBRUSD; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XBRUSD; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "FOMC",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XBRUSD; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "GDP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XBRUSD; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.17267152165580682
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.12236489076274434
+    },
+    {
+      "regime": "ranging",
+      "share": 0.43359524722115755
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.2713683403602913
+    }
+  ],
+  "as_of": "2026-10-07T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-12T00:01:06.254366Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

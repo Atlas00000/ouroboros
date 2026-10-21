@@ -56,6 +56,27 @@ def test_finnhub_news_fixture_parse_and_map() -> None:
     assert "XAUUSD" in symbols
 
 
+def test_finnhub_company_news_fixture_force_related() -> None:
+    body = _load("finnhub_company_news_aapl.json")
+    transport = _transport_for({"/api/v1/company-news": body})
+    client = FinnhubNewsClient(settings=_settings(), transport=transport)
+    articles = client.fetch_company_news(
+        "AAPL",
+        from_date=date(2024, 10, 1),
+        to_date=date(2024, 10, 20),
+    )
+    assert len(articles) == 2
+    assert all(a.related == "AAPL" for a in articles)
+    assert all(a.category == "company" or a.category == "company news" for a in articles)
+
+    from app.ingestion.news.company_poller import _force_map
+
+    mapper = NewsAssetMapper({"AAPL", "MSFT", "EURUSD"})
+    # Second article has empty related in raw JSON but client force_related=AAPL
+    mapped = _force_map(mapper, articles, forced_symbol="AAPL")
+    assert all("AAPL" in m.symbols for m in mapped)
+
+
 def test_finnhub_calendar_fixture_high_impact() -> None:
     body = _load("finnhub_calendar.json")
     transport = _transport_for({"/api/v1/calendar/economic": body})

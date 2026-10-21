@@ -7,14 +7,27 @@ from dataclasses import dataclass
 from app.ingestion.econ_calendar.client import RawCalendarEvent
 
 # Country codes Finnhub uses → primary FX/metal/index symbols in our universe.
+# Equities are intentionally omitted — do not attach every US macro print to AAPL…
 _COUNTRY_SYMBOLS: dict[str, tuple[str, ...]] = {
-    "US": ("EURUSD", "GBPUSD", "USDJPY", "USDCHF", "AUDUSD", "USDCAD", "NZDUSD", "XAUUSD", "US500", "US30", "NAS100"),
-    "EU": ("EURUSD", "EURGBP", "EURJPY"),
-    "EZ": ("EURUSD", "EURGBP", "EURJPY"),
-    "DE": ("EURUSD", "EURGBP", "EURJPY"),
-    "GB": ("GBPUSD", "EURGBP", "GBPJPY"),
-    "UK": ("GBPUSD", "EURGBP", "GBPJPY"),
-    "JP": ("USDJPY", "EURJPY", "GBPJPY"),
+    "US": (
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY",
+        "USDCHF",
+        "AUDUSD",
+        "USDCAD",
+        "NZDUSD",
+        "XAUUSD",
+        "US500",
+        "US30",
+        "NAS100",
+    ),
+    "EU": ("EURUSD", "EURGBP", "EURJPY", "DE40"),
+    "EZ": ("EURUSD", "EURGBP", "EURJPY", "DE40"),
+    "DE": ("EURUSD", "EURGBP", "EURJPY", "DE40"),
+    "GB": ("GBPUSD", "EURGBP", "GBPJPY", "UK100"),
+    "UK": ("GBPUSD", "EURGBP", "GBPJPY", "UK100"),
+    "JP": ("USDJPY", "EURJPY", "GBPJPY", "JP225"),
     "CH": ("USDCHF",),
     "AU": ("AUDUSD",),
     "CA": ("USDCAD",),

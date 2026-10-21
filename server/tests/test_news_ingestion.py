@@ -42,6 +42,9 @@ def test_mapper_keywords_and_pairs() -> None:
             "XAUUSD",
             "US500",
             "USDJPY",
+            "AAPL",
+            "NVDA",
+            "XTIUSD",
         }
     )
     m = mapper.map_article(_article("1", "ECB holds rates as euro rises vs dollar"))
@@ -56,6 +59,46 @@ def test_mapper_keywords_and_pairs() -> None:
 
     m4 = mapper.map_article(_article("4", "EUR/USD slips ahead of data"))
     assert "EURUSD" in m4.symbols
+
+    m5 = mapper.map_article(_article("5", "Apple and NVIDIA rally on AI demand"))
+    assert "AAPL" in m5.symbols
+    assert "NVDA" in m5.symbols
+
+    m6 = mapper.map_article(_article("6", "WTI crude slips as inventories rise"))
+    assert "XTIUSD" in m6.symbols
+
+    m7 = mapper.map_article(_article("7", "Chip names firm", related="AAPL,NVDA"))
+    assert "AAPL" in m7.symbols
+    assert "NVDA" in m7.symbols
+
+    m8 = mapper.map_article(_article("8", "DAX futures slip as Europe weakens"))
+    # DE40 not in this mapper's active set — keyword alone insufficient
+    assert "DE40" not in m8.symbols
+
+
+def test_mapper_energy_and_regional_keywords() -> None:
+    mapper = NewsAssetMapper(
+        {
+            "XTIUSD",
+            "XBRUSD",
+            "DE40",
+            "UK100",
+            "JP225",
+            "AAPL",
+        }
+    )
+    oil = mapper.map_article(_article("o1", "OPEC keeps output steady; WTI and Brent ease"))
+    assert "XTIUSD" in oil.symbols
+    assert "XBRUSD" in oil.symbols
+
+    de = mapper.map_article(_article("d1", "DAX falls on German data miss"))
+    assert "DE40" in de.symbols
+
+    uk = mapper.map_article(_article("u1", "FTSE 100 slips at the open"))
+    assert "UK100" in uk.symbols
+
+    jp = mapper.map_article(_article("j1", "Nikkei retreats as yen firms"))
+    assert "JP225" in jp.symbols
 
 
 def test_dedupe_and_upsert() -> None:

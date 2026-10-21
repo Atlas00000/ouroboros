@@ -1,0 +1,133 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "AUDUSD",
+    "display_name": "Australian Dollar / US Dollar",
+    "asset_class": "fx",
+    "venues": [],
+    "mt5_ticker": "AUDUSD",
+    "base_currency": "AUD",
+    "quote_currency": "USD"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "sydney",
+      "tokyo",
+      "london",
+      "new_york"
+    ],
+    "open_utc": "22:00:00",
+    "close_utc": "22:00:00",
+    "notes": "FX approx Sun 22:00\u2013Fri 22:00 UTC; session names from calendar module."
+  },
+  "volatility": {
+    "atr_percentile_30d": 3.3333333333333335,
+    "realized_vol_percentile_30d": 33.33333333333333,
+    "typical_daily_range": 0.0031955000000000065
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 46.666666666666664,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "NZDUSD",
+      "coefficient": 0.7831119418922052,
+      "window_days": 30
+    },
+    {
+      "symbol": "GBPUSD",
+      "coefficient": 0.7290333041468048,
+      "window_days": 30
+    },
+    {
+      "symbol": "EURUSD",
+      "coefficient": 0.6822181308380492,
+      "window_days": 30
+    },
+    {
+      "symbol": "USDCAD",
+      "coefficient": -0.5201126655575147,
+      "window_days": 30
+    },
+    {
+      "symbol": "USDJPY",
+      "coefficient": -0.47862033394681697,
+      "window_days": 30
+    },
+    {
+      "symbol": "EURGBP",
+      "coefficient": -0.2510596046252245,
+      "window_days": 30
+    },
+    {
+      "symbol": "EURJPY",
+      "coefficient": -0.21866143107272787,
+      "window_days": 30
+    },
+    {
+      "symbol": "GBPJPY",
+      "coefficient": -0.19735911961119434,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "NFP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for AUDUSD; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": 1.489,
+      "notes": "Median H1 range / ATR over 5 events (4h window)."
+    },
+    {
+      "event_type": "FOMC",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for AUDUSD; need \u22653 scored windows (have 0 moves from 6 calendar hits)."
+    },
+    {
+      "event_type": "central_bank",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for AUDUSD; need \u22653 scored windows (have 2 moves from 2 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.14552087555735713
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.12768544791244427
+    },
+    {
+      "regime": "ranging",
+      "share": 0.47693554925010134
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.2498581272800973
+    }
+  ],
+  "as_of": "2026-09-21T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-18T23:39:50.459768Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

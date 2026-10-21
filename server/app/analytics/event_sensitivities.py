@@ -58,9 +58,14 @@ _SYMBOL_EVENT_TYPES: dict[str, tuple[str, ...]] = {
     "GBPJPY": ("CPI", "GDP", "central_bank"),
     "XAUUSD": ("NFP", "CPI", "FOMC"),
     "XAGUSD": ("NFP", "CPI", "FOMC"),
+    "XTIUSD": ("NFP", "CPI", "FOMC", "GDP"),
+    "XBRUSD": ("NFP", "CPI", "FOMC", "GDP"),
     "US500": ("NFP", "CPI", "FOMC", "GDP"),
     "US30": ("NFP", "CPI", "FOMC", "GDP"),
     "NAS100": ("NFP", "CPI", "FOMC", "GDP"),
+    "DE40": ("CPI", "GDP", "central_bank"),
+    "UK100": ("CPI", "GDP", "central_bank"),
+    "JP225": ("CPI", "GDP", "central_bank"),
 }
 
 

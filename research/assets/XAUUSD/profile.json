@@ -1,0 +1,103 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "XAUUSD",
+    "display_name": "Gold / US Dollar",
+    "asset_class": "metal",
+    "venues": [],
+    "mt5_ticker": "XAUUSD",
+    "base_currency": "XAU",
+    "quote_currency": "USD"
+  },
+  "trading_hours": {
+    "timezone": "UTC",
+    "sessions": [
+      "sydney",
+      "tokyo",
+      "london",
+      "new_york"
+    ],
+    "open_utc": "22:00:00",
+    "close_utc": "21:00:00",
+    "notes": "Metals/energy CFDs follow broker session (approx Sun 22:00\u2013Fri 21:00 UTC); gap-aware metrics applied. Softs/inventory calendars deferred."
+  },
+  "volatility": {
+    "atr_percentile_30d": 6.666666666666667,
+    "realized_vol_percentile_30d": 3.3333333333333335,
+    "typical_daily_range": 71.33449999999998
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 50.0,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "XAGUSD",
+      "coefficient": 0.8825477929361633,
+      "window_days": 30
+    },
+    {
+      "symbol": "XTIUSD",
+      "coefficient": -0.367466903561178,
+      "window_days": 30
+    },
+    {
+      "symbol": "XBRUSD",
+      "coefficient": -0.35985309879789046,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "NFP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XAUUSD; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": 1.579,
+      "notes": "Median H1 range / ATR over 4 events (4h window)."
+    },
+    {
+      "event_type": "FOMC",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XAUUSD; need \u22653 scored windows (have 2 moves from 6 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.19017003637594113
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.09533880382370358
+    },
+    {
+      "regime": "ranging",
+      "share": 0.42940529566026564
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.2850858641400897
+    }
+  ],
+  "as_of": "2026-10-06T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-09T12:39:20.564171Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

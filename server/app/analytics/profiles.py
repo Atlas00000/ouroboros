@@ -61,7 +61,8 @@ class AssetIdentityInput:
 
 def _trading_hours_default(*, asset_class: str) -> TradingHours:
     sessions = [s.name.value for s in DEFAULT_SESSIONS]
-    if asset_class == "fx":
+    klass = (asset_class or "").lower()
+    if klass == "fx":
         return TradingHours(
             timezone="UTC",
             sessions=sessions,
@@ -69,16 +70,45 @@ def _trading_hours_default(*, asset_class: str) -> TradingHours:
             close_utc=time(22, 0),
             notes="FX approx Sun 22:00–Fri 22:00 UTC; session names from calendar module.",
         )
-    if asset_class == "metal":
+    if klass == "metal":
         return TradingHours(
             timezone="UTC",
             sessions=sessions,
-            notes="Metals follow broker session; gap-aware metrics applied.",
+            open_utc=time(22, 0),
+            close_utc=time(21, 0),
+            notes=(
+                "Metals/energy CFDs follow broker session (approx Sun 22:00–Fri 21:00 UTC); "
+                "gap-aware metrics applied. Softs/inventory calendars deferred."
+            ),
+        )
+    if klass == "equity":
+        return TradingHours(
+            timezone="America/New_York",
+            sessions=[SessionName.NEW_YORK.value],
+            open_utc=time(13, 30),
+            close_utc=time(20, 0),
+            notes=(
+                "US cash RTH approx 09:30–16:00 America/New_York "
+                "(13:30–20:00 UTC during EST; 14:30–21:00 UTC during EDT). "
+                "Broker CFD hours may extend; DST shifts open/close UTC."
+            ),
+        )
+    if klass == "index":
+        return TradingHours(
+            timezone="UTC",
+            sessions=[SessionName.NEW_YORK.value, SessionName.LONDON.value],
+            open_utc=time(13, 30),
+            close_utc=time(20, 0),
+            notes=(
+                "Index cash hours approximate (US RTH for US500/US30/NAS100; "
+                "London/Frankfurt/Tokyo cash for regional indices). "
+                "Broker CFD session may trade nearly 24h — treat as research proxy."
+            ),
         )
     return TradingHours(
         timezone="UTC",
         sessions=[SessionName.NEW_YORK.value, SessionName.LONDON.value],
-        notes="Index hours approximate; broker cash session may differ.",
+        notes="Hours approximate; broker cash session may differ.",
     )
 
 
@@ -307,10 +337,9 @@ def build_asset_profile_from_session(
 
     peers = peer_symbols
     if peers is None:
-        peers = [
-            str(s)
-            for s in session.scalars(select(Asset.symbol).where(Asset.is_active.is_(True))).all()
-        ]
+        from app.analytics.universe import default_peer_symbols
+
+        peers = default_peer_symbols(session, sym, asset_class=row.asset_class)
 
     peer_frames: dict[str, pd.DataFrame] = {}
     span_map: dict[str, float] = {sym: span}

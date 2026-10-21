@@ -32,7 +32,7 @@ Live regime probabilities (`RegimeNowcastField`) and profile regime-distribution
 
 ## Product surface (Asset page)
 
-Single route: `/assets/[symbol]`. Same composition for every symbol; depth and emptiness vary by data coverage (FX majors tend to be richest).
+Single route: `/assets/[symbol]`. Same composition for every symbol; depth and emptiness vary by data coverage (FX majors tend to be richest; equities/energy/regional indices stay depth-gated until ≥90d M1 and may leave event ATR / earnings planes empty by design).
 
 Desk voice: `ASSET_COPY` + `AssetSection` / `SectionWrap` — eyebrow + wrap per block, same honesty contract as the home desk.
 
@@ -99,7 +99,7 @@ Builder: `profiles.v1` (`server/app/analytics/profiles.py`) · refresh via `dail
 | **Identity** | Display name · asset class · base/quote · venues · version | `mt5_ticker` exists in contract; not shown on dossier |
 | **Volatility** | ATR pct 30d · RV pct 30d · typical daily range | From D1 metrics |
 | **Liquidity** | Range percentile 30d · notes | Proxy only — true bid/ask deferred |
-| **Trading hours** | Sessions · timezone · open/close UTC · notes | Coarse defaults by asset class |
+| **Trading hours** | Sessions · timezone · open/close UTC · notes | Coarse defaults by asset class (`fx` / `metal` / `index` / `equity` RTH) |
 | **Correlations** | Peer coefficients (`CorrelationField`) | H1 ~30d matrix, depth-gated |
 | **Regime distribution** | Share per regime (`RegimeHistoryField`) | Prefer H1 confirmed labels; else D1 |
 | **Event sensitivities** | Event type · optional × ATR · notes (`EventSensitivityField`) | Calendar taxonomy; ATR multiple when ≥3 scored windows |
@@ -194,5 +194,6 @@ On this page (`FitField`):
 
 | Date | Change |
 | --- | --- |
+| 2026-10-07 | Universe expansion — equity RTH hours, class-aware peers, depth gates for equities/energy/extra indices; coverage honesty note |
 | 2026-10-06 | Living-plane dossier inventory — FitField, ProfileDossier, CorrelationField, nowcast/history pair, EventSensitivityField, SentimentField, DriverPress, InsightBrief; code map + composition stance refreshed |
 | 2026-10-06 | Initial brief — dossier inventory, clocks, profile.v1 Desk fields, rework stance |

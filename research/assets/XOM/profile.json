@@ -1,0 +1,140 @@
+{
+  "schema_id": "profile.v1",
+  "profile_version": 1,
+  "identity": {
+    "symbol": "XOM",
+    "display_name": "Exxon Mobil Corporation",
+    "asset_class": "equity",
+    "venues": [],
+    "mt5_ticker": "Exxon",
+    "base_currency": null,
+    "quote_currency": "USD"
+  },
+  "trading_hours": {
+    "timezone": "America/New_York",
+    "sessions": [
+      "new_york"
+    ],
+    "open_utc": "13:30:00",
+    "close_utc": "20:00:00",
+    "notes": "US cash RTH approx 09:30\u201316:00 America/New_York (13:30\u201320:00 UTC during EST; 14:30\u201321:00 UTC during EDT). Broker CFD hours may extend; DST shifts open/close UTC."
+  },
+  "volatility": {
+    "atr_percentile_30d": 20.0,
+    "realized_vol_percentile_30d": 6.666666666666667,
+    "typical_daily_range": 3.5619999999999976
+  },
+  "liquidity": {
+    "typical_spread": null,
+    "spread_percentile_30d": 30.0,
+    "notes": "true bid/ask spread deferred until quote ingestion; range proxies (high-low) only"
+  },
+  "correlations": [
+    {
+      "symbol": "AAPL",
+      "coefficient": -0.24220035117678826,
+      "window_days": 30
+    },
+    {
+      "symbol": "NAS100",
+      "coefficient": -0.21761760423279408,
+      "window_days": 30
+    },
+    {
+      "symbol": "JPM",
+      "coefficient": -0.18657638189177575,
+      "window_days": 30
+    },
+    {
+      "symbol": "TSLA",
+      "coefficient": -0.12195006179268641,
+      "window_days": 30
+    },
+    {
+      "symbol": "AMZN",
+      "coefficient": -0.07672230034419895,
+      "window_days": 30
+    },
+    {
+      "symbol": "GOOGL",
+      "coefficient": -0.07123558642528983,
+      "window_days": 30
+    },
+    {
+      "symbol": "US500",
+      "coefficient": 0.04630474761738917,
+      "window_days": 30
+    },
+    {
+      "symbol": "AVGO",
+      "coefficient": -0.040141710487207626,
+      "window_days": 30
+    },
+    {
+      "symbol": "MSFT",
+      "coefficient": 0.020362260065386557,
+      "window_days": 30
+    },
+    {
+      "symbol": "META",
+      "coefficient": 0.013752575078558392,
+      "window_days": 30
+    },
+    {
+      "symbol": "NVDA",
+      "coefficient": -0.0027245899192420617,
+      "window_days": 30
+    }
+  ],
+  "event_sensitivities": [
+    {
+      "event_type": "NFP",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XOM; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "CPI",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XOM; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    },
+    {
+      "event_type": "FOMC",
+      "typical_move_atr_multiple": null,
+      "notes": "Relevant for XOM; need \u22653 scored windows (have 0 moves from 0 calendar hits)."
+    }
+  ],
+  "regime_distribution": [
+    {
+      "regime": "trending_up",
+      "share": 0.2321139527355131
+    },
+    {
+      "regime": "trending_down",
+      "share": 0.12172224020718679
+    },
+    {
+      "regime": "ranging",
+      "share": 0.3434768533505989
+    },
+    {
+      "regime": "high_volatility",
+      "share": 0.3026869537067012
+    }
+  ],
+  "as_of": "2026-10-07T00:00:00Z",
+  "provenance": {
+    "sources": [
+      "mt5.prices",
+      "metrics.v1",
+      "regimes.rule_v1"
+    ],
+    "generated_at": "2026-10-18T23:49:59.788455Z",
+    "model_version": "profiles.v1",
+    "confidence": 0.99,
+    "stale": false
+  },
+  "disclaimer": {
+    "text": "Ouroboros provides internal research context only. Outputs are not investment advice and do not execute trades.",
+    "url": null
+  }
+}

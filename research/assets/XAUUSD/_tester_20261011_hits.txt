@@ -1,0 +1,7 @@
+P1 magic 26100916 hits: 2
+22643:RN	0	23:09:52.197	Core 01	  InpMagic=26100916
+22664:PM	0	23:09:52.197	Core 01	2026.05.01 00:00:00   [BMRG][INFO] BMRG init OK | XAUUSD PERIOD_M15 | BB(20,2.4) ATR(14) lotMode=1 lot=0.01 risk%=0.50 maxExp%=15.0 magic=26100916 aos=0
+
+P0 magic 26100915 hits: 2
+90:EF	0	23:09:13.275	Core 01	  InpMagic=26100915
+111:IE	0	23:09:13.275	Core 01	2026.05.01 00:00:00   [BMRG][INFO] BMRG init OK | XAUUSD PERIOD_M15 | BB(20,2.2) ATR(14) lotMode=1 lot=0.01 risk%=0.50 maxExp%=15.0 magic=26100915 aos=0

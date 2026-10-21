@@ -1,0 +1,299 @@
+{
+  "symbol": "GBPJPY",
+  "generated_at": "2026-10-18T14:57:53.225029+00:00",
+  "hard_rule": "SL/TP frozen 160/200 \u2014 raise WR via selectivity only",
+  "window_design": {
+    "start": "2026-05-01 00:00:00+00:00",
+    "end": "2026-09-11 20:45:00+00:00"
+  },
+  "window_full_tip": {
+    "start": "2026-05-01 00:00:00+00:00",
+    "end": "2026-09-11 20:45:00+00:00"
+  },
+  "frozen_geometry": {
+    "sl": 160.0,
+    "tp": 200.0,
+    "rr": 1.25
+  },
+  "cost_priors": {
+    "blotter_rt_pts": 58.0,
+    "tight_rt_pts": 40.0
+  },
+  "blotter_p0_ref": {
+    "magic": 26101825,
+    "WR": 0.413,
+    "BWR": 0.444,
+    "E_N": -0.071,
+    "spread_mean_pts": 28.9
+  },
+  "probe_summary": {
+    "P0_base_BB2.2_CD2_ATR126_cost58": {
+      "n": 50,
+      "WR": 0.62,
+      "BWR": 0.4444,
+      "E_N": 0.395,
+      "EF": 0.0144,
+      "BM": 0.1756,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": true,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P0_base_BB2.2_CD2_ATR126_cost58_fullTip": {
+      "n": 50,
+      "WR": 0.62,
+      "BWR": 0.4444,
+      "E_N": 0.395,
+      "EF": 0.0144,
+      "BM": 0.1756,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": true,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_light_BB2.3_CD3": {
+      "n": 35,
+      "WR": 0.6,
+      "BWR": 0.4444,
+      "E_N": 0.35,
+      "EF": -0.0056,
+      "BM": 0.1556,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": false,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_fade_BB2.3_CD3": {
+      "n": 34,
+      "WR": 0.5882,
+      "BWR": 0.4444,
+      "E_N": 0.3235,
+      "EF": -0.0173,
+      "BM": 0.1438,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": false,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_fade_BB2.2_CD3": {
+      "n": 43,
+      "WR": 0.5581,
+      "BWR": 0.4444,
+      "E_N": 0.2558,
+      "EF": -0.0474,
+      "BM": 0.1137,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": false,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_fade_BB2.3_CD2": {
+      "n": 34,
+      "WR": 0.5882,
+      "BWR": 0.4444,
+      "E_N": 0.3235,
+      "EF": -0.0173,
+      "BM": 0.1438,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": false,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_fade_BB2.3_CD3_sellOnly": {
+      "n": 20,
+      "WR": 0.6,
+      "BWR": 0.4444,
+      "E_N": 0.35,
+      "EF": -0.0056,
+      "BM": 0.1556,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": false,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_fade_BB2.3_CD3_cost40": {
+      "n": 34,
+      "WR": 0.5882,
+      "BWR": 0.4444,
+      "E_N": 0.3235,
+      "EF": 0.0327,
+      "BM": 0.1438,
+      "Leak": 0.1111,
+      "c_R": 0.25,
+      "cost_rt": 40.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": true,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_fade_BB2.4_CD3": {
+      "n": 27,
+      "WR": 0.6296,
+      "BWR": 0.4444,
+      "E_N": 0.4167,
+      "EF": 0.0241,
+      "BM": 0.1852,
+      "Leak": 0.1611,
+      "c_R": 0.3625,
+      "cost_rt": 58.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": true,
+      "sl": 160.0,
+      "tp": 200.0
+    },
+    "P1_light_BB2.3_CD3_cost40": {
+      "n": 34,
+      "WR": 0.5882,
+      "BWR": 0.4444,
+      "E_N": 0.3235,
+      "EF": 0.0327,
+      "BM": 0.1438,
+      "Leak": 0.1111,
+      "c_R": 0.25,
+      "cost_rt": 40.0,
+      "wr_gt_bwr": true,
+      "stage1_ok": true,
+      "sl": 160.0,
+      "tp": 200.0
+    }
+  },
+  "recommended": "P1_fade_BB2.3_CD3_cost40",
+  "recommended_metrics": {
+    "n": 34,
+    "WR": 0.5882,
+    "BWR": 0.4444,
+    "E_N": 0.3235,
+    "EF": 0.0327,
+    "BM": 0.1438,
+    "Leak": 0.1111,
+    "c_R": 0.25,
+    "cost_rt": 40.0,
+    "wr_gt_bwr": true,
+    "stage1_ok": true,
+    "sl": 160.0,
+    "tp": 200.0
+  },
+  "top": [
+    {
+      "name": "P1_fade_BB2.3_CD3_cost40",
+      "WR": 0.5882,
+      "E_N": 0.3235,
+      "EF": 0.0327,
+      "Leak": 0.1111,
+      "n": 34,
+      "wr_gt_bwr": true,
+      "stage1": true
+    },
+    {
+      "name": "P1_light_BB2.3_CD3_cost40",
+      "WR": 0.5882,
+      "E_N": 0.3235,
+      "EF": 0.0327,
+      "Leak": 0.1111,
+      "n": 34,
+      "wr_gt_bwr": true,
+      "stage1": true
+    },
+    {
+      "name": "P1_fade_BB2.4_CD3",
+      "WR": 0.6296,
+      "E_N": 0.4167,
+      "EF": 0.0241,
+      "Leak": 0.1611,
+      "n": 27,
+      "wr_gt_bwr": true,
+      "stage1": true
+    },
+    {
+      "name": "P0_base_BB2.2_CD2_ATR126_cost58",
+      "WR": 0.62,
+      "E_N": 0.395,
+      "EF": 0.0144,
+      "Leak": 0.1611,
+      "n": 50,
+      "wr_gt_bwr": true,
+      "stage1": true
+    },
+    {
+      "name": "P0_base_BB2.2_CD2_ATR126_cost58_fullTip",
+      "WR": 0.62,
+      "E_N": 0.395,
+      "EF": 0.0144,
+      "Leak": 0.1611,
+      "n": 50,
+      "wr_gt_bwr": true,
+      "stage1": true
+    },
+    {
+      "name": "P1_light_BB2.3_CD3",
+      "WR": 0.6,
+      "E_N": 0.35,
+      "EF": -0.0056,
+      "Leak": 0.1611,
+      "n": 35,
+      "wr_gt_bwr": true,
+      "stage1": false
+    },
+    {
+      "name": "P1_fade_BB2.3_CD3",
+      "WR": 0.5882,
+      "E_N": 0.3235,
+      "EF": -0.0173,
+      "Leak": 0.1611,
+      "n": 34,
+      "wr_gt_bwr": true,
+      "stage1": false
+    },
+    {
+      "name": "P1_fade_BB2.3_CD2",
+      "WR": 0.5882,
+      "E_N": 0.3235,
+      "EF": -0.0173,
+      "Leak": 0.1611,
+      "n": 34,
+      "wr_gt_bwr": true,
+      "stage1": false
+    },
+    {
+      "name": "P1_fade_BB2.2_CD3",
+      "WR": 0.5581,
+      "E_N": 0.2558,
+      "EF": -0.0474,
+      "Leak": 0.1611,
+      "n": 43,
+      "wr_gt_bwr": true,
+      "stage1": false
+    },
+    {
+      "name": "P1_fade_BB2.3_CD3_sellOnly",
+      "WR": 0.6,
+      "E_N": 0.35,
+      "EF": -0.0056,
+      "Leak": 0.1611,
+      "n": 20,
+      "wr_gt_bwr": true,
+      "stage1": false
+    }
+  ]
+}

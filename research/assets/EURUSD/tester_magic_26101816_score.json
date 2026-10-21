@@ -1,0 +1,627 @@
+{
+  "magic": "26101816",
+  "scored_at": "2026-10-18T12:19:49.084402+00:00",
+  "log": "C:\\Users\\emili\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Tester\\logs\\20261018.log",
+  "framework": "unified_edge_framework Stage 0-1 (R from deal pairs; Leak prior 20pt RT)",
+  "runs": [
+    {
+      "label": "run1_L423498",
+      "window": "2025.01.01 -> 2026.08.31",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": null,
+      "final": 502.92,
+      "pnl_currency": null,
+      "n_opens": 17,
+      "n_deal_pairs": 17,
+      "n_scored": 17,
+      "wins": 8,
+      "losses": 9,
+      "WR": 0.4706,
+      "AW": 1.2529,
+      "AL": 1.0056,
+      "R": 1.246,
+      "BWR": 0.4452,
+      "BM": 0.0254,
+      "Leak_prior": 0.0297,
+      "EF_prior": -0.0043,
+      "E_N": 0.0569,
+      "E_N_designR": 0.0588,
+      "BWR_design": 0.4444,
+      "sum_R": 0.973,
+      "kinds": {
+        "TP": 8,
+        "SL": 9,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 1079,
+        "weekday blocked": 482,
+        "ATR > max": 409,
+        "BBw gate": 108,
+        "fail pause (loss streak=3) barsLeft=11": 1,
+        "fail pause (loss streak=3) barsLeft=10": 1,
+        "fail pause (loss streak=3) barsLeft=9": 1
+      },
+      "events_preview": [
+        "2025.07.16 13:30:00 buy R=-1.00 SL",
+        "2025.07.18 13:15:00 sell R=+1.25 TP",
+        "2025.07.30 12:15:00 buy R=-1.00 SL",
+        "2025.11.06 13:45:00 sell R=-1.00 SL",
+        "2025.12.01 13:00:00 sell R=+1.26 TP",
+        "2025.12.08 15:45:00 buy R=+1.25 TP",
+        "2026.01.05 13:45:00 buy R=+1.25 TP",
+        "2026.01.15 13:45:00 buy R=+1.25 TP"
+      ]
+    },
+    {
+      "label": "run2_L508235",
+      "window": "2025.05.04 -> 2026.08.31",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": null,
+      "final": 502.92,
+      "pnl_currency": null,
+      "n_opens": 17,
+      "n_deal_pairs": 17,
+      "n_scored": 17,
+      "wins": 8,
+      "losses": 9,
+      "WR": 0.4706,
+      "AW": 1.2529,
+      "AL": 1.0056,
+      "R": 1.246,
+      "BWR": 0.4452,
+      "BM": 0.0254,
+      "Leak_prior": 0.0297,
+      "EF_prior": -0.0043,
+      "E_N": 0.0569,
+      "E_N_designR": 0.0588,
+      "BWR_design": 0.4444,
+      "sum_R": 0.973,
+      "kinds": {
+        "TP": 8,
+        "SL": 9,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 836,
+        "weekday blocked": 384,
+        "ATR > max": 306,
+        "BBw gate": 104,
+        "fail pause (loss streak=3) barsLeft=11": 1,
+        "fail pause (loss streak=3) barsLeft=10": 1,
+        "fail pause (loss streak=3) barsLeft=9": 1
+      },
+      "events_preview": [
+        "2025.07.16 13:30:00 buy R=-1.00 SL",
+        "2025.07.18 13:15:00 sell R=+1.25 TP",
+        "2025.07.30 12:15:00 buy R=-1.00 SL",
+        "2025.11.06 13:45:00 sell R=-1.00 SL",
+        "2025.12.01 13:00:00 sell R=+1.26 TP",
+        "2025.12.08 15:45:00 buy R=+1.25 TP",
+        "2026.01.05 13:45:00 buy R=+1.25 TP",
+        "2026.01.15 13:45:00 buy R=+1.25 TP"
+      ]
+    },
+    {
+      "label": "run3_L575871",
+      "window": "2026.05.01 -> 2026.08.31",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": null,
+      "final": 495.39,
+      "pnl_currency": null,
+      "n_opens": 6,
+      "n_deal_pairs": 6,
+      "n_scored": 6,
+      "wins": 2,
+      "losses": 4,
+      "WR": 0.3333,
+      "AW": 1.2533,
+      "AL": 1.0108,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM": -0.1131,
+      "Leak_prior": 0.0298,
+      "EF_prior": -0.1429,
+      "E_N": -0.2534,
+      "E_N_designR": -0.25,
+      "BWR_design": 0.4444,
+      "sum_R": -1.537,
+      "kinds": {
+        "TP": 2,
+        "SL": 4,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 188,
+        "weekday blocked": 98,
+        "ATR > max": 53,
+        "BBw gate": 35
+      },
+      "events_preview": [
+        "2026.05.28 13:00:00 sell R=-1.01 SL",
+        "2026.06.01 13:45:00 buy R=-1.01 SL",
+        "2026.07.01 13:00:00 buy R=+1.26 TP",
+        "2026.07.15 17:30:00 sell R=+1.25 TP",
+        "2026.08.14 13:45:00 sell R=-1.01 SL",
+        "2026.08.19 13:00:00 sell R=-1.01 SL"
+      ]
+    },
+    {
+      "label": "run4_L592954",
+      "window": "2026.01.01 -> 2026.08.31",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": null,
+      "final": 500.64,
+      "pnl_currency": null,
+      "n_opens": 11,
+      "n_deal_pairs": 11,
+      "n_scored": 11,
+      "wins": 5,
+      "losses": 6,
+      "WR": 0.4545,
+      "AW": 1.252,
+      "AL": 1.0078,
+      "R": 1.2423,
+      "BWR": 0.446,
+      "BM": 0.0086,
+      "Leak_prior": 0.0297,
+      "EF_prior": -0.0211,
+      "E_N": 0.0192,
+      "E_N_designR": 0.0227,
+      "BWR_design": 0.4444,
+      "sum_R": 0.213,
+      "kinds": {
+        "TP": 5,
+        "SL": 6,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 379,
+        "weekday blocked": 212,
+        "ATR > max": 123,
+        "BBw gate": 69,
+        "fail pause (loss streak=3) barsLeft=11": 1,
+        "fail pause (loss streak=3) barsLeft=10": 1,
+        "fail pause (loss streak=3) barsLeft=9": 1
+      },
+      "events_preview": [
+        "2026.01.05 13:45:00 buy R=+1.25 TP",
+        "2026.01.15 13:45:00 buy R=+1.25 TP",
+        "2026.01.21 13:00:00 sell R=+1.25 TP",
+        "2026.02.06 14:45:00 sell R=-1.00 SL",
+        "2026.04.22 12:30:00 buy R=-1.00 SL",
+        "2026.05.28 13:00:00 sell R=-1.01 SL",
+        "2026.06.01 13:45:00 buy R=-1.01 SL",
+        "2026.07.01 13:00:00 buy R=+1.26 TP"
+      ]
+    },
+    {
+      "label": "run5_L626855",
+      "window": "2026.05.01 -> 2026.08.31",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": 500.0,
+      "final": 495.39,
+      "pnl_currency": -4.610000000000014,
+      "n_opens": 6,
+      "n_deal_pairs": 6,
+      "n_scored": 6,
+      "wins": 2,
+      "losses": 4,
+      "WR": 0.3333,
+      "AW": 1.2533,
+      "AL": 1.0108,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM": -0.1131,
+      "Leak_prior": 0.0298,
+      "EF_prior": -0.1429,
+      "E_N": -0.2534,
+      "E_N_designR": -0.25,
+      "BWR_design": 0.4444,
+      "sum_R": -1.537,
+      "kinds": {
+        "TP": 2,
+        "SL": 4,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 188,
+        "weekday blocked": 98,
+        "ATR > max": 53,
+        "BBw gate": 35
+      },
+      "events_preview": [
+        "2026.05.28 13:00:00 sell R=-1.01 SL",
+        "2026.06.01 13:45:00 buy R=-1.01 SL",
+        "2026.07.01 13:00:00 buy R=+1.26 TP",
+        "2026.07.15 17:30:00 sell R=+1.25 TP",
+        "2026.08.14 13:45:00 sell R=-1.01 SL",
+        "2026.08.19 13:00:00 sell R=-1.01 SL"
+      ]
+    },
+    {
+      "label": "run6_L626968",
+      "window": "2026.05.01 -> 2026.08.31",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": null,
+      "final": 495.39,
+      "pnl_currency": null,
+      "n_opens": 6,
+      "n_deal_pairs": 6,
+      "n_scored": 6,
+      "wins": 2,
+      "losses": 4,
+      "WR": 0.3333,
+      "AW": 1.2533,
+      "AL": 1.0108,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM": -0.1131,
+      "Leak_prior": 0.0298,
+      "EF_prior": -0.1429,
+      "E_N": -0.2534,
+      "E_N_designR": -0.25,
+      "BWR_design": 0.4444,
+      "sum_R": -1.537,
+      "kinds": {
+        "TP": 2,
+        "SL": 4,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 188,
+        "weekday blocked": 98,
+        "ATR > max": 53,
+        "BBw gate": 35
+      },
+      "events_preview": [
+        "2026.05.28 13:00:00 sell R=-1.01 SL",
+        "2026.06.01 13:45:00 buy R=-1.01 SL",
+        "2026.07.01 13:00:00 buy R=+1.26 TP",
+        "2026.07.15 17:30:00 sell R=+1.25 TP",
+        "2026.08.14 13:45:00 sell R=-1.01 SL",
+        "2026.08.19 13:00:00 sell R=-1.01 SL"
+      ]
+    },
+    {
+      "label": "run7_L644054",
+      "window": "2026.05.01 -> 2026.10.17",
+      "sl": "300",
+      "tp": "375",
+      "rr_design": 1.25,
+      "atr_on": "true",
+      "atr_max": "68.0",
+      "bb_dev": "2.4",
+      "deposit": null,
+      "final": 495.39,
+      "pnl_currency": null,
+      "n_opens": 6,
+      "n_deal_pairs": 6,
+      "n_scored": 6,
+      "wins": 2,
+      "losses": 4,
+      "WR": 0.3333,
+      "AW": 1.2533,
+      "AL": 1.0108,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM": -0.1131,
+      "Leak_prior": 0.0298,
+      "EF_prior": -0.1429,
+      "E_N": -0.2534,
+      "E_N_designR": -0.25,
+      "BWR_design": 0.4444,
+      "sum_R": -1.537,
+      "kinds": {
+        "TP": 2,
+        "SL": 4,
+        "other": 0
+      },
+      "tp_lt_sl_opens": 0,
+      "halt": 0,
+      "blocks_top": {
+        "outside session": 288,
+        "weekday blocked": 143,
+        "ATR > max": 86,
+        "BBw gate": 52
+      },
+      "events_preview": [
+        "2026.05.28 13:00:00 sell R=-1.01 SL",
+        "2026.06.01 13:45:00 buy R=-1.01 SL",
+        "2026.07.01 13:00:00 buy R=+1.26 TP",
+        "2026.07.15 17:30:00 sell R=+1.25 TP",
+        "2026.08.14 13:45:00 sell R=-1.01 SL",
+        "2026.08.19 13:00:00 sell R=-1.01 SL"
+      ]
+    }
+  ],
+  "tip_window_202605_20261007": [
+    {
+      "run": 1,
+      "dep": null,
+      "final": 502.92,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    },
+    {
+      "run": 2,
+      "dep": null,
+      "final": 502.92,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    },
+    {
+      "run": 3,
+      "dep": null,
+      "final": 495.39,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    },
+    {
+      "run": 4,
+      "dep": null,
+      "final": 500.64,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    },
+    {
+      "run": 5,
+      "dep": 500.0,
+      "final": 495.39,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    },
+    {
+      "run": 6,
+      "dep": null,
+      "final": 495.39,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    },
+    {
+      "run": 7,
+      "dep": null,
+      "final": 495.39,
+      "n": 6,
+      "WR": 0.3333,
+      "R": 1.2399,
+      "BWR": 0.4464,
+      "BM_pp": -11.31,
+      "EF_pp": -14.29,
+      "E_N": -0.2534,
+      "sum_R": -1.537,
+      "monthly": {
+        "2026.05": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.06": {
+          "n": 1,
+          "WR": 0.0,
+          "sum_R": -1.01
+        },
+        "2026.07": {
+          "n": 2,
+          "WR": 1.0,
+          "sum_R": 2.51
+        },
+        "2026.08": {
+          "n": 2,
+          "WR": 0.0,
+          "sum_R": -2.02
+        }
+      }
+    }
+  ]
+}
